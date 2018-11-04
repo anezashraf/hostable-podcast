@@ -1,3 +1,23 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+index:
+    path: /
+    controller: App\Controller\HomeController::index
+
+installation_process_podcast:
+    path: /installation/podcast
+    methods: ['GET']
+    controller: App\Controller\Installation\PodcastController::podcast
+
+installation_process_podcast_submit:
+    path: /installation/podcast
+    methods: ['POST']
+    controller: App\Controller\Installation\PodcastController::podcastSubmit
+
+installation_process_user:
+    path: /installation/user
+    methods: ['GET']
+    controller: App\Controller\Installation\UserController::user
+
+installation_process_user_submit:
+    path: /installation/user
+    methods: ['POST']
+    controller: App\Controller\Installation\UserController::userSubmit
