@@ -47,8 +47,8 @@ class PodcastController extends AbstractController implements InstallationProces
 
         if ($form->isSubmitted() && $form->isValid()) {
             $podcast = $form->getData();
-            $this->settingRepository->update(['name' => 'doesPodcastInformationExist', 'value' => 'true']);
             $this->repository->update($podcast);
+            $this->settingRepository->update(['name' => 'doesPodcastInformationExist', 'value' => 'true']);
             return $this->redirectToRoute('installation_process_user');
         }
     }

@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Podcast;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\SubmitButton;
@@ -17,7 +18,7 @@ class PodcastType extends AbstractType
         $builder
             ->add('title')
             ->add('description')
-            ->add('image')
+            ->add('image', FileType::class, ['label' => 'Podcast image'])
             ->add('author')
             ->add('save', SubmitType::class);
         ;

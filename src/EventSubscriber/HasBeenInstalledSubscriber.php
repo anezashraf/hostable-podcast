@@ -4,12 +4,10 @@ namespace App\EventSubscriber;
 
 use App\Controller\Contacts\InstallationProcessInterface;
 use App\Repository\SettingRepository;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Bundle\TwigBundle\Controller\ExceptionController;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\Routing\RouterInterface;
 
 class HasBeenInstalledSubscriber implements EventSubscriberInterface

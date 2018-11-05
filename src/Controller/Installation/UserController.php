@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends AbstractController implements InstallationProcessInterface
 {
@@ -41,7 +42,7 @@ class UserController extends AbstractController implements InstallationProcessIn
         ]);
     }
 
-    public function userSubmit(Request $request)
+    public function userSubmit(Request $request, UserPasswordEncoderInterface $encoder)
     {
         $form = $this->createForm(UserType::class);
 
@@ -49,7 +50,11 @@ class UserController extends AbstractController implements InstallationProcessIn
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
+            $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
             $this->repository->update($user);
+            $this->settingRepository->update(['name' => 'doesUserInformationExist', 'value' => 'true']);
+            return $this->redirectToRoute('index');
+
         }
     }
 }

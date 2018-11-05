@@ -1,5 +1,12 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    encoders:
+        # use your user class name here
+        App\Entity\User:
+            # bcrypt or argon2i are recommended
+            # argon2i is more secure, but requires PHP 7.2 or the Sodium extension
+            algorithm: argon2i
+            cost: 24
     providers:
         in_memory: { memory: ~ }
     firewalls:

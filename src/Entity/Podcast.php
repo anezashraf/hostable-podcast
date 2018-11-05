@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PodcastRepository")
@@ -27,6 +29,9 @@ class Podcast
     private $description;
 
     /**
+     * @Assert\NotBlank(message="Please upload the image as a png file")
+     * @Assert\File(mimeTypes={ "image/png" })
+     *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;

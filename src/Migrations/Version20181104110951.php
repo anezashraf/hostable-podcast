@@ -19,6 +19,7 @@ final class Version20181104110951 extends AbstractMigration
         $this->addSql("INSERT INTO setting(name, value) VALUES('hasBeenInstalled','false')");
         $this->addSql("INSERT INTO setting(name, value) VALUES('doesPodcastInformationExist','false')");
         $this->addSql("INSERT INTO setting(name, value) VALUES('doesUserInformationExist','false')");
+        $this->addSql("INSERT INTO setting(name, value) VALUES('isOnline','true')");
     }
 
     public function down(Schema $schema) : void
