@@ -8,13 +8,20 @@ security:
             algorithm: argon2i
             cost: 24
     providers:
-        in_memory: { memory: ~ }
+        database_provider:
+            entity:
+                class: App\Entity\User
+          # the property to query by - e.g. username, email, etc
+                property: username
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             anonymous: true
+            guard:
+                authenticators:
+                    - App\Security\LoginFormAuthenticator
 
             # activate different ways to authenticate
 
