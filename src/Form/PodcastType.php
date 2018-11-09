@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Podcast;
+use App\Form\Transformer\FileToStringTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -13,6 +14,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PodcastType extends AbstractType
 {
+    private $fileToStringTransformer;
+
+    public function __construct(FileToStringTransformer $fileToStringTransformer)
+    {
+        $this->fileToStringTransformer = $fileToStringTransformer;
+
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -21,7 +30,8 @@ class PodcastType extends AbstractType
             ->add('image', FileType::class, ['label' => 'Podcast image'])
             ->add('author')
             ->add('save', SubmitType::class);
-        ;
+
+        $builder->get('image')->addModelTransformer($this->fileToStringTransformer);
     }
 
     public function configureOptions(OptionsResolver $resolver)
