@@ -4,19 +4,12 @@ namespace App\Controller\Installation;
 
 use App\Controller\Installation\Contracts\InstallationProcessInterface;
 use App\Entity\Podcast;
-use App\Entity\Setting;
 use App\FileUploader\FileUploader;
 use App\Form\PodcastType;
-use App\Form\UserType;
 use App\Repository\PodcastRepository;
 use App\Repository\SettingRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Routing\RouterInterface;
 
 class PodcastController extends AbstractController implements InstallationProcessInterface
 {

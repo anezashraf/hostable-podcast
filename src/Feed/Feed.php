@@ -11,8 +11,6 @@ use FeedIo\Feed\Item\Media;
 
 class Feed
 {
-    private $feed;
-
     public function feed(Podcast $podcast)
     {
         $feed = new FeedLib();

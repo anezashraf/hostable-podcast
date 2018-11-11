@@ -9,9 +9,7 @@ use App\Repository\EpisodeRepository;
 use App\Repository\PodcastRepository;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\FormFactoryBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
 
 class EpisodeController extends AbstractController
 {
@@ -26,7 +24,7 @@ class EpisodeController extends AbstractController
 
     public function index()
     {
-        $episodes = $this->repository->findAll();
+        $episodes = $this->repository->findAllOrdered();
 
         return $this->render('admin/episode/index.html.twig', [
             'episodes' => $episodes ,

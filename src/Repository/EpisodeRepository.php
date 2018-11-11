@@ -25,6 +25,15 @@ class EpisodeRepository extends ServiceEntityRepository
         $this->_em->flush($episode);
     }
 
+    public function findAllOrdered()
+    {
+        return $this->createQueryBuilder('e')
+            ->orderBy('e.publishedAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+    }
+
     // /**
     //  * @return Episode[] Returns an array of Episode objects
     //  */

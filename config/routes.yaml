@@ -2,12 +2,20 @@ index:
     path: /
     controller: App\Controller\Site\SiteController::home
 
+episode:
+    path: /episode/{id}
+    controller: App\Controller\Site\SiteController::episode
+
 rss:
     path: /subscribe
     controller: App\Controller\Site\SiteController::rss
 
 app_logout:
     path: /logout
+
+app_login:
+    controller: App\Controller\SecurityController::login
+    path: /login
 
 installation_process_podcast:
     path: /installation/podcast

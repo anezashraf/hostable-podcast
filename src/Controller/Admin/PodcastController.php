@@ -5,7 +5,6 @@ namespace App\Controller\Admin;
 use App\Entity\Podcast;
 use App\Form\PodcastType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 
 class PodcastController extends AbstractController
 {

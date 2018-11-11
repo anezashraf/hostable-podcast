@@ -8,13 +8,12 @@ use App\Repository\EpisodeRepository;
 use App\Repository\PodcastRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 class SiteController extends AbstractController
 {
     public function home(EpisodeRepository $repository)
     {
-        $episodes = $repository->findAll();
+        $episodes = $repository->findAllOrdered();
 
         return $this->render('site/home.html.twig', [
             'episodes' => $episodes,
@@ -24,7 +23,9 @@ class SiteController extends AbstractController
 
     public function episode(Episode $episode)
     {
-
+        return $this->render('site/episode.html.twig', [
+            'episode' => $episode,
+        ]);
     }
 
     public function rss(PodcastRepository $repository)
