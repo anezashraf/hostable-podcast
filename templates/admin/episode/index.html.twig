@@ -1,22 +1,15 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Hello {% endblock %}
+{% extends 'admin/base.html.twig' %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
     <ul>
         {% for episode in episodes %}
             <li><a href="{{ path('admin_show_episode', {id: episode.id}) }}">{{ episode.title }}</a></li>
         {% else %}
             <li>Looks like there are no episodes, please
-                <a href="{{ path('admin_create_episodes') }}">click here</a> to create your first one :)
+                <a href="{{ path('admin_create_episode') }}">click here</a> to create your first one :)
             </li>
         {% endfor %}
         <a href="{{ path('admin_create_episode') }}">click here</a> to create your first one :)
 
     </ul>
-
 {% endblock %}

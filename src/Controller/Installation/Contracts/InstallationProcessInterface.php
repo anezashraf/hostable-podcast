@@ -1,7 +1,6 @@
 <?php
 
-namespace App\Controller\Contacts;
-
+namespace App\Controller\Installation\Contracts;
 
 interface InstallationProcessInterface
 {

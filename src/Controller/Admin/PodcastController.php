@@ -13,7 +13,7 @@ class PodcastController extends AbstractController
     {
         $form = $this->createForm(PodcastType::class, $podcast);
 
-        return $this->render('podcast/index.html.twig', [
+        return $this->render('admin/podcast/index.html.twig', [
             'form' => $form->createView(),
         ]);
     }

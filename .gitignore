@@ -24,3 +24,5 @@ yarn-error.log
 
 
 .idea/
+/public/img/
+/public/mp3/

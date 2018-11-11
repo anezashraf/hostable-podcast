@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <p><a href="{{ path('rss') }}">Subscribe</a></p>
+    <p><a href="{{ path('admin_episodes') }}">Login</a></p>
+{% for episode in episodes %}
+    <p>{{ episode.title }}</p>
+    <p>{{ episode.description }}</p>
+    <p>{{ episode.publishedAt|date }}</p>
+    <p>{{ episode.enclosureUrl }}</p>
+{% endfor %}
+{% endblock %}

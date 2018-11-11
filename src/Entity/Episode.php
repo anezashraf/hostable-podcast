@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EpisodeRepository")
@@ -39,6 +41,11 @@ class Episode
     private $podcast;
 
     /**
+     * @Assert\NotBlank(message="Please upload the podcast as a mp3 file")
+     * @Assert\File(
+     *     mimeTypes={ "audio/mpeg" },
+     *     maxSize="1000000M"
+     * )
      * @ORM\Column(type="string", length=255)
      */
     private $enclosureUrl;
@@ -96,12 +103,12 @@ class Episode
         return $this;
     }
 
-    public function getEnclosureUrl(): ?string
+    public function getEnclosureUrl()
     {
         return $this->enclosureUrl;
     }
 
-    public function setEnclosureUrl(string $enclosureUrl): self
+    public function setEnclosureUrl($enclosureUrl): self
     {
         $this->enclosureUrl = $enclosureUrl;
 

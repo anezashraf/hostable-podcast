@@ -76,6 +76,6 @@ class FileToStringTransformer implements DataTransformerInterface
      */
     public function reverseTransform($value)
     {
-        // TODO: Implement reverseTransform() method.
+        return $value;
     }
 }

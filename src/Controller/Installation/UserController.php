@@ -2,7 +2,7 @@
 
 namespace App\Controller\Installation;
 
-use App\Controller\Contacts\InstallationProcessInterface;
+use App\Controller\Installation\Contracts\InstallationProcessInterface;
 use App\Entity\Podcast;
 use App\Entity\Setting;
 use App\Form\PodcastType;

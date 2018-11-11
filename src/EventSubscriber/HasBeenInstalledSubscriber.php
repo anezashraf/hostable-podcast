@@ -2,7 +2,7 @@
 
 namespace App\EventSubscriber;
 
-use App\Controller\Contacts\InstallationProcessInterface;
+use App\Controller\Installation\Contracts\InstallationProcessInterface;
 use App\Repository\SettingRepository;
 use Symfony\Bundle\TwigBundle\Controller\ExceptionController;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

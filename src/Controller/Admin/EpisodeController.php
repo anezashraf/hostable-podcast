@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Episode;
+use App\FileUploader\FileUploader;
 use App\Form\EpisodeType;
 use App\Repository\EpisodeRepository;
 use App\Repository\PodcastRepository;
@@ -27,7 +28,7 @@ class EpisodeController extends AbstractController
     {
         $episodes = $this->repository->findAll();
 
-        return $this->render('episode/index.html.twig', [
+        return $this->render('admin/episode/index.html.twig', [
             'episodes' => $episodes ,
         ]);
     }
@@ -36,7 +37,7 @@ class EpisodeController extends AbstractController
     {
         $form = $this->createForm(EpisodeType::class, $episode);
 
-        return $this->render('episode/edit.html.twig', [
+        return $this->render('admin/episode/edit.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -45,21 +46,23 @@ class EpisodeController extends AbstractController
     {
         $form = $this->createForm(EpisodeType::class);
 
-        return $this->render('episode/create.html.twig', [
+        return $this->render('admin/episode/create.html.twig', [
             'form' => $form->createView(),
         ]);
     }
 
-    public function createSave(Request $request)
+    public function createSave(Request $request, FileUploader $fileUploader)
     {
-        $form = $this->createForm(EpisodeType::class);
-
+        $episode = new Episode();
+        $form = $this->createForm(EpisodeType::class, $episode);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $episode = $form->getData();
             $episode->setPodcast($this->podcastRepository->find(1));
             $episode->setPublishedAt(new DateTime('now'));
+            $uploadedFile = $episode->getEnclosureUrl();
+            $fileName = $fileUploader->upload($uploadedFile);
+            $episode->setEnclosureUrl($fileName);
             $this->repository->saveOrUpdate($episode);
             return $this->redirectToRoute('admin_episodes');
         }

@@ -1,6 +1,13 @@
 index:
     path: /
-    controller: App\Controller\HomeController::index
+    controller: App\Controller\Site\SiteController::home
+
+rss:
+    path: /subscribe
+    controller: App\Controller\Site\SiteController::rss
+
+app_logout:
+    path: /logout
 
 installation_process_podcast:
     path: /installation/podcast
@@ -21,11 +28,6 @@ installation_process_user_submit:
     path: /installation/user
     methods: ['POST']
     controller: App\Controller\Installation\UserController::userSubmit
-
-admin:
-    path: /admin
-    methods: ['GET']
-    controller: App\Controller\Admin\AdminController::index
 
 admin_episodes:
     path: /admin/episodes
