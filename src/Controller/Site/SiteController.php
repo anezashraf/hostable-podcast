@@ -11,12 +11,14 @@ use Symfony\Component\HttpFoundation\Response;
 
 class SiteController extends AbstractController
 {
-    public function home(EpisodeRepository $repository)
+    public function home(PodcastRepository $repository)
     {
-        $episodes = $repository->findAllOrdered();
+        $podcast = $repository->find(1);
+        $episodes = $podcast->getEpisodes();
 
         return $this->render('site/home.html.twig', [
             'episodes' => $episodes,
+            'podcast' => $podcast,
         ]);
 
     }

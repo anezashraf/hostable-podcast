@@ -17,7 +17,7 @@ class PodcastFixtures extends Fixture
         $podcast = new Podcast();
 
         $podcast->setTitle($faker->title)
-            ->setDescription($faker->text(150))
+            ->setDescription($faker->text(250))
             ->setAuthor($faker->name)
             ->setImage($faker->image(__DIR__ . '/../../public/img'));
 

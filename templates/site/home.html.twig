@@ -1,12 +1,43 @@
 {% extends 'base.html.twig' %}
 
+{% block header %}
+    <h1 class="header__title">{{ podcast.title }}</h1>
+    <div class="header__subscription-buttons">
+        <i class="fas fa-rss-square"></i>
+    </div>
+    <p class="header__description">{{ podcast.description }}</p>
+{% endblock %}
+
 {% block body %}
-    <p><a href="{{ path('rss') }}">Subscribe</a></p>
-    <p><a href="{{ path('admin_episodes') }}">Login</a></p>
-{% for episode in episodes %}
-    <p><a href="{{ path('episode', {id: episode.id}) }}">{{ episode.title }}</a></p>
-    <p>{{ episode.description }}</p>
-    <p>{{ episode.publishedAt|date }}</p>
-    <p>{{ episode.enclosureUrl }}</p>
-{% endfor %}
+    {% for episode in episodes %}
+        <article class="episode">
+            <div class="episode__image">
+                <img src="{{ podcast.image }}">
+            </div>
+            <div class="episode__content">
+            <span class="episode__header">
+            <small class="episode__datetime">{{ episode.publishedAt|date }}</small>
+            <small class="episode__number">Episode {{ episode.id }}</small>
+            </span>
+                <h3 class="episode__title">
+                    <a href="{{ path('episode', {id: episode.id}) }}">
+                        {{ episode.title }}
+                    </a>
+                </h3>
+                <div class="episode__description">
+                    <p class="episode__description-title">
+                        {{ episode.description }}
+                    </p>
+                </div>
+                <a class="epsiode__download" href="{{ episode.enclosureUrl }}" download>Download MP3</a>
+            </div>
+        </article>
+    {% endfor %}
+{% endblock %}
+
+{% block footer %}
+    <p>{{ podcast.author }}</p>
+    <img src="{{ podcast.image }}"/>
+    <p>{{ podcast.title }}</p>
+    <small>2019 copyright {{ podcast.title }}</small>
 {% endblock %}
