@@ -3,7 +3,7 @@
 {% block header %}
     <h1 class="header__title">{{ podcast.title }}</h1>
     <div class="header__subscription-buttons">
-        <i class="fas fa-rss-square"></i>
+        <a href="{{ path('rss') }}"><i class="fas fa-rss-square"></i></a>
     </div>
     <p class="header__description">{{ podcast.description }}</p>
 {% endblock %}
@@ -28,6 +28,9 @@
                     <p class="episode__description-title">
                         {{ episode.description }}
                     </p>
+                </div>
+                <div class="episode__audio">
+                    <audio controls src="{{ episode.enclosureUrl }}"></audio>
                 </div>
                 <a class="epsiode__download" href="{{ episode.enclosureUrl }}" download>Download MP3</a>
             </div>

@@ -7,7 +7,7 @@ episode:
     controller: App\Controller\Site\SiteController::episode
 
 rss:
-    path: /subscribe
+    path: /subscribe.rss
     controller: App\Controller\Site\SiteController::rss
 
 app_logout:
