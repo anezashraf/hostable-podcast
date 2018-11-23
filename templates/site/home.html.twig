@@ -1,11 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block header %}
-    <h1 class="header__title">{{ podcast.title }}</h1>
-    <div class="header__subscription-buttons">
-        <a href="{{ path('rss') }}"><i class="fas fa-rss-square"></i></a>
-    </div>
-    <p class="header__description">{{ podcast.description }}</p>
+    {% include 'site/_partials/header.html.twig' %}
 {% endblock %}
 
 {% block body %}
@@ -39,8 +35,5 @@
 {% endblock %}
 
 {% block footer %}
-    <p>{{ podcast.author }}</p>
-    <img src="{{ podcast.image }}"/>
-    <p>{{ podcast.title }}</p>
-    <small>2019 copyright {{ podcast.title }}</small>
+    {% include 'site/_partials/footer.html.twig' %}
 {% endblock %}

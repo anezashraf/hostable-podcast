@@ -1,7 +1,16 @@
 {% extends 'base.html.twig' %}
 
+
+{% block header %}
+    {% include 'site/_partials/header.html.twig' %}
+{% endblock %}
+
 {% block body %}
 {{ episode.title }}
 {{ episode.description }}
 {{ episode.enclosureUrl }}
+{% endblock %}
+
+{% block footer %}
+    {% include 'site/_partials/footer.html.twig' %}
 {% endblock %}
