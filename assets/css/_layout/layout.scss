@@ -1,14 +1,21 @@
-section {
-  min-height: 100%;
+body {
   display: flex;
+  min-height: 98vh;
   flex-direction: column;
-  align-items: center;
+  padding:0;
+  margin: 0;
 }
 
 main {
-  flex-grow: 1;
+  flex: 1 0 auto; /* 2 */
+  padding: 2rem;
 }
 
-header, main, footer {
-  flex-shrink: 0;
+
+header,
+footer {
+  flex: none; /* 2 */
+  background-color: #222222;
+  color: #FFFFFF;
+
 }

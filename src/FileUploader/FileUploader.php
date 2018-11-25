@@ -42,6 +42,6 @@ class FileUploader
 
         $file->move($directory, $fileName);
 
-        return "${directory}/${fileName}";
+        return "$location/${fileName}";
     }
 }

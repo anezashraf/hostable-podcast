@@ -1,5 +1,6 @@
-<h1 class="header__title">{{ podcast.title }}</h1>
-<div class="header__subscription-buttons">
-    <a href="{{ path('rss') }}"><i class="fas fa-rss-square"></i></a>
+<div class="header__title-container">
+    <h2 class="header__title">{{ podcast.title }} --- {{ podcast.description }} </h2>
 </div>
-<p class="header__description">{{ podcast.description }}</p>
+<div class="header__subscription-buttons">
+    <a class="header__subscription-buttons-anchor" href="{{ path('rss') }}"><i class="fas fa-rss-square"></i></a>
+</div>
