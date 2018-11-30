@@ -24,15 +24,12 @@
                         <p class="episode__description-text">
                             {{ episode.description }}
                         </p>
-                        <div class="episode__audio">
-                            <audio controls src="{{ episode.enclosureUrl }}"></audio>
-                            <div>
-                                <a class="episode__download" href="{{ episode.enclosureUrl }}" download>Download MP3</a>
-                            </div>
-                        </div>
                     </div>
-                    <div class="episode__image">
-                        <img width="250" height="250" class="episode__image-img" src="{{ podcast.image }}">
+                    <div class="episode__audio">
+                        <audio controls src="{{ episode.enclosureUrl }}"></audio>
+                        <div>
+                            <a class="episode__download" href="{{ episode.enclosureUrl }}" download>Download MP3</a>
+                        </div>
                     </div>
                 </div>
 

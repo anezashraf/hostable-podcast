@@ -34,6 +34,12 @@ class PodcastRepository extends ServiceEntityRepository
         $this->_em->flush($podcast);
     }
 
+    public function saveOrUpdate(Podcast $podcast)
+    {
+        $this->_em->persist($podcast);
+        $this->_em->flush($podcast);
+    }
+
     // /**
     //  * @return Podcast[] Returns an array of Podcast objects
     //  */

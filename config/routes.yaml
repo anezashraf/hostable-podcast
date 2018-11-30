@@ -47,6 +47,11 @@ admin_podcast:
     methods: ['GET']
     controller: App\Controller\Admin\PodcastController::index
 
+admin_podcast.save:
+    path: /admin/podcast/{id}
+    methods: ['POST']
+    controller: App\Controller\Admin\PodcastController::save
+
 admin_settings:
     path: /admin/settings
     methods: ['GET']
