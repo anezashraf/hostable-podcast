@@ -35,7 +35,7 @@ class Episode
     private $publishedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Podcast", inversedBy="episodes")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Podcast", inversedBy="episodes", fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
     private $podcast;

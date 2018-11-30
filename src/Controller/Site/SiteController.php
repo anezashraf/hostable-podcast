@@ -16,7 +16,7 @@ class SiteController extends AbstractController
         $podcast = $repository->find(1);
         $episodes = $podcast->getEpisodes();
 
-        return $this->render('site/home.html.twig', [
+        return $this->render('site/index.html.twig', [
             'episodes' => $episodes,
             'podcast' => $podcast,
         ]);
@@ -26,8 +26,9 @@ class SiteController extends AbstractController
     public function episode(Episode $episode)
     {
         $podcast = $episode->getPodcast();
-        return $this->render('site/episode.html.twig', [
-            'episode' => $episode,
+
+        return $this->render('site/index.html.twig', [
+            'episodes' => [$episode],
             'podcast' => $podcast
         ]);
     }

@@ -5,6 +5,11 @@
   border-bottom: 5px solid #4c86c7;
 }
 
+.header__title, .header__description {
+  display:inline-block;
+  margin-right: 1rem;
+}
+
 .header__subscription-buttons-anchor {
   display: block;
   font-size: 1.5em;
@@ -15,6 +20,29 @@
   font-weight: bold;
 }
 
+.header__menu-list-element {
+  display: inline;
+  margin:.3rem;
+}
+
+.header__menu-list-element-anchor {
+  color: white;
+  font-size: 1.2rem;
+}
+
+.header__menu-list {
+  margin-top: 1.5rem;
+}
+
 .fa-rss-square {
   color: orange;
+  font-weight: 900;
+  vertical-align: bottom;
+  margin-bottom: 1px;
+}
+
+@media (max-width:600px)  {
+  .has-hide {
+    display: none;
+  }
 }

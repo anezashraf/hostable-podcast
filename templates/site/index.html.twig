@@ -5,18 +5,17 @@
 {% endblock %}
 
 {% block body %}
-    {% for episode in episodes %}
+    {% for episode in episodes|reverse %}
         <article class="episode">
             <div class="episode__content">
                 <div class="episode__header">
                     <h4 class="episode__title">
                         <a href="{{ path('episode', {id: episode.id}) }}">
-                            {{ episode.title }}
+                            #{{ episode.id }} {{ episode.title }}
                         </a>
                     </h4>
                     <div class="">
-                        <small class="episode__datetime">{{ episode.publishedAt|date }}</small>
-                        <small class="episode__number">Episode {{ episode.id }}</small>
+                        <small class="episode__datetime">{{ episode.publishedAt|date("m-d-Y") }}</small>
                     </div>
                 </div>
                 <div class="episode__main">
@@ -26,13 +25,12 @@
                         </p>
                     </div>
                     <div class="episode__audio">
-                        <audio controls src="{{ episode.enclosureUrl }}"></audio>
+                        <audio controls src="{{ asset(episode.enclosureUrl) }}"></audio>
                         <div>
-                            <a class="episode__download" href="{{ episode.enclosureUrl }}" download>Download MP3</a>
+                                <a class="episode__download" href="{{ asset(episode.enclosureUrl) }}" download>Download MP3</a>
                         </div>
                     </div>
                 </div>
-
             </div>
         </article>
     {% endfor %}
