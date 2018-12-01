@@ -7,20 +7,13 @@
 
 
         {% block stylesheets %}
-            <link rel="stylesheet" type="text/css" href="{{ asset('build/site.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('build/installation.css') }}">
         {% endblock %}
     </head>
     <body class="wrapper">
-            <header class="header">
-                {% block header %}{% endblock %}
-            </header>
             <main>
                 {% block body %}{% endblock %}
             </main>
-            <footer class="footer">
-                {% block footer %}
-                {% endblock %}
-            </footer>
             {% block javascripts %}{% endblock %}
     </body>
 

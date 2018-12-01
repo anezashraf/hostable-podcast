@@ -31,17 +31,11 @@ class Podcast
     private $description;
 
     /**
-     * @Assert\NotBlank(message="Please upload the image as a png file")
      * @Assert\File(mimeTypes={ "image/png" })
      *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $author;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Episode", mappedBy="podcast", orphanRemoval=true)
@@ -94,17 +88,6 @@ class Podcast
         return $this;
     }
 
-    public function getAuthor(): ?string
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(?string $author): self
-    {
-        $this->author = $author;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Episode[]

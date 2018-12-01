@@ -14,24 +14,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PodcastType extends AbstractType
 {
-    private $fileToStringTransformer;
-
-    public function __construct(FileToStringTransformer $fileToStringTransformer)
-    {
-        $this->fileToStringTransformer = $fileToStringTransformer;
-
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('title')
             ->add('description')
-            ->add('image', FileType::class, ['label' => 'Podcast image'])
-            ->add('author')
             ->add('save', SubmitType::class);
-
-        $builder->get('image')->addModelTransformer($this->fileToStringTransformer);
     }
 
     public function configureOptions(OptionsResolver $resolver)

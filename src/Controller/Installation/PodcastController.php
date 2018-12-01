@@ -34,19 +34,18 @@ class PodcastController extends AbstractController implements InstallationProces
         ]);
     }
 
-    public function podcastSubmit(Request $request, FileUploader $fileUploader)
+    public function podcastSubmit(Request $request)
     {
         $podcast = new Podcast();
         $form = $this->createForm(PodcastType::class, $podcast);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $uploadedFile = $podcast->getImage();
-            $fileName = $fileUploader->upload($uploadedFile);
-            $podcast->setImage($fileName);
             $this->repository->update($podcast);
             $this->settingRepository->update(['name' => 'doesPodcastInformationExist', 'value' => 'true']);
             return $this->redirectToRoute('installation_process_user');
         }
+
+        dd($form);
     }
 }
