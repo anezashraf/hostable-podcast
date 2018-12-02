@@ -1,6 +1,9 @@
 {% extends 'admin/base.html.twig' %}
 
 {% block body %}
+    <div class="title">
+        <h3>Episode Management</h3>
+    </div>
     <ul>
         {% for episode in episodes %}
             <li><a href="{{ path('admin_show_episode', {id: episode.id}) }}">{{ episode.title }}</a></li>

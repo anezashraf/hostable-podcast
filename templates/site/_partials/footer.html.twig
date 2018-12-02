@@ -1,6 +1,8 @@
 <div>
-<p>{{ podcast.author }}</p>
-<img src="/{{ podcast.image }}"/>
+<p>{{ podcast.user.username }}</p>
+    {% if podcast.image %}
+        <img src="/{{ podcast.image }}"/>
+    {% endif %}
 <p>{{ podcast.title }}</p>
 <small>2019 copyright {{ podcast.title }}</small>
 `</div>

@@ -26,11 +26,9 @@ class EpisodeType extends AbstractType
     {
         $builder
             ->add('title', TextType::class)
-            ->add('description', TextareaType::class)
-            ->add('enclosureUrl', FileType::class)
+            ->add('description', TextType::class)
             ->add('save', SubmitType::class);
 
-        $builder->get('enclosureUrl')->addModelTransformer($this->fileToStringTransformer);
     }
 
     public function configureOptions(OptionsResolver $resolver)

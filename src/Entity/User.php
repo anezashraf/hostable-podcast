@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -31,6 +33,16 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $password;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Podcast", mappedBy="user")
+     */
+    private $podcasts;
+
+    public function __construct()
+    {
+        $this->podcasts = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -113,5 +125,36 @@ class User implements UserInterface
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
+    }
+
+    /**
+     * @return Collection|Podcast[]
+     */
+    public function getPodcasts(): Collection
+    {
+        return $this->podcasts;
+    }
+
+    public function addPodcast(Podcast $podcast): self
+    {
+        if (!$this->podcasts->contains($podcast)) {
+            $this->podcasts[] = $podcast;
+            $podcast->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePodcast(Podcast $podcast): self
+    {
+        if ($this->podcasts->contains($podcast)) {
+            $this->podcasts->removeElement($podcast);
+            // set the owning side to null (unless already changed)
+            if ($podcast->getUser() === $this) {
+                $podcast->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }

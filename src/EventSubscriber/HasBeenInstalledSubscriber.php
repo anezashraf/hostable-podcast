@@ -31,16 +31,6 @@ class HasBeenInstalledSubscriber implements EventSubscriberInterface
 
         if (! $controller instanceof InstallationProcessInterface && ! $controller instanceof ExceptionController) {
 
-            if (! $this->repository->findByName('doesPodcastInformationExist')) {
-                $event->setController(function() {
-                    return new RedirectResponse($this->router->generate('installation_process_podcast'));
-                });
-
-
-                $event->stopPropagation();
-                return;
-            }
-
             if (! $this->repository->findByName('doesUserInformationExist')) {
 
                 $event->setController(function() {
@@ -52,6 +42,16 @@ class HasBeenInstalledSubscriber implements EventSubscriberInterface
                 return;
             }
 
+
+            if (! $this->repository->findByName('doesPodcastInformationExist')) {
+                $event->setController(function() {
+                    return new RedirectResponse($this->router->generate('installation_process_podcast'));
+                });
+
+
+                $event->stopPropagation();
+                return;
+            }
         }
     }
 

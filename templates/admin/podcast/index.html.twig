@@ -3,7 +3,27 @@
 {% block title %}{% endblock %}
 
 {% block body %}
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
+    <div class="title">
+        <h3>Podcast Management</h3>
+    </div>
+    <div class="form-container">
+        <div class="podcast-form">
+
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        </div>
+
+        <div class="podcast-img-upload">
+
+            {% if podcast.image %}
+                <img src="/{{ podcast.image }}"/>
+            {% endif %}
+            {{ form_start(imageUpload, {'action' : path('admin_podcast.fileupload.save', {id: 1})}) }}
+            {{ form_widget(imageUpload) }}
+            {{ form_end(imageUpload) }}
+        </div>
+
+
+    </div>
 {% endblock %}

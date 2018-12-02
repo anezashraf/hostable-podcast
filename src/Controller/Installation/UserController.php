@@ -45,8 +45,12 @@ class UserController extends AbstractController implements InstallationProcessIn
             $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
             $this->repository->update($user);
             $this->settingRepository->update(['name' => 'doesUserInformationExist', 'value' => 'true']);
-            return $this->redirectToRoute('index');
 
+            return $this->redirectToRoute('installation_process_podcast');
         }
+
+
+        return $this->redirectToRoute('installation_process_user');
+
     }
 }

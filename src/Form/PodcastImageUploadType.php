@@ -13,15 +13,24 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PodcastType extends AbstractType
+class PodcastImageUploadType extends AbstractType
 {
+    private $fileToStringTransformer;
+
+    public function __construct(FileToStringTransformer $fileToStringTransformer)
+    {
+        $this->fileToStringTransformer = $fileToStringTransformer;
+
+    }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class)
-            ->add('description', TextType::class)
+            ->add('image', FileType::class, ['label' => 'Podcast image'])
             ->add('save', SubmitType::class);
+
+        $builder->get('image')->addModelTransformer($this->fileToStringTransformer);
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

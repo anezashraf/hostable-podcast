@@ -25,6 +25,7 @@ class UserType extends AbstractType
                 'first_options'  => array('label' => 'Password'),
                 'second_options' => array('label' => 'Confirm Password')))
             ->add('save', SubmitType::class);
+
     }
 
     public function configureOptions(OptionsResolver $resolver)
