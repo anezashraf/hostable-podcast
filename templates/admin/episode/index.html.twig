@@ -4,11 +4,11 @@
     <div class="title">
         <h3>Episode Management</h3>
     </div>
-    <ul>
-        {% for episode in episodes %}
+    <ol>
+        {% for episode in episodes|reverse %}
             <li><a href="{{ path('admin_show_episode', {id: episode.id}) }}">{{ episode.title }}</a></li>
         {% endfor %}
-        <a href="{{ path('admin_create_episode') }}">Create New</a>
+    </ol>
 
-    </ul>
+    <a href="{{ path('admin_create_episode') }}" id="episode_save">Create New</a>
 {% endblock %}

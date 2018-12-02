@@ -17,7 +17,7 @@
         <div class="podcast-img-upload">
 
             {% if podcast.image %}
-                <img src="/{{ podcast.image }}"/>
+                <img src="/{{ podcast.image }}" class="img-block"/>
             {% endif %}
             {{ form_start(imageUpload, {'action' : path('admin_podcast.fileupload.save', {id: 1})}) }}
             {{ form_widget(imageUpload) }}

@@ -11,7 +11,7 @@ use FeedIo\Feed\Item\Media;
 
 class Feed
 {
-    public function feed(Podcast $podcast)
+    public function feed(Podcast $podcast, string $host)
     {
         $feed = new FeedLib();
         $feed->setTitle($podcast->getTitle())
@@ -20,18 +20,22 @@ class Feed
         $episodes = $podcast->getEpisodes()->getValues();
 
         foreach ($episodes as $episode) {
-            $enclosure = new Media();
-            $enclosure->setUrl($episode->getEnclosureUrl())
-                ->setType('audio/mpeg');
+            if ($episode->getEnclosureUrl()) {
 
-            $item = $feed->newItem();
-            $item->setDescription($episode->getDescription());
-            $item->setLastModified($episode->getPublishedAt());
-            $item->setTitle($episode->getTitle());
+                $enclosure = new Media();
+                $enclosure->setUrl($host . DIRECTORY_SEPARATOR . $episode->getEnclosureUrl())
+                    ->setType('audio/mpeg');
 
-            $item->addMedia($enclosure);
+                $item = $feed->newItem();
+                $item->setDescription($episode->getDescription());
+                $item->setLastModified($episode->getPublishedAt());
+                $item->setTitle($episode->getTitle());
+                $item->setLink($host . DIRECTORY_SEPARATOR . 'episode' . $episode->getId());
 
-            $feed->add($item);
+                $item->addMedia($enclosure);
+
+                $feed->add($item);
+            }
         }
 
         $feedIo = Factory::create()->getFeedIo();

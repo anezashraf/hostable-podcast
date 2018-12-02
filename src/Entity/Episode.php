@@ -41,12 +41,11 @@ class Episode
     private $podcast;
 
     /**
-     * @Assert\NotBlank(message="Please upload the podcast as a mp3 file")
      * @Assert\File(
      *     mimeTypes={ "audio/mpeg" },
      *     maxSize="1000000M"
      * )
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $enclosureUrl;
 

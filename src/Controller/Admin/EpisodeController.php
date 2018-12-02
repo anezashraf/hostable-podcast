@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Episode;
 use App\FileUploader\FileUploader;
+use App\Form\EpisodeEnclosureUrlUploadType;
 use App\Form\EpisodeType;
 use App\Repository\EpisodeRepository;
 use App\Repository\PodcastRepository;
@@ -15,11 +16,13 @@ class EpisodeController extends AbstractController
 {
     private $repository;
     private $podcastRepository;
+    private $fileuploader;
 
-    public function __construct(EpisodeRepository $repository, PodcastRepository $podcastRepository)
+    public function __construct(EpisodeRepository $repository, PodcastRepository $podcastRepository, FileUploader $fileUploader)
     {
         $this->repository = $repository;
         $this->podcastRepository = $podcastRepository;
+        $this->fileuploader = $fileUploader;
     }
 
     public function index()
@@ -34,9 +37,12 @@ class EpisodeController extends AbstractController
     public function update(Episode $episode)
     {
         $form = $this->createForm(EpisodeType::class, $episode);
+        $enclosureUrlUpload = $this->createForm(EpisodeEnclosureUrlUploadType::class, $episode);
 
         return $this->render('admin/episode/edit.html.twig', [
             'form' => $form->createView(),
+            'enclosureUrlUpload' => $enclosureUrlUpload->createView(),
+            'episode' => $episode,
         ]);
     }
 
@@ -58,9 +64,6 @@ class EpisodeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $episode->setPodcast($this->podcastRepository->find(1));
             $episode->setPublishedAt(new DateTime('now'));
-            $uploadedFile = $episode->getEnclosureUrl();
-            $fileName = $fileUploader->upload($uploadedFile);
-            $episode->setEnclosureUrl($fileName);
             $this->repository->saveOrUpdate($episode);
             return $this->redirectToRoute('admin_episodes');
         }
@@ -77,5 +80,21 @@ class EpisodeController extends AbstractController
             $this->repository->saveOrUpdate($episode);
             return $this->redirectToRoute('admin_episodes');
         }
+    }
+
+    public function upload(Request $request, Episode $episode)
+    {
+        $form = $this->createForm(EpisodeEnclosureUrlUploadType::class, $episode);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $uploadedFile = $episode->getEnclosureUrl();
+            $fileName = $this->fileuploader->upload($uploadedFile);
+            $episode->setEnclosureUrl($fileName);
+            $this->repository->saveOrUpdate($episode);
+            return $this->redirectToRoute('admin_show_episode', ['id' => $episode->getId()]);
+        }
+
     }
 }

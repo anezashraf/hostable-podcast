@@ -1,7 +1,14 @@
 {% extends 'admin/base.html.twig' %}
 
 {% block body %}
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
+    <div class="title">
+        <h3>Podcast Management</h3>
+    </div>
+    <div class="form-container">
+        <div class="podcast-form">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
 {% endblock %}

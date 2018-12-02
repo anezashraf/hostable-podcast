@@ -57,6 +57,12 @@ admin_podcast.fileupload.save:
     methods: ['POST']
     controller: App\Controller\Admin\PodcastController::upload
 
+admin_episode.fileupload.save:
+    path: /admin/episode/imageupload/{id}
+    methods: ['POST']
+    controller: App\Controller\Admin\EpisodeController::upload
+
+
 admin_settings:
     path: /admin/settings
     methods: ['GET']
