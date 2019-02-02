@@ -34,6 +34,17 @@ class UserRepository extends ServiceEntityRepository
         $this->_em->flush($user);
     }
 
+    public function insert(User $user)
+    {
+        $this->_em->persist($user);
+        $this->_em->flush($user);
+    }
+
+    public function get()
+    {
+        return $this->find(1);
+    }
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

@@ -21,6 +21,7 @@ class SettingRepository extends ServiceEntityRepository
 
     public function findByName(string $name)
     {
+
         $value = $this->createQueryBuilder('setting')
             ->select('setting.value')
             ->andWhere('setting.name= :name')
@@ -46,6 +47,12 @@ class SettingRepository extends ServiceEntityRepository
             ->getQuery();
 
         $query->execute();
+    }
+
+    public function insert(Setting $setting)
+    {
+        $this->_em->merge($setting);
+        $this->_em->flush();
     }
 
     // /**

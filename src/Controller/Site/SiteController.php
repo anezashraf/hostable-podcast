@@ -22,6 +22,7 @@ class SiteController extends AbstractController
         $podcast = $repository->find(1);
         $episodes = $podcast->getEpisodes();
 
+
         return $this->render('site/index.html.twig', [
             'episodes' => $episodes,
             'podcast' => $podcast,

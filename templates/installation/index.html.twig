@@ -3,7 +3,7 @@
 {% block title %}Hello!{% endblock %}
 
 {% block body %}
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
 {% endblock %}

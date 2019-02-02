@@ -2,64 +2,60 @@
 
 namespace App\EventSubscriber;
 
-use App\Controller\Installation\Contracts\InstallationProcessInterface;
+use App\Entity\Setting;
 use App\Repository\SettingRepository;
-use Symfony\Bundle\TwigBundle\Controller\ExceptionController;
+use Doctrine\ORM\NoResultException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\Templating\EngineInterface;
 
 class HasBeenInstalledSubscriber implements EventSubscriberInterface
 {
     private $repository;
-    private $router;
+    private $engine;
 
-    public function __construct(SettingRepository $repository, RouterInterface $router)
+    public function __construct(SettingRepository $repository, EngineInterface $engine)
     {
         $this->repository = $repository;
-        $this->router = $router;
+        $this->engine = $engine;
     }
 
-    public function onKernelController(FilterControllerEvent $event)
+    public function onKernelRequest(GetResponseEvent $event)
     {
-        if ($this->repository->findByName('hasBeenInstalled')) {
-            return;
-        }
 
-        $controller = $event->getController()[0];
+        $messages = [];
 
-        if (! $controller instanceof InstallationProcessInterface && ! $controller instanceof ExceptionController) {
+        try {
+            if (! $this->repository->findByName(Setting::USER_INSERTED)) {
+                $messages[] = 'You need to create a user, please run php bin/console user:create';
 
-            if (! $this->repository->findByName('doesUserInformationExist')) {
-
-                $event->setController(function() {
-                    return new RedirectResponse($this->router->generate('installation_process_user'));
-                });
-
-
-                $event->stopPropagation();
-                return;
             }
 
+        } catch (NoResultException $exception) {
 
-            if (! $this->repository->findByName('doesPodcastInformationExist')) {
-                $event->setController(function() {
-                    return new RedirectResponse($this->router->generate('installation_process_podcast'));
-                });
-
-
-                $event->stopPropagation();
-                return;
-            }
+            $messages[] = 'Please run php bin/console settings:create';
         }
+
+
+
+        if (count($messages) > 0) {
+
+            $event->setResponse(
+                new Response(
+                    $this->engine->render('installation/index.html.twig', ['messages' => $messages]), 503)
+            );
+
+            $event->stopPropagation();
+
+        }
+
     }
-
 
     public static function getSubscribedEvents()
     {
         return [
-            'kernel.controller' => 'onKernelController',
+            'kernel.request' => 'onKernelRequest',
         ];
     }
 }

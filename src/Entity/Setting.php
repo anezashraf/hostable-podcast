@@ -9,6 +9,30 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Setting
 {
+
+    const USER_INSERTED = 'user_inserted';
+    const PODCAST_INSERTED = 'podcast_inserted';
+    const SETTINGS_CREATED = 'settings_created';
+    const IS_ONLINE = 'is_online';
+
+    const DEFAULTS = [
+        self::USER_INSERTED => [
+            'default_value' => 'false'
+        ],
+
+        self::SETTINGS_CREATED => [
+            'default_value' => 'false'
+        ],
+
+        self::IS_ONLINE => [
+            'default_value' => 'false'
+        ],
+
+        self::PODCAST_INSERTED => [
+            'default_value' => 'false'
+        ]
+    ];
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

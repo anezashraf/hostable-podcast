@@ -2,6 +2,7 @@
 
 namespace App\EventSubscriber;
 
+use App\Entity\Setting;
 use App\Repository\SettingRepository;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +19,7 @@ class IsOnlineSubscriber implements EventSubscriberInterface
 
     public function onKernelRequest(GetResponseEvent $event)
     {
-        if ($this->repository->findByName('isOnline')) {
+        if ($this->repository->findByName(Setting::IS_ONLINE)) {
             return;
         }
 
