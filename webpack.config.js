@@ -19,7 +19,7 @@ Encore
      */
     .addEntry('site', './assets/site/js/site.js')
     .addEntry('dashboard', './assets/dashboard/js/dashboard.js')
-    .addEntry('installation', './assets/installation/js/installation.js')
+    .addEntry('login', './assets/login/js/login.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 
@@ -38,6 +38,7 @@ Encore
 
     // enables Sass/SCSS support
     .enableSassLoader()
+    .enableReactPreset()
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
