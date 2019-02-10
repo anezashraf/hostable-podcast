@@ -40,6 +40,15 @@ class PodcastRepository extends ServiceEntityRepository
         $this->_em->flush($podcast);
     }
 
+    public function getWithEpisodes()
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.id = :id')
+            ->setParameter('id', 1)
+            ->getQuery()
+            ->getSingleResult();
+    }
+
     // /**
     //  * @return Podcast[] Returns an array of Podcast objects
     //  */

@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello{% endblock %}
+
+{% block body %}
+    <h3>{{ podcast.title }}</h3>
+    <h3>{{ podcast.description }}</h3>
+    <h3>{{ podcast.image }} </h3>
+
+    {% for episode in podcast.episodes %}
+        <p>{{ episode.title }}</p>
+        <p>{{ episode.description }}</p>
+    {% endfor %}
+{% endblock %}
