@@ -21,7 +21,7 @@ class EpisodeRepository extends ServiceEntityRepository
 
     public function saveOrUpdate(Episode $episode)
     {
-        $this->_em->persist($episode);
+        $this->_em->merge($episode);
         $this->_em->flush($episode);
     }
 
@@ -32,6 +32,15 @@ class EpisodeRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
 
+    }
+
+    public function get(string $id) : Episode
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getSingleResult();
     }
 
     // /**

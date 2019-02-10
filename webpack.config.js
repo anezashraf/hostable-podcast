@@ -41,6 +41,8 @@ Encore
     .enableReactPreset()
     .configureBabel(function(babelConfig) {
         // add additional presets
+
+        babelConfig.plugins.push('transform-class-properties');
         babelConfig.presets.push('stage-3');
         babelConfig.presets.push('env');
 

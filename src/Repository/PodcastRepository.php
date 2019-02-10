@@ -36,7 +36,7 @@ class PodcastRepository extends ServiceEntityRepository
 
     public function saveOrUpdate(Podcast $podcast)
     {
-        $this->_em->persist($podcast);
+        $this->_em->merge($podcast);
         $this->_em->flush($podcast);
     }
 
@@ -44,6 +44,15 @@ class PodcastRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.id = :id')
+            ->setParameter('id', 1)
+            ->getQuery()
+            ->getSingleResult();
+    }
+
+    public function get() : Podcast
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.id = :id')
             ->setParameter('id', 1)
             ->getQuery()
             ->getSingleResult();

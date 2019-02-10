@@ -1,7 +1,9 @@
 {
     "devDependencies": {
+        "@babel/plugin-proposal-class-properties": "^7.3.0",
         "@babel/preset-react": "^7.0.0",
         "@symfony/webpack-encore": "^0.20.0",
+        "babel-plugin-transform-class-properties": "^6.24.1",
         "babel-preset-env": "^1.7.0",
         "babel-preset-react": "^6.24.1",
         "babel-preset-stage-3": "^6.24.1",
@@ -18,8 +20,10 @@
         "build": "encore production"
     },
     "dependencies": {
-        "prop-types": "^15.6.2",
+        "axios": "^0.18.0",
+        "bootstrap-sass": "^3.4.1",
         "connected-react-router": "4.5.0",
+        "prop-types": "^15.6.2",
         "react": "16.8.1",
         "react-dom": "16.8.1",
         "react-redux": "5.1.1",
@@ -27,7 +31,6 @@
         "react-router-dom": "4.3.1",
         "redux": "4.0.1",
         "redux-thunk": "2.3.0",
-        "sanitize.css": "7.0.3",
         "serve": "10.1.2"
     }
 }
