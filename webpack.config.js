@@ -18,7 +18,7 @@ Encore
      * and one CSS file (e.g. app.scss) if you JavaScript imports CSS.
      */
     .addEntry('site', './assets/site/js/site.js')
-    .addEntry('dashboard', './assets/dashboard/js/dashboard.js')
+    .addEntry('dashboard', './assets/dashboard/src/index.js')
     .addEntry('login', './assets/login/js/login.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
@@ -39,6 +39,14 @@ Encore
     // enables Sass/SCSS support
     .enableSassLoader()
     .enableReactPreset()
+    .configureBabel(function(babelConfig) {
+        // add additional presets
+        babelConfig.presets.push('stage-3');
+        babelConfig.presets.push('env');
+
+        // no plugins are added by default, but you can add some
+        // babelConfig.plugins.push('styled-jsx/babel');
+    })
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
