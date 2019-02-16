@@ -2,7 +2,7 @@ import React from 'react'
 import {bindActionCreators} from "redux";
 import PodcastForm from '../../Components/Forms/PodcastForm'
 import Episodes from '../../Components/Episodes'
-import {fetchDetails, updateDetails} from "../../modules/podcast";
+import {fetchDetails, updateDetails, uploadImage} from "../../modules/podcast";
 import {connect} from "react-redux";
 
 
@@ -28,7 +28,13 @@ class Details extends React.Component {
 
         return (
             <div className='details'>
-                <PodcastForm id={id} title={title} description={description} handleSave={this.handleSave}/>
+                <PodcastForm
+                    id={id}
+                    title={title}
+                    description={description}
+                    handleSave={this.handleSave}
+                    uploadImage={this.props.uploadImage}
+                />
                 <Episodes />
             </div>
         );
@@ -50,6 +56,7 @@ const mapDispatchToProps = dispatch =>
     bindActionCreators(
         {
             fetchDetails,
+            uploadImage,
             updateDetails,
         },
         dispatch

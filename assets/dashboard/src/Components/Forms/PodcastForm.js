@@ -1,4 +1,6 @@
 import React from 'react'
+import classNames from 'classnames'
+import Dropzone from 'react-dropzone'
 
 class PodcastForm extends React.Component {
 
@@ -7,7 +9,9 @@ class PodcastForm extends React.Component {
 
         this.state = {
             title: '',
-            description: ''
+            description: '',
+            accepted: [],
+            rejected: []
         }
     }
 
@@ -25,6 +29,10 @@ class PodcastForm extends React.Component {
         this.setState({description: e.target.value});
     };
 
+    handleDrop = (one, two, three, four) => {
+        this.props.uploadImage(one[0], this.state.id);
+    };
+
     handleSave = (e) => {
         e.preventDefault();
         this.props.handleSave(this.state.title, this.state.description, this.props.id)
@@ -35,11 +43,34 @@ class PodcastForm extends React.Component {
         let {title, description} = this.state;
 
         return (
+            <div>
                 <form onSubmit={this.handleSave}>
                     <input type="text" name="title" value={title} onChange={this.handleTitleChange}/>
                     <input type="text" name="description" value={description} onChange={this.handleDescriptionChange}/>
                     <button type="submit">Save</button>
                 </form>
+                <div className="dropzone">
+                    <Dropzone
+                        accept="image/jpeg, image/png"
+                        onDrop={this.handleDrop}
+                    >
+                        {({ getRootProps, getInputProps }) => (
+                            <div {...getRootProps()}  className="dropzone">
+                                <input {...getInputProps()} />
+                                <p>Upload The Podcast Image</p>
+                            </div>
+                        )}
+                    </Dropzone>
+                </div>
+                <aside>
+                    <h4>Accepted files</h4>
+                    <ul>
+                        {
+                            this.state.accepted.map(f => <li key={f.name}>{f.name} - {f.size} bytes</li>)
+                        }
+                    </ul>
+                </aside>
+            </div>
         )
     }
 }
