@@ -10,6 +10,7 @@ class DashboardController extends AbstractController
 
     /**
      * @Route("/dashboard", name="dashboard")
+     * @Route("/dashboard/{all}", name="dashboard_all" , requirements={"all"=".$"})
      */
     public function index()
     {

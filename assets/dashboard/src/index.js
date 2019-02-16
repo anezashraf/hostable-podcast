@@ -5,8 +5,7 @@ import { ConnectedRouter } from 'connected-react-router'
 import store, { history } from './store'
 import App from './App'
 
-import 'sanitize.css/sanitize.css'
-import './index.css'
+require('bootstrap-sass/assets/stylesheets/_bootstrap.scss');
 
 const target = document.querySelector('#root')
 

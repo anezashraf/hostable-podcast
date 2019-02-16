@@ -122,6 +122,12 @@
     "ocramius/proxy-manager": {
         "version": "2.1.1"
     },
+    "php-jsonpatch/php-jsonpatch": {
+        "version": "v3.0.2"
+    },
+    "php-jsonpointer/php-jsonpointer": {
+        "version": "v3.0.2"
+    },
     "phpdocumentor/reflection-common": {
         "version": "1.0.1"
     },
