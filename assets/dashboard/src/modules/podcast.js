@@ -28,9 +28,10 @@ export default (state = initialState, action) => {
     case GET_DETAILS_RESPONSED:
       return {
         ...state,
-        title: action.payload.title,
-        description: action.payload.description,
-        isLoading: false
+        title: action.payload.data.title,
+        id: action.payload.data.id,
+        description: action.payload.data.description,
+        isLoading: false,
       };
 
     case SAVE_DETAILS_REQUEST:

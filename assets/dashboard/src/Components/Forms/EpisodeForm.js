@@ -40,8 +40,6 @@ class EpisodeForm extends React.Component {
             {op: "replace", path: "/description", value: episode.description},
         ];
 
-        console.log(episode.id)
-
         this.props.handleSave(episode.id, data)
     }
 

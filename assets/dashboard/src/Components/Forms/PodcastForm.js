@@ -16,9 +16,13 @@ class PodcastForm extends React.Component {
     }
 
     componentDidMount() {
-        let {title, description} = this.props;
+        let {title, description, id} = this.props;
 
-        this.setState({title: title, description: description});
+        this.setState({
+            title: title,
+            description: description,
+            id: id
+        });
     }
 
     handleTitleChange = (e) => {
@@ -29,8 +33,8 @@ class PodcastForm extends React.Component {
         this.setState({description: e.target.value});
     };
 
-    handleDrop = (one, two, three, four) => {
-        this.props.uploadImage(one[0], this.state.id);
+    handleDrop = (file) => {
+        this.props.uploadImage(file[0], this.state.id);
     };
 
     handleSave = (e) => {
