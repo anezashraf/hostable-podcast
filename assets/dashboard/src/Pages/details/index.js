@@ -19,7 +19,7 @@ class Details extends React.Component {
 
     render() {
 
-        let {title, description, isLoading, id} = this.props;
+        let {title, description, isLoading, id, image} = this.props;
 
 
         if (isLoading) {
@@ -31,6 +31,7 @@ class Details extends React.Component {
                 <PodcastForm
                     id={id}
                     title={title}
+                    image={image}
                     description={description}
                     handleSave={this.handleSave}
                     uploadImage={this.props.uploadImage}
@@ -49,6 +50,7 @@ const mapStateToProps = ({ podcast }) => ({
     title: podcast.title,
     id: podcast.id,
     description: podcast.description,
+    image: podcast.image,
     isLoading: podcast.isLoading
 });
 

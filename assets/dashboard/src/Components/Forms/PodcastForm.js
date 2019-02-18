@@ -1,6 +1,5 @@
 import React from 'react'
-import classNames from 'classnames'
-import Dropzone from 'react-dropzone'
+import UploadFile from "./UploadFile";
 
 class PodcastForm extends React.Component {
 
@@ -10,8 +9,6 @@ class PodcastForm extends React.Component {
         this.state = {
             title: '',
             description: '',
-            accepted: [],
-            rejected: []
         }
     }
 
@@ -33,9 +30,6 @@ class PodcastForm extends React.Component {
         this.setState({description: e.target.value});
     };
 
-    handleDrop = (file) => {
-        this.props.uploadImage(file[0], this.state.id);
-    };
 
     handleSave = (e) => {
         e.preventDefault();
@@ -45,6 +39,7 @@ class PodcastForm extends React.Component {
     render() {
 
         let {title, description} = this.state;
+        let {image, uploadImage} = this.props;
 
         return (
             <div>
@@ -53,27 +48,7 @@ class PodcastForm extends React.Component {
                     <input type="text" name="description" value={description} onChange={this.handleDescriptionChange}/>
                     <button type="submit">Save</button>
                 </form>
-                <div className="dropzone">
-                    <Dropzone
-                        accept="image/jpeg, image/png"
-                        onDrop={this.handleDrop}
-                    >
-                        {({ getRootProps, getInputProps }) => (
-                            <div {...getRootProps()}  className="dropzone">
-                                <input {...getInputProps()} />
-                                <p>Upload The Podcast Image</p>
-                            </div>
-                        )}
-                    </Dropzone>
-                </div>
-                <aside>
-                    <h4>Accepted files</h4>
-                    <ul>
-                        {
-                            this.state.accepted.map(f => <li key={f.name}>{f.name} - {f.size} bytes</li>)
-                        }
-                    </ul>
-                </aside>
+                <UploadFile fileType='image' fileLocation={image} uploadFile={uploadImage} />
             </div>
         )
     }

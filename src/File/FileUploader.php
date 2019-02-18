@@ -20,7 +20,7 @@ class FileUploader
     public function upload(UploadedFile $file)
     {
         $clientOriginalFilename = $file->getClientOriginalName();
-        $extension = $file->guessExtension();
+        $extension = $file->getClientOriginalExtension();
         $originalFilename = substr($clientOriginalFilename, 0, strpos($clientOriginalFilename, "."));
 
         $fileName = rawurlencode("$originalFilename.$extension");

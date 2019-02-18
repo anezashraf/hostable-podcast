@@ -1,4 +1,5 @@
 import React from 'react'
+import UploadFile from "./UploadFile";
 
 class EpisodeForm extends React.Component {
 
@@ -43,6 +44,14 @@ class EpisodeForm extends React.Component {
         this.props.handleSave(episode.id, data)
     }
 
+    uploadImage = (file) => {
+        this.props.uploadImage(file, this.props.episode.id);
+    }
+
+    uploadAudio = (file) => {
+        this.props.uploadAudio(file, this.props.episode.id);
+    }
+
     render() {
 
         let {episode} = this.state;
@@ -54,7 +63,11 @@ class EpisodeForm extends React.Component {
                     <input type="text" name="title" value={episode.title} onChange={this.handleTitleChange}/>
                     <input type="text" name="description" value={episode.description} onChange={this.handleDescriptionChange}/>
                     <button type="submit">Save</button>
-                </form></div>
+                </form>
+                <UploadFile fileType="image" fileLocation={this.props.episode.image} uploadFile={this.uploadImage} />
+                <UploadFile fileType="audio" fileLocation={this.props.episode.enclosureUrl} uploadFile={this.uploadAudio} />
+
+            </div>
         )
     }
 }

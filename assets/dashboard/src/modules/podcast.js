@@ -30,6 +30,7 @@ export default (state = initialState, action) => {
         ...state,
         title: action.payload.data.title,
         id: action.payload.data.id,
+        image: action.payload.data.image,
         description: action.payload.data.description,
         isLoading: false,
       };

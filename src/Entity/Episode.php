@@ -43,6 +43,13 @@ class Episode implements EntityInterface
     private $publishedAt;
 
     /**
+     * @Groups("dashboard")
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Podcast", inversedBy="episodes", fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -123,5 +130,21 @@ class Episode implements EntityInterface
         $this->enclosureUrl = $enclosureUrl;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image): void
+    {
+        $this->image = $image;
     }
 }
