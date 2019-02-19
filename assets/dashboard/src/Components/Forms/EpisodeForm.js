@@ -64,8 +64,8 @@ class EpisodeForm extends React.Component {
                     <input type="text" name="description" value={episode.description} onChange={this.handleDescriptionChange}/>
                     <button type="submit">Save</button>
                 </form>
-                <UploadFile fileType="image" fileLocation={this.props.episode.image} uploadFile={this.uploadImage} />
-                <UploadFile fileType="audio" fileLocation={this.props.episode.enclosureUrl} uploadFile={this.uploadAudio} />
+                <UploadFile isLoading={this.props.isImageLoading} fileType="image" fileLocation={this.props.episode.image} uploadFile={this.uploadImage} />
+                <UploadFile isLoading={this.props.isAudioUploading} fileType="audio" fileLocation={this.props.episode.enclosureUrl} uploadFile={this.uploadAudio} />
 
             </div>
         )

@@ -13,7 +13,8 @@ export const UPLOAD_EPISODE_AUDIO_REQUEST = 'episode/UPLOAD_AUDIO_REQUEST';
 export const UPLOAD_EPISODE_AUDIO_RESPONSE = 'episode/UPLOAD_AUDIO_RESPONSED';
 
 const initialState = {
-  episodes: []
+  episodes: [],
+  isAudioUploading: false
 };
 
 export default (state = initialState, action) => {
@@ -28,9 +29,29 @@ export default (state = initialState, action) => {
     case UPLOAD_EPISODE_IMAGE_REQUEST:
       return {
         ...state,
+
       };
 
+    case UPLOAD_EPISODE_AUDIO_REQUEST:
+      return {
+        ...state,
+        isAudioUploading: true
+      };
 
+    case UPLOAD_EPISODE_AUDIO_RESPONSE:
+      let id = action.payload.data.id;
+      let newEpisodes = state.episodes;
+      console.log(action.payload);
+      newEpisodes[id - 1] = action.payload.data;
+      console.log(newEpisodes);
+      console.log(id);
+      console.log("ross");
+
+      return {
+        ...state,
+        episodes: newEpisodes,
+        isAudioUploading: false
+      };
     case GET_EPISODES_RESPONSED:
       console.log("s");
       let episodes = action.payload.data;
@@ -99,8 +120,10 @@ export const uploadImage = (file, id) => {
           }
         }
     ).then(function () {
-      console.log('SUCCESS!!');
-    })
+      dispatch({
+        type: UPLOAD_EPISODE_IMAGE_RESPONSE,
+        payload: response.data
+      });    })
         .catch(function () {
           console.log('FAILURE!!');
         });
@@ -122,9 +145,13 @@ export const uploadAudio = (file, id) => {
             'Content-Type': 'multipart/form-data'
           }
         }
-    ).then(function () {
-      console.log('SUCCESS!!');
-    })
+    ).then(function (response) {
+      console.log("rossssss");
+      console.log(response);
+      dispatch({
+        type: UPLOAD_EPISODE_AUDIO_RESPONSE,
+        payload: response.data
+      });    })
         .catch(function () {
           console.log('FAILURE!!');
         });

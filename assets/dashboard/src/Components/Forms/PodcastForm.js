@@ -39,7 +39,7 @@ class PodcastForm extends React.Component {
     render() {
 
         let {title, description} = this.state;
-        let {image, uploadImage} = this.props;
+        let {image, uploadImage, isImageLoading} = this.props;
 
         return (
             <div>
@@ -48,7 +48,7 @@ class PodcastForm extends React.Component {
                     <input type="text" name="description" value={description} onChange={this.handleDescriptionChange}/>
                     <button type="submit">Save</button>
                 </form>
-                <UploadFile fileType='image' fileLocation={image} uploadFile={uploadImage} />
+                <UploadFile isLoading={isImageLoading} fileType='image' fileLocation={image} uploadFile={uploadImage} />
             </div>
         )
     }

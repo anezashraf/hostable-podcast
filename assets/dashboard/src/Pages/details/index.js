@@ -51,7 +51,8 @@ const mapStateToProps = ({ podcast }) => ({
     id: podcast.id,
     description: podcast.description,
     image: podcast.image,
-    isLoading: podcast.isLoading
+    isLoading: podcast.isLoading,
+    isImageLoading: podcast.isImageLoading
 });
 
 const mapDispatchToProps = dispatch =>

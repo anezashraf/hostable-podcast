@@ -49,6 +49,7 @@ class FileController extends AbstractController
 
         $json = $this->serializer->serialize(ApiStructure::create($entity, new ConstraintViolationList), 'json', ['groups' => ['dashboard']]);
 
+        sleep(3);
         return new JsonResponse($json, 200, [], true);
     }
 }

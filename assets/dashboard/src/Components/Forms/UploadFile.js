@@ -17,27 +17,32 @@ class UploadFile extends React.Component {
         this.props.uploadFile(file[0], this.state.id);
     };
 
-    allowedFileTypes = () => {
-        let {type} = this.props.fileType;
-
-        if (type === 'audio') {
-            return 'audio/mpeg, audio/mp3';
-        }
-
-        return 'image/jpeg, image/png';
-
-    }
-
 
     render() {
 
-        let {fileLocation, fileType} = this.props;
+        let {fileLocation, fileType, isLoading} = this.props;
+
+
+
+        let preview = <p><b>Currently Loading Please Wait This Could Take Some Time..</b></p>
+
+        if (! isLoading) {
+            preview = <Preview type={fileType} fileLocation={fileLocation} />
+        }
+
+        let acceptedFileTypes = 'image/jpeg, image/png';
+
+
+        if (fileType === 'audio') {
+            acceptedFileTypes = 'audio/mpeg, audio/mp3';
+        }
 
         return (
             <div>
-                <Preview type={fileType} fileLocation={fileLocation} />
+                {preview}
                 <div className="dropzone">
                     <Dropzone
+                        accept={acceptedFileTypes}
                         onDrop={this.handleDrop}
                     >
                         {({ getRootProps, getInputProps }) => (

@@ -13,14 +13,22 @@ class Episodes extends React.Component {
 
 
     render() {
-        let {episodes, updateEpisode, uploadImage, uploadAudio} = this.props;
+        let {episodes, updateEpisode, uploadImage, uploadAudio, isAudioUploading, isImageUploading} = this.props;
         console.log(this.props);
 
         return (
             <section>
                     {episodes.map((value, index) => {
                         return(
-                            <EpisodeForm uploadAudio={uploadAudio} uploadImage={uploadImage} key={index} episode={value} handleSave={updateEpisode} />
+                            <EpisodeForm
+                                uploadAudio={uploadAudio}
+                                uploadImage={uploadImage}
+                                key={index}
+                                episode={value}
+                                handleSave={updateEpisode}
+                                isImageUploading={isImageUploading}
+                                isAudioUploading={isAudioUploading}
+                            />
                             )
                     })}
             </section>
@@ -30,7 +38,9 @@ class Episodes extends React.Component {
 
 
 const mapStateToProps = ({ episode }) => ({
-    episodes: episode.episodes
+    episodes: episode.episodes,
+    isAudioUploading: episode.isAudioUploading,
+    isImageUploading: episode.isImageUploading
 });
 
 const mapDispatchToProps = dispatch =>
