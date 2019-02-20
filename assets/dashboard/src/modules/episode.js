@@ -6,8 +6,8 @@ export const GET_EPISODES_RESPONSED = 'episode/GET_EPISODES_RESPONSED';
 export const SAVE_EPISODE_REQUEST = 'episode/SAVE_DETAILS_REQUEST';
 export const SAVE_EPISODE_RESPONSE = 'episode/SAVE_DETAILS_RESPONSED';
 
-export const UPLOAD_EPISODE_IMAGE_REQUEST = 'episode/SAVE_DETAILS_REQUEST';
-export const UPLOAD_EPISODE_IMAGE_RESPONSE = 'episode/SAVE_DETAILS_RESPONSED';
+export const UPLOAD_EPISODE_IMAGE_REQUEST = 'episode/UPLOAD_IMAGE_REQUEST';
+export const UPLOAD_EPISODE_IMAGE_RESPONSE = 'episode/UPLOAD_IMAGE_RESPONSE';
 
 export const UPLOAD_EPISODE_AUDIO_REQUEST = 'episode/UPLOAD_AUDIO_REQUEST';
 export const UPLOAD_EPISODE_AUDIO_RESPONSE = 'episode/UPLOAD_AUDIO_RESPONSED';
@@ -20,7 +20,6 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_EPISODES_REQUESTED:
-      console.log("loading1");
       return {
         ...state,
         isLoading: true
@@ -29,6 +28,7 @@ export default (state = initialState, action) => {
     case UPLOAD_EPISODE_IMAGE_REQUEST:
       return {
         ...state,
+        isImageUploading: true
 
       };
 
@@ -38,24 +38,20 @@ export default (state = initialState, action) => {
         isAudioUploading: true
       };
 
-    case UPLOAD_EPISODE_AUDIO_RESPONSE:
+    case UPLOAD_EPISODE_AUDIO_RESPONSE: case UPLOAD_EPISODE_IMAGE_RESPONSE:
       let id = action.payload.data.id;
       let newEpisodes = state.episodes;
-      console.log(action.payload);
       newEpisodes[id - 1] = action.payload.data;
-      console.log(newEpisodes);
-      console.log(id);
-      console.log("ross");
 
       return {
         ...state,
         episodes: newEpisodes,
-        isAudioUploading: false
+        isAudioUploading: false,
+        isImageUploading: false,
       };
     case GET_EPISODES_RESPONSED:
-      console.log("s");
       let episodes = action.payload.data;
-      console.log(episodes)
+
       return {
         ...state,
         episodes: episodes,
@@ -92,8 +88,6 @@ export const updateEpisode = (id, data) => {
     });
 
 
-    console.log(id);
-    console.log("ross");
     axios.patch(`/api/episode/${id}`, data)
         .then(function (response) {
           console.log(response);
@@ -119,7 +113,8 @@ export const uploadImage = (file, id) => {
             'Content-Type': 'multipart/form-data'
           }
         }
-    ).then(function () {
+    ).then(function (response) {
+      console.log(response);
       dispatch({
         type: UPLOAD_EPISODE_IMAGE_RESPONSE,
         payload: response.data
@@ -146,8 +141,6 @@ export const uploadAudio = (file, id) => {
           }
         }
     ).then(function (response) {
-      console.log("rossssss");
-      console.log(response);
       dispatch({
         type: UPLOAD_EPISODE_AUDIO_RESPONSE,
         payload: response.data

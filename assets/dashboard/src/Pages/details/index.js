@@ -19,7 +19,7 @@ class Details extends React.Component {
 
     render() {
 
-        let {title, description, isLoading, id, image} = this.props;
+        let {title, description, isLoading, id, image, isImageUploading} = this.props;
 
 
         if (isLoading) {
@@ -35,6 +35,7 @@ class Details extends React.Component {
                     description={description}
                     handleSave={this.handleSave}
                     uploadImage={this.props.uploadImage}
+                    isImageUploading={isImageUploading}
                 />
                 <Episodes />
             </div>
@@ -52,7 +53,7 @@ const mapStateToProps = ({ podcast }) => ({
     description: podcast.description,
     image: podcast.image,
     isLoading: podcast.isLoading,
-    isImageLoading: podcast.isImageLoading
+    isImageUploading: podcast.isImageUploading
 });
 
 const mapDispatchToProps = dispatch =>

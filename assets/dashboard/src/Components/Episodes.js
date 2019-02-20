@@ -14,7 +14,6 @@ class Episodes extends React.Component {
 
     render() {
         let {episodes, updateEpisode, uploadImage, uploadAudio, isAudioUploading, isImageUploading} = this.props;
-        console.log(this.props);
 
         return (
             <section>
