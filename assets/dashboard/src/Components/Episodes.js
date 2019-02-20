@@ -1,6 +1,6 @@
 import React from 'react'
 import {bindActionCreators} from "redux";
-import {fetchEpisodes, updateEpisode} from "../modules/episode";
+import {fetchEpisodes, updateEpisode, uploadImage, uploadAudio} from "../modules/episode";
 import {connect} from "react-redux";
 import EpisodeForm from '../Components/Forms/EpisodeForm'
 
@@ -13,14 +13,21 @@ class Episodes extends React.Component {
 
 
     render() {
-        let {episodes, updateEpisode} = this.props;
-        console.log(this.props);
+        let {episodes, updateEpisode, uploadImage, uploadAudio, isAudioUploading, isImageUploading} = this.props;
 
         return (
             <section>
                     {episodes.map((value, index) => {
                         return(
-                            <EpisodeForm key={index} episode={value} handleSave={updateEpisode} />
+                            <EpisodeForm
+                                uploadAudio={uploadAudio}
+                                uploadImage={uploadImage}
+                                key={index}
+                                episode={value}
+                                handleSave={updateEpisode}
+                                isImageUploading={isImageUploading}
+                                isAudioUploading={isAudioUploading}
+                            />
                             )
                     })}
             </section>
@@ -30,14 +37,18 @@ class Episodes extends React.Component {
 
 
 const mapStateToProps = ({ episode }) => ({
-    episodes: episode.episodes
+    episodes: episode.episodes,
+    isAudioUploading: episode.isAudioUploading,
+    isImageUploading: episode.isImageUploading
 });
 
 const mapDispatchToProps = dispatch =>
     bindActionCreators(
         {
             fetchEpisodes,
-            updateEpisode
+            updateEpisode,
+            uploadImage,
+            uploadAudio,
         },
         dispatch
     );

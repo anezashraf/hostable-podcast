@@ -2,7 +2,7 @@ import React from 'react'
 import {bindActionCreators} from "redux";
 import PodcastForm from '../../Components/Forms/PodcastForm'
 import Episodes from '../../Components/Episodes'
-import {fetchDetails, updateDetails} from "../../modules/podcast";
+import {fetchDetails, updateDetails, uploadImage} from "../../modules/podcast";
 import {connect} from "react-redux";
 
 
@@ -19,7 +19,7 @@ class Details extends React.Component {
 
     render() {
 
-        let {title, description, isLoading, id} = this.props;
+        let {title, description, isLoading, id, image, isImageUploading} = this.props;
 
 
         if (isLoading) {
@@ -28,7 +28,15 @@ class Details extends React.Component {
 
         return (
             <div className='details'>
-                <PodcastForm id={id} title={title} description={description} handleSave={this.handleSave}/>
+                <PodcastForm
+                    id={id}
+                    title={title}
+                    image={image}
+                    description={description}
+                    handleSave={this.handleSave}
+                    uploadImage={this.props.uploadImage}
+                    isImageUploading={isImageUploading}
+                />
                 <Episodes />
             </div>
         );
@@ -43,13 +51,16 @@ const mapStateToProps = ({ podcast }) => ({
     title: podcast.title,
     id: podcast.id,
     description: podcast.description,
-    isLoading: podcast.isLoading
+    image: podcast.image,
+    isLoading: podcast.isLoading,
+    isImageUploading: podcast.isImageUploading
 });
 
 const mapDispatchToProps = dispatch =>
     bindActionCreators(
         {
             fetchDetails,
+            uploadImage,
             updateDetails,
         },
         dispatch

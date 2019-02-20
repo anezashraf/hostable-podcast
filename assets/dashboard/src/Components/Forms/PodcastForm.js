@@ -1,4 +1,5 @@
 import React from 'react'
+import UploadFile from "./UploadFile";
 
 class PodcastForm extends React.Component {
 
@@ -7,14 +8,18 @@ class PodcastForm extends React.Component {
 
         this.state = {
             title: '',
-            description: ''
+            description: '',
         }
     }
 
     componentDidMount() {
-        let {title, description} = this.props;
+        let {title, description, id} = this.props;
 
-        this.setState({title: title, description: description});
+        this.setState({
+            title: title,
+            description: description,
+            id: id
+        });
     }
 
     handleTitleChange = (e) => {
@@ -25,6 +30,7 @@ class PodcastForm extends React.Component {
         this.setState({description: e.target.value});
     };
 
+
     handleSave = (e) => {
         e.preventDefault();
         this.props.handleSave(this.state.title, this.state.description, this.props.id)
@@ -33,13 +39,17 @@ class PodcastForm extends React.Component {
     render() {
 
         let {title, description} = this.state;
+        let {image, uploadImage, isImageUploading} = this.props;
 
         return (
+            <div>
                 <form onSubmit={this.handleSave}>
                     <input type="text" name="title" value={title} onChange={this.handleTitleChange}/>
                     <input type="text" name="description" value={description} onChange={this.handleDescriptionChange}/>
                     <button type="submit">Save</button>
                 </form>
+                <UploadFile isLoading={isImageUploading} fileType='image' fileLocation={image} uploadFile={uploadImage} />
+            </div>
         )
     }
 }

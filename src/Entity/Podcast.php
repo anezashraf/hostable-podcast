@@ -47,7 +47,9 @@ class Podcast implements EntityInterface
      */
     private $description;
 
-    /***
+    /**
+     * @Groups("dashboard")
+     *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;

@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class PodcastController extends AbstractController
@@ -38,9 +39,9 @@ class PodcastController extends AbstractController
     {
         $podcast = $this->repository->get();
 
-        return new Response(
-            $this->serializer->serialize($podcast, 'json', ['groups' => ['dashboard']])
-        );
+        $json = $this->serializer->serialize(ApiStructure::create($podcast, new ConstraintViolationList), 'json', ['groups' => ['dashboard']]);
+
+        return new JsonResponse($json, 200, [], true);
     }
 
     /**

@@ -1,15 +1,21 @@
-
 import axios from 'axios';
+import {UPLOAD_EPISODE_AUDIO_RESPONSE} from "./episode";
 
 export const GET_DETAILS_REQUESTED = 'podcast/GET_DETAILS_REQUESTED';
 export const GET_DETAILS_RESPONSED = 'podcast/GET_DETAILS_RESPONSED';
+
 export const SAVE_DETAILS_REQUEST = 'podcast/SAVE_DETAILS_REQUEST';
 export const SAVE_DETAILS_RESPONSE = 'podcast/SAVE_DETAILS_RESPONSED';
+
+export const UPLOAD_IMAGE_REQUEST = 'podcast/UPLOAD_IMAGE_REQUEST';
+export const UPLOAD_IMAGE_RESPONSE = 'podcast/UPLOAD_IMAGE_RESPONSE';
+
 
 const initialState = {
   title: '',
   description: '',
-  id: ''
+  id: '',
+  isImageUploading: false
 };
 
 export default (state = initialState, action) => {
@@ -21,17 +27,27 @@ export default (state = initialState, action) => {
       };
 
 
-    case GET_DETAILS_RESPONSED:
+    case GET_DETAILS_RESPONSED: case UPLOAD_IMAGE_RESPONSE:
       return {
         ...state,
-        title: action.payload.title,
-        description: action.payload.description,
-        isLoading: false
+        title: action.payload.data.title,
+        id: action.payload.data.id,
+        image: action.payload.data.image,
+        description: action.payload.data.description,
+        isLoading: false,
+        isImageUploading: false
       };
 
     case SAVE_DETAILS_REQUEST:
       return {
         ...state,
+        isLoading: true
+      };
+
+    case UPLOAD_IMAGE_REQUEST:
+      return {
+        ...state,
+        isImageUploading: true
       };
 
     case SAVE_DETAILS_RESPONSE:
@@ -75,10 +91,34 @@ export const updateDetails = (title, description) => {
 
       axios.patch('/api/podcast', data)
           .then(function (response) {
-              console.log(response);
           })
           .catch(function (error) {
-              console.log(error);
           });
+  }
+};
+
+export const uploadImage = (file) => {
+  return dispatch => {
+    dispatch({
+      type: UPLOAD_IMAGE_REQUEST
+    });
+
+    let formData = new FormData();
+    formData.append('file', file);
+
+    axios.post(`/api/fileupload/podcast/1/image`,
+        formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }
+    ).then(function (response) {
+      dispatch({
+        type: UPLOAD_IMAGE_RESPONSE,
+        payload: response.data
+      });     })
+        .catch(function () {
+          console.log('FAILURE!!');
+        });
   }
 };
