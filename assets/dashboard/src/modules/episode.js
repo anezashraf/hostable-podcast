@@ -4,6 +4,7 @@ import {SAVE_DETAILS_REQUEST, UPLOAD_IMAGE_REQUEST} from "./podcast";
 export const GET_EPISODES_REQUESTED = 'episode/GET_EPISODES_REQUESTED';
 export const GET_EPISODES_RESPONSED = 'episode/GET_EPISODES_RESPONSED';
 export const SAVE_EPISODE_REQUEST = 'episode/SAVE_DETAILS_REQUEST';
+export const SAVE_NEW_EPISODE_REQUEST = 'episode/SAVE_NEW_EPISODE_REQUEST';
 export const SAVE_EPISODE_RESPONSE = 'episode/SAVE_DETAILS_RESPONSED';
 
 export const UPLOAD_EPISODE_IMAGE_REQUEST = 'episode/UPLOAD_IMAGE_REQUEST';
@@ -136,6 +137,36 @@ export const uploadAudio = (file, id) => {
 
     axios.post(`/api/fileupload/episode/${id}/enclosureUrl`,
         formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }
+    ).then(function (response) {
+      dispatch({
+        type: UPLOAD_EPISODE_AUDIO_RESPONSE,
+        payload: response.data
+      });    })
+        .catch(function () {
+          console.log('FAILURE!!');
+        });
+  }
+};
+
+export const saveNew = (title, description, audio, image) => {
+  return dispatch => {
+    dispatch({
+      type: SAVE_NEW_EPISODE_REQUEST
+    });
+
+
+    let data = {
+      title: title,
+      description: description
+    };
+
+
+    axios.put(`/api/episode`,
+        data, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }

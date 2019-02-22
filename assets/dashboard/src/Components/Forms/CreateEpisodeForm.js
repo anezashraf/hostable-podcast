@@ -1,7 +1,7 @@
 import React from 'react'
 import UploadFile from "./UploadFile";
 
-class EpisodeForm extends React.Component {
+class CreateEpisodeForm extends React.Component {
 
     constructor(props) {
         super(props);
@@ -19,29 +19,15 @@ class EpisodeForm extends React.Component {
     }
 
     handleTitleChange = (e) => {
-        let newEpisode = this.state.episode;
-
-        newEpisode.title = e.target.value;
-        this.setState({episode:newEpisode});
+        this.setState({title :e.target.value});
     };
 
     handleDescriptionChange = (e) => {
-        let newEpisode = this.state.episode;
-
-        newEpisode.description = e.target.value;
-        this.setState({episode:newEpisode});
+        this.setState({description: e.target.value});
     };
 
     handleSave = (e) => {
-        e.preventDefault();
-        let {episode} = this.state;
-
-        let data = [
-            {op: "replace", path: "/title", value: episode.title},
-            {op: "replace", path: "/description", value: episode.description},
-        ];
-
-        this.props.handleSave(episode.id, data)
+        this.props.handleSave(this.props.title, this.props.description)
     }
 
     uploadImage = (file) => {
@@ -67,10 +53,9 @@ class EpisodeForm extends React.Component {
                 </form>
                 <UploadFile isLoading={this.props.isImageUploading} fileType="image" fileLocation={this.props.imageFileLocation} uploadFile={this.uploadImage} />
                 <UploadFile isLoading={this.props.isAudioUploading} fileType="audio" fileLocation={this.props.audioFileLocation} uploadFile={this.uploadAudio} />
-
             </div>
         )
     }
 }
 
-export default EpisodeForm
+export default CreateEpisodeForm

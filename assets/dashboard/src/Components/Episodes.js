@@ -1,6 +1,8 @@
 import React from 'react'
 import {bindActionCreators} from "redux";
 import {fetchEpisodes, updateEpisode, uploadImage, uploadAudio} from "../modules/episode";
+import { Link } from 'react-router-dom'
+
 import {connect} from "react-redux";
 import EpisodeForm from '../Components/Forms/EpisodeForm'
 
@@ -17,13 +19,20 @@ class Episodes extends React.Component {
 
         return (
             <section>
+                <Link to={'/dashboard/create-episode'}>Create New Episode</Link>
                     {episodes.map((value, index) => {
+
+                        let imageFileLocation = value.image;
+                        let audioFileLocation = value.enclosureUrl;
                         return(
                             <EpisodeForm
                                 uploadAudio={uploadAudio}
                                 uploadImage={uploadImage}
                                 key={index}
-                                episode={value}
+                                title={value.title}
+                                description={value.description}
+                                imageFileLocation={imageFileLocation}
+                                audioFileLocation={audioFileLocation}
                                 handleSave={updateEpisode}
                                 isImageUploading={isImageUploading}
                                 isAudioUploading={isAudioUploading}
