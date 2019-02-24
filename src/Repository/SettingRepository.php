@@ -55,6 +55,30 @@ class SettingRepository extends ServiceEntityRepository
         $this->_em->flush();
     }
 
+    public function getAll()
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.editableFromDashboard = :val')
+            ->setParameter('val', true)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function get(string $id) : Setting
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getSingleResult();
+    }
+
+    public function saveOrUpdate(Setting $setting)
+    {
+        $this->_em->merge($setting);
+        $this->_em->flush($setting);
+    }
+
     // /**
     //  * @return Setting[] Returns an array of Setting objects
     //  */

@@ -8,22 +8,18 @@ import {fetchEpisodes, updateEpisode, uploadAudio, saveNew} from "../../modules/
 class CreateNewEpisode extends React.Component {
 
     handleSave = (title, description, audio, image) => {
-        console.log(sdsdsd);
         this.props.saveNew(title, description, audio, image);
     };
 
     render() {
 
-        let {isImageUploading, isAudioUploading} = this.props;
+        let {isNewEpisodeSaving} = this.props;
 
         return (
             <section>
                 <CreateEpisodeForm
-                    uploadAudio={uploadAudio}
-                    uploadImage={uploadImage}
+                    isNewEpisodeSaving={isNewEpisodeSaving}
                     handleSave={this.handleSave}
-                    isImageUploading={isImageUploading}
-                    isAudioUploading={isAudioUploading}
                 />
             </section>
         )
@@ -33,7 +29,8 @@ class CreateNewEpisode extends React.Component {
 const mapStateToProps = ({ episode }) => ({
     episodes: episode.episodes,
     isAudioUploading: episode.isAudioUploading,
-    isImageUploading: episode.isImageUploading
+    isImageUploading: episode.isImageUploading,
+    isNewEpisodeSaving: episode.isNewEpisodeSaving,
 });
 
 const mapDispatchToProps = dispatch =>

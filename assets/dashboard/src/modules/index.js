@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
-import counter from './counter'
+import setting from './setting'
 import podcast from './podcast'
 import episode from './episode'
 
 export default combineReducers({
-  counter,
   podcast,
+  setting,
   episode
 })

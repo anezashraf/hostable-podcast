@@ -15,7 +15,8 @@ export const UPLOAD_EPISODE_AUDIO_RESPONSE = 'episode/UPLOAD_AUDIO_RESPONSED';
 
 const initialState = {
   episodes: [],
-  isAudioUploading: false
+  isAudioUploading: false,
+  isNewEpisodeSaving: false,
 };
 
 export default (state = initialState, action) => {
@@ -39,6 +40,12 @@ export default (state = initialState, action) => {
         isAudioUploading: true
       };
 
+    case SAVE_NEW_EPISODE_REQUEST:
+      return {
+        ...state,
+        isNewEpisodeSaving: true
+      };
+
     case UPLOAD_EPISODE_AUDIO_RESPONSE: case UPLOAD_EPISODE_IMAGE_RESPONSE:
       let id = action.payload.data.id;
       let newEpisodes = state.episodes;
@@ -48,6 +55,7 @@ export default (state = initialState, action) => {
         ...state,
         episodes: newEpisodes,
         isAudioUploading: false,
+        isNewEpisodeSaving: false,
         isImageUploading: false,
       };
     case GET_EPISODES_RESPONSED:
@@ -100,6 +108,8 @@ export const updateEpisode = (id, data) => {
 };
 
 export const uploadImage = (file, id) => {
+
+  console.log("Can you hear me?");
   return dispatch => {
     dispatch({
       type: UPLOAD_EPISODE_IMAGE_REQUEST
@@ -145,10 +155,10 @@ export const uploadAudio = (file, id) => {
       dispatch({
         type: UPLOAD_EPISODE_AUDIO_RESPONSE,
         payload: response.data
-      });    })
-        .catch(function () {
+      });
+    }).catch(function () {
           console.log('FAILURE!!');
-        });
+    });
   }
 };
 
@@ -164,20 +174,58 @@ export const saveNew = (title, description, audio, image) => {
       description: description
     };
 
-
-    axios.put(`/api/episode`,
+    axios.put(`/api/episodes`,
         data, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
         }
     ).then(function (response) {
-      dispatch({
-        type: UPLOAD_EPISODE_AUDIO_RESPONSE,
-        payload: response.data
-      });    })
-        .catch(function () {
-          console.log('FAILURE!!');
+      console.log("about ot save");
+
+
+      let formData = new FormData();
+      formData.append('file', audio);
+
+      axios.post(`/api/fileupload/episode/${response.data.id}/enclosureUrl`,
+          formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          }
+      ).then(function (response) {
+        dispatch({
+          type: UPLOAD_EPISODE_AUDIO_RESPONSE,
+          payload: response.data
         });
+      }).catch(function () {
+        console.log('FAILURE!!');
+      });
+
+
+      formData = new FormData();
+      formData.append('file', image);
+
+      axios.post(`/api/fileupload/episode/${response.data.id}/image`,
+          formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          }
+      ).then(function (response) {
+        console.log(response);
+        dispatch({
+          type: UPLOAD_EPISODE_IMAGE_RESPONSE,
+          payload: response.data
+        });    })
+          .catch(function () {
+            console.log('FAILURE!!');
+          });
+
+
+
+
+
+    });
   }
 };

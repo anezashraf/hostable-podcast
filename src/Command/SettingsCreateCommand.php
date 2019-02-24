@@ -50,9 +50,12 @@ class SettingsCreateCommand extends Command
         } catch (NoResultException $exception) {
             foreach ($defaultSettings as $name => $value) {
 
+                dump($value);
                 $setting = (new Setting())
                     ->setName($name)
-                    ->setValue($value['default_value']);
+                    ->setValue($value['default_value'])
+                    ->setEditableFromDashboard($value['editable_from_dashboard'])
+                    ->setType($value['type']);
 
                 $this->repository->insert($setting);
             }
