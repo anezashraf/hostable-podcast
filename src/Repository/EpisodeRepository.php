@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Episode;
+use App\Entity\Podcast;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -21,7 +23,12 @@ class EpisodeRepository extends ServiceEntityRepository
 
     public function saveOrUpdate(Episode $episode)
     {
-        $this->_em->merge($episode);
+        if (is_null($episode->getPodcast())) {
+            $podcast = $this->_em->getRepository(Podcast::class)->find(1);
+            $episode->setPodcast($podcast);
+            $episode->setPublishedAt(new DateTime());
+        }
+        $this->_em->persist($episode);
         $this->_em->flush($episode);
     }
 

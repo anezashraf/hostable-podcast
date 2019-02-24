@@ -56,16 +56,17 @@ class EpisodeForm extends React.Component {
 
         let {episode} = this.state;
 
+
         return (
             <div>
                 <form onSubmit={this.handleSave}>
                     <label>title</label>
-                    <input type="text" name="title" value={episode.title} onChange={this.handleTitleChange}/>
-                    <input type="text" name="description" value={episode.description} onChange={this.handleDescriptionChange}/>
+                    <input type="text" name="title" value={this.props.title} onChange={this.handleTitleChange}/>
+                    <input type="text" name="description" value={this.props.description} onChange={this.handleDescriptionChange}/>
                     <button type="submit">Save</button>
                 </form>
-                <UploadFile isLoading={this.props.isImageUploading} fileType="image" fileLocation={this.props.episode.image} uploadFile={this.uploadImage} />
-                <UploadFile isLoading={this.props.isAudioUploading} fileType="audio" fileLocation={this.props.episode.enclosureUrl} uploadFile={this.uploadAudio} />
+                <UploadFile isLoading={this.props.isImageUploading} fileType="image" fileLocation={this.props.imageFileLocation} uploadFile={this.uploadImage} />
+                <UploadFile isLoading={this.props.isAudioUploading} fileType="audio" fileLocation={this.props.audioFileLocation} uploadFile={this.uploadAudio} />
 
             </div>
         )

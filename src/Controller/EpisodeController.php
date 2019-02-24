@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Episode;
+use App\Entity\User;
 use App\Patcher\Patcher;
 use App\Repository\EpisodeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -40,6 +42,27 @@ class EpisodeController extends AbstractController
             'json', ['groups' => ['dashboard']]
         );
 
+        return new JsonResponse($json, 200, [], true);
+    }
+
+    /**
+     * @Route("/api/episodes", name="episodes_new", methods={"PUT"})
+     */
+    public function saveNew(Request $request)
+    {
+        $json = $request->getContent();
+
+        $episode = $this->serializer->deserialize(
+            $json,
+            Episode::class,
+            'json',
+            ['groups' => ['dashboard']
+            ]
+        );
+
+        $this->repository->saveOrUpdate($episode);
+
+        $json = $this->serializer->serialize($episode, 'json', ['groups' => ['dashboard']]);
         return new JsonResponse($json, 200, [], true);
     }
 

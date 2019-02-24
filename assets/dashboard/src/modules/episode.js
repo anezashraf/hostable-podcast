@@ -4,6 +4,7 @@ import {SAVE_DETAILS_REQUEST, UPLOAD_IMAGE_REQUEST} from "./podcast";
 export const GET_EPISODES_REQUESTED = 'episode/GET_EPISODES_REQUESTED';
 export const GET_EPISODES_RESPONSED = 'episode/GET_EPISODES_RESPONSED';
 export const SAVE_EPISODE_REQUEST = 'episode/SAVE_DETAILS_REQUEST';
+export const SAVE_NEW_EPISODE_REQUEST = 'episode/SAVE_NEW_EPISODE_REQUEST';
 export const SAVE_EPISODE_RESPONSE = 'episode/SAVE_DETAILS_RESPONSED';
 
 export const UPLOAD_EPISODE_IMAGE_REQUEST = 'episode/UPLOAD_IMAGE_REQUEST';
@@ -14,7 +15,8 @@ export const UPLOAD_EPISODE_AUDIO_RESPONSE = 'episode/UPLOAD_AUDIO_RESPONSED';
 
 const initialState = {
   episodes: [],
-  isAudioUploading: false
+  isAudioUploading: false,
+  isNewEpisodeSaving: false,
 };
 
 export default (state = initialState, action) => {
@@ -38,6 +40,12 @@ export default (state = initialState, action) => {
         isAudioUploading: true
       };
 
+    case SAVE_NEW_EPISODE_REQUEST:
+      return {
+        ...state,
+        isNewEpisodeSaving: true
+      };
+
     case UPLOAD_EPISODE_AUDIO_RESPONSE: case UPLOAD_EPISODE_IMAGE_RESPONSE:
       let id = action.payload.data.id;
       let newEpisodes = state.episodes;
@@ -47,6 +55,7 @@ export default (state = initialState, action) => {
         ...state,
         episodes: newEpisodes,
         isAudioUploading: false,
+        isNewEpisodeSaving: false,
         isImageUploading: false,
       };
     case GET_EPISODES_RESPONSED:
@@ -99,6 +108,8 @@ export const updateEpisode = (id, data) => {
 };
 
 export const uploadImage = (file, id) => {
+
+  console.log("Can you hear me?");
   return dispatch => {
     dispatch({
       type: UPLOAD_EPISODE_IMAGE_REQUEST
@@ -144,9 +155,77 @@ export const uploadAudio = (file, id) => {
       dispatch({
         type: UPLOAD_EPISODE_AUDIO_RESPONSE,
         payload: response.data
-      });    })
-        .catch(function () {
+      });
+    }).catch(function () {
           console.log('FAILURE!!');
+    });
+  }
+};
+
+export const saveNew = (title, description, audio, image) => {
+  return dispatch => {
+    dispatch({
+      type: SAVE_NEW_EPISODE_REQUEST
+    });
+
+
+    let data = {
+      title: title,
+      description: description
+    };
+
+    axios.put(`/api/episodes`,
+        data, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }
+    ).then(function (response) {
+      console.log("about ot save");
+
+
+      let formData = new FormData();
+      formData.append('file', audio);
+
+      axios.post(`/api/fileupload/episode/${response.data.id}/enclosureUrl`,
+          formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          }
+      ).then(function (response) {
+        dispatch({
+          type: UPLOAD_EPISODE_AUDIO_RESPONSE,
+          payload: response.data
         });
+      }).catch(function () {
+        console.log('FAILURE!!');
+      });
+
+
+      formData = new FormData();
+      formData.append('file', image);
+
+      axios.post(`/api/fileupload/episode/${response.data.id}/image`,
+          formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          }
+      ).then(function (response) {
+        console.log(response);
+        dispatch({
+          type: UPLOAD_EPISODE_IMAGE_RESPONSE,
+          payload: response.data
+        });    })
+          .catch(function () {
+            console.log('FAILURE!!');
+          });
+
+
+
+
+
+    });
   }
 };
