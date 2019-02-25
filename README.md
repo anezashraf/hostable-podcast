@@ -1,4 +1,7 @@
-### Hostable Podcast
+
+
+
+### Hostable Podcast [![Build Status](https://travis-ci.org/rossboswell/hostable-podcast.svg?branch=master)](https://travis-ci.org/rossboswell/hostable-podcast)
 
 ##### Installation
 
