@@ -7,15 +7,17 @@
 
 
         {% block stylesheets %}
+            <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+            <link rel="stylesheet" href="{{ asset('build/site.css') }}">
         {% endblock %}
     </head>
     <body class="wrapper">
             <header class="header">
                 {% block header %}{% endblock %}
             </header>
-            <main>
+            <div class="main">
                 {% block body %}{% endblock %}
-            </main>
+            </div>
             <footer class="footer">
                 {% block footer %}
                 {% endblock %}

@@ -1,0 +1,24 @@
+.main {
+  width: 800px;
+  @include make-container();
+}
+
+.frontpage {
+  @include make-row();
+}
+
+.episode-container {
+  @include make-col-ready();
+
+  @include make-col-ready();
+  @include media-breakpoint-up(sm) {
+    @include make-col(6)
+    @include make-col-offset(1)
+  }
+  @include media-breakpoint-up(lg) {
+    @include make-col(8);
+  }
+
+}
+
+
