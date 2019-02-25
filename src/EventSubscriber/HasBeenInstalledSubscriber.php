@@ -29,27 +29,23 @@ class HasBeenInstalledSubscriber implements EventSubscriberInterface
         try {
             if (! $this->repository->findByName(Setting::USER_INSERTED)) {
                 $messages[] = 'You need to create a user, please run php bin/console user:create';
-
             }
-
         } catch (NoResultException $exception) {
-
             $messages[] = 'Please run php bin/console settings:create';
         }
 
 
 
         if (count($messages) > 0) {
-
             $event->setResponse(
                 new Response(
-                    $this->engine->render('installation/index.html.twig', ['messages' => $messages]), 503)
+                    $this->engine->render('installation/index.html.twig', ['messages' => $messages]),
+                    503
+                )
             );
 
             $event->stopPropagation();
-
         }
-
     }
 
     public static function getSubscribedEvents()

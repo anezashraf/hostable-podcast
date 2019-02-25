@@ -8,7 +8,6 @@
 
 namespace App\Patcher;
 
-
 use App\Entity\EntityInterface;
 use App\Entity\Podcast;
 use Rs\Json\Patch;
@@ -50,7 +49,12 @@ class Patcher
         $patch = (new Patch($targetDocument, $this->patchDocument))->apply();
 
 
-        $this->serializer->deserialize($patch, get_class($this->entity), 'json', ['object_to_populate' => $this->entity]);
+        $this->serializer->deserialize(
+            $patch,
+            get_class($this->entity),
+            'json',
+            ['object_to_populate' => $this->entity]
+        );
 
         $this->errors = $this->validator->validate($this->entity);
         return $this;
@@ -60,5 +64,4 @@ class Patcher
     {
         return $this->errors;
     }
-
 }

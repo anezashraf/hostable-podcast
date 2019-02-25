@@ -11,7 +11,6 @@ namespace App\Entity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\ConstraintViolationList;
 
-
 class ApiStructure
 {
     /**
@@ -31,7 +30,6 @@ class ApiStructure
     {
         $this->data = $data;
         $this->metadata = $metadata;
-
     }
 
     public function setData($data)

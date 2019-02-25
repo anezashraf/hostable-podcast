@@ -39,7 +39,14 @@ class PodcastController extends AbstractController
     {
         $podcast = $this->repository->get();
 
-        $json = $this->serializer->serialize(ApiStructure::create($podcast, new ConstraintViolationList), 'json', ['groups' => ['dashboard']]);
+        $json = $this->serializer->serialize(
+            ApiStructure::create(
+                $podcast,
+                new ConstraintViolationList
+            ),
+            'json',
+            ['groups' => ['dashboard']]
+        );
 
         return new JsonResponse($json, 200, [], true);
     }
@@ -59,7 +66,11 @@ class PodcastController extends AbstractController
 
         $this->repository->saveOrUpdate($podcast);
 
-        $json = $this->serializer->serialize(ApiStructure::create($podcast, $errors), 'json', ['groups' => ['dashboard']]);
+        $json = $this->serializer->serialize(
+            ApiStructure::create($podcast, $errors),
+            'json',
+            ['groups' => ['dashboard']]
+        );
 
         return new JsonResponse($json, 200, [], true);
     }

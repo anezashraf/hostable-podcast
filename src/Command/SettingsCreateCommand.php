@@ -41,15 +41,12 @@ class SettingsCreateCommand extends Command
         $defaultSettings = Setting::DEFAULTS;
 
         try {
-
             if ($this->repository->findByName(Setting::SETTINGS_CREATED)) {
-
                 $io->error("Settings have already been initialised");
                 return;
             }
         } catch (NoResultException $exception) {
             foreach ($defaultSettings as $name => $value) {
-
                 dump($value);
                 $setting = (new Setting())
                     ->setName($name)
@@ -69,6 +66,5 @@ class SettingsCreateCommand extends Command
 
             $io->success("Settings have now been initialised");
         }
-
     }
 }

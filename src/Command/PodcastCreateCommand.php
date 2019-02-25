@@ -47,7 +47,6 @@ class PodcastCreateCommand extends Command
         $io = new SymfonyStyle($input, $output);
 
         if ($this->settingsRepository->findByName(Setting::PODCAST_INSERTED)) {
-
             $io->error("Podcast has already been created");
             return;
         }
@@ -63,6 +62,5 @@ class PodcastCreateCommand extends Command
 
         $this->repository->update($podcast);
         $this->settingsRepository->update(['name' => Setting::PODCAST_INSERTED, 'value' => 'true']);
-
     }
 }
