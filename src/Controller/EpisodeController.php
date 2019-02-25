@@ -39,7 +39,8 @@ class EpisodeController extends AbstractController
 
         $json = $this->serializer->serialize(
             ApiStructure::create($episodes, new ConstraintViolationList),
-            'json', ['groups' => ['dashboard']]
+            'json',
+            ['groups' => ['dashboard']]
         );
 
         return new JsonResponse($json, 200, [], true);
@@ -83,7 +84,8 @@ class EpisodeController extends AbstractController
 
         $json = $this->serializer->serialize(
             ApiStructure::create($episode, $errors),
-            'json', ['groups' => ['dashboard']]
+            'json',
+            ['groups' => ['dashboard']]
         );
 
         return new JsonResponse($json, 200, [], true);

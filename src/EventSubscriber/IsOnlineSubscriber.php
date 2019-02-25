@@ -14,7 +14,7 @@ class IsOnlineSubscriber implements EventSubscriberInterface
 
     public function __construct(SettingRepository $repository)
     {
-        $this->repository = $repository;        
+        $this->repository = $repository;
     }
 
     public function onKernelRequest(GetResponseEvent $event)

@@ -7,7 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EpisodeRepository")
  */
@@ -35,6 +34,13 @@ class Episode implements EntityInterface
      * @ORM\Column(type="text")
      */
     private $description;
+
+    /**
+     * @Groups("dashboard")
+     * @ORM\Column(type="text")
+     */
+    private $slug;
+
 
     /**
      * @Groups("dashboard")
@@ -66,6 +72,11 @@ class Episode implements EntityInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $enclosureUrl;
+
+    public function __construct()
+    {
+        $this->slug = uniqid();
+    }
 
     public function getId(): ?int
     {
@@ -146,5 +157,24 @@ class Episode implements EntityInterface
     public function setImage($image): void
     {
         $this->image = $image;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param $slug
+     * @return Episode
+     */
+    public function setSlug($slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 }

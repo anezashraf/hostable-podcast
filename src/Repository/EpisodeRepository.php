@@ -38,7 +38,6 @@ class EpisodeRepository extends ServiceEntityRepository
             ->orderBy('e.publishedAt', 'DESC')
             ->getQuery()
             ->getResult();
-
     }
 
     public function get(string $id) : Episode
@@ -46,6 +45,15 @@ class EpisodeRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('e')
             ->where('e.id = :id')
             ->setParameter('id', $id)
+            ->getQuery()
+            ->getSingleResult();
+    }
+
+    public function getBySlug(string $slug)
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.slug = :slug')
+            ->setParameter('slug', $slug)
             ->getQuery()
             ->getSingleResult();
     }

@@ -30,7 +30,7 @@ class SettingRepository extends ServiceEntityRepository
             ->getResult(4);
 
         if ($value == 'true' || $value == 'false') {
-            return filter_var(    $value, FILTER_VALIDATE_BOOLEAN);
+            return filter_var($value, FILTER_VALIDATE_BOOLEAN);
         }
 
         return $value;

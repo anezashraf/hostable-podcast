@@ -2,7 +2,6 @@
 
 namespace App\Feed;
 
-
 use App\Entity\Podcast;
 use FeedIo\Factory;
 use FeedIo\Feed as FeedLib;
@@ -21,16 +20,15 @@ class Feed
 
         foreach ($episodes as $episode) {
             if ($episode->getEnclosureUrl()) {
-
                 $enclosure = new Media();
-                $enclosure->setUrl($host . DIRECTORY_SEPARATOR . $episode->getEnclosureUrl())
+                $enclosure->setUrl($host  . $episode->getEnclosureUrl())
                     ->setType('audio/mpeg');
 
                 $item = $feed->newItem();
                 $item->setDescription($episode->getDescription());
                 $item->setLastModified($episode->getPublishedAt());
                 $item->setTitle($episode->getTitle());
-                $item->setLink($host . DIRECTORY_SEPARATOR . 'episode' . $episode->getId());
+                $item->setLink($host  . 'episode' . $episode->getId());
 
                 $item->addMedia($enclosure);
 
@@ -42,5 +40,4 @@ class Feed
 
         return $feedIo->format($feed, 'rss');
     }
-
 }

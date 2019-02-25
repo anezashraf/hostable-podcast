@@ -42,7 +42,6 @@ class UserCreateCommand extends Command
         $io = new SymfonyStyle($input, $output);
 
         if ($this->settingRepository->findByName(Setting::USER_INSERTED)) {
-
             $user = $this->userRepository->get();
             $io->error("a user has already been created with the username " . $user->getUsername());
             return;

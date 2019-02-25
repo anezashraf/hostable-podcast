@@ -37,7 +37,10 @@ class UserChangePasswordCommand extends Command
 
         $user = $this->userRepository->get();
 
-        $io->caution("You're about to change the password of the user " . $user->getUsername() . "/" . $user->getEmail());
+        $io->caution(
+            "You're about to change the password of the user " .
+            $user->getUsername() . "/" . $user->getEmail()
+        );
 
         $password = $io->askHidden('Please enter your new password');
         $confirmPassword = $io->askHidden('Please re-enter your password');
