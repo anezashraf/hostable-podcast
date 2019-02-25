@@ -1,0 +1,13 @@
+
+language: php
+
+before_script:
+  - composer install -vvv
+
+after_script:
+  - vendor/bin/phpstan analyse -l 7 -c extension.neon src tests
+  - ./vendor/bin/phpmd src text cleancode,unusedcode,naming,codesize,design,controversial
+  - ./vendor/bin/phpcs
+
+php:
+  - '7.1'
