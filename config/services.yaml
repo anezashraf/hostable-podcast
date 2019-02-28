@@ -15,6 +15,8 @@ services:
                             # fetching services directly from the container via $container->get() won't work.
                             # The best practice is to be explicit about your dependencies anyway.
         bind:
+            $host: '%env(HOST)%'
+            $targetDirectory: '%kernel.project_dir%/public'
             # pass this value to any $adminEmail argument for any service
             # that's defined in this file (including controller arguments)
 
@@ -29,10 +31,6 @@ services:
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
-
-    App\File\FileUploader:
-        arguments:
-            $targetDirectory: '%kernel.project_dir%/public'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

@@ -1,0 +1,30 @@
+.header {
+  @include make-row();
+  background-color: $headerBackgroundColor;
+  color: white;
+  border-bottom: 6px solid $secondaryColor;
+
+  &__information {
+    @include make-col-ready();
+    @include make-col(6);
+    & > * {
+      display: inline;
+    }
+
+    &-title {
+      font-size: 2rem;
+    }
+
+    &-description {
+      font-size: 1rem;
+      display: none;
+
+      @include media-breakpoint-up(md) {
+        display: inline;
+      }
+
+    }
+
+  }
+}
+

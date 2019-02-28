@@ -1,0 +1,104 @@
+.episodes-list {
+  @include make-row();
+
+  &__controls {
+    font-size: 21rem;
+    @include media-breakpoint-up(md) {
+      @include make-col-ready();
+      @include make-col(6);
+      @include make-col-offset(3);
+    }
+  }
+}
+
+.single-episode {
+  width: 95%;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  min-height: 10rem;
+
+  @include media-breakpoint-up(md) {
+    @include make-col-ready();
+    @include make-col(6);
+    @include make-col-offset(3);
+  }
+  margin-bottom: 1rem;;
+  background-color: #FFFFFF;
+  box-shadow: 2px 2px 2px 2px gray;
+
+  &__audio {
+    margin-bottom: 1rem;
+    position: absolute;
+    top: 8rem;
+  }
+
+  &-container {
+    @include make-container();
+  }
+
+  &-row {
+    @include make-row()
+  }
+
+  &__information {
+    @include make-col-ready()
+    @include make-col(12)
+  }
+}
+
+.controls {
+  text-align: right;
+  width: 100%;
+  font-size: 1.5rem;
+  padding: rem;
+  @include media-breakpoint-up(md) {
+    @include make-col-ready();
+    @include make-col(6);
+    @include make-col-offset(3);
+  }
+
+  & > a {
+    padding: 0.5rem;
+  }
+
+  & > a:hover {
+    text-decoration: none;
+    color:inherit;
+  }
+
+  &--rss {
+    @extend .fas;
+    color: orange;
+
+    &:before {
+      content: fa-content($fa-var-rss);
+    }
+  }
+
+  &--itunes {
+    @extend .fab;
+    color: purple;
+    &:before {
+      content: fa-content($fa-var-itunes);
+    }
+  }
+
+  &--facebook {
+    @extend .fab;
+    color: blue;
+
+    &:before {
+      content: fa-content($fa-var-facebook);
+    }
+  }
+
+
+  &--twitter {
+    @extend .fab;
+    color: lightblue;
+    &:before {
+      content: fa-content($fa-var-twitter);
+    }
+  }
+
+}
