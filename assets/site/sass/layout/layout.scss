@@ -1,0 +1,10 @@
+.top-part,
+.middle-part {
+  @include make-container();
+}
+
+.top-part {
+  margin-bottom: 4rem;
+}
+
+

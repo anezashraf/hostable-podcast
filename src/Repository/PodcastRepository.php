@@ -43,7 +43,10 @@ class PodcastRepository extends ServiceEntityRepository
     public function getWithEpisodes()
     {
         return $this->createQueryBuilder('p')
+            ->select('p', 'e')
+            ->join('p.episodes', 'e')
             ->andWhere('p.id = :id')
+            ->orderBy('e.publishedAt', 'DESC')
             ->setParameter('id', 1)
             ->getQuery()
             ->getSingleResult();

@@ -1,1 +1,1 @@
-console.log("site");
+require('../sass/index.scss');

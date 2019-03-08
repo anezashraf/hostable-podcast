@@ -11,12 +11,12 @@
         {% endblock %}
     </head>
     <body class="wrapper">
-            <header class="header">
-                {% block header %}{% endblock %}
-            </header>
-            <div class="main">
-                {% block body %}{% endblock %}
-            </div>
+    <div class="top-part">
+        {% block header %}{% endblock %}
+    </div>
+    <div class="middle-part">
+        {% block body %}{% endblock %}
+    </div>
             <footer class="footer">
                 {% block footer %}
                 {% endblock %}

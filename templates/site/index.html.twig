@@ -1,17 +1,39 @@
-{% extends 'base.html.twig' %}
+{% extends 'site/layout.html.twig' %}
 
 {% block title %}Hello{% endblock %}
 
+{% block header %}
+    <div class="header">
+            <div class="header__information">
+                <h1 class="header__information-title">{{ podcast.title }}</h1>
+                <h3 class="header__information-description">{{ podcast.description }}</h3>
+            </div>
+    </div>
+{% endblock %}
 {% block body %}
-    <h3>{{ podcast.title }}</h3>
-    <h3>{{ podcast.description }}</h3>
-    <h3>{{ podcast.image }} </h3>
+    <section class="episodes-list">
+        <aside class="controls">
+            <a class="controls--rss" href="{{ path('subscribe') }}"></a>
+            <a class="controls--itunes" href=""></a>
+            <a class="controls--facebook" href=""></a>
+            <a class="controls--twitter" href=""></a>
+        </aside>
+        {% for episode in podcast.episodes %}
+            <article class="single-episode">
+                <div class="single-episode-container">
+                    <div class="single-episode-row">
+                        <div class="single-episode__information">
+                            <h4><a class="single-episode__information-link" href="{{ path('download', {slug: episode.slug}) }}">#{{ episode.id }} {{ episode.title}}</a></h4>
+                            <p class="single-episode__information-description">{{ firstSentence(episode.description) }}</p>
+                            <div class="single-episode__audio">
+                                <small class="single-episode__audio-download"><a href="{{ path('download', {slug: episode.slug}) }}">Download</a></small>
+                            </div>
+                        </div>
 
-    {% for episode in podcast.episodes %}
-        <p><a href="{{ path('site_episode', {slug: episode.slug}) }}">{{ episode.title }}</a></p>
-        <p>{{ episode.description }}</p>
-        {% if loop.first %}
-            <small><a href="/download">Download</a></small>
-        {% endif %}
+                    </div>
+                </div>
+            </article>
     {% endfor %}
+        </div>
+    </section>
 {% endblock %}

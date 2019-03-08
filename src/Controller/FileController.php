@@ -57,7 +57,6 @@ class FileController extends AbstractController
             ]
         );
 
-        sleep(3);
         return new JsonResponse($json, 200, [], true);
     }
 }
