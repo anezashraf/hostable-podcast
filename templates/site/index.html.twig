@@ -23,11 +23,16 @@
                 <div class="single-episode-container">
                     <div class="single-episode-row">
                         <div class="single-episode__information">
-                            <h4><a class="single-episode__information-link" href="{{ path('download', {slug: episode.slug}) }}">#{{ episode.id }} {{ episode.title}}</a></h4>
+                            <h4><a class="single-episode__information-link" href="{{ path('site_episode', {slug: episode.slug}) }}">#{{ episode.id }} {{ episode.title}}</a></h4>
                             <p class="single-episode__information-description">{{ firstSentence(episode.description) }}</p>
-                            <div class="single-episode__audio">
-                                <small class="single-episode__audio-download"><a href="{{ path('download', {slug: episode.slug}) }}">Download</a></small>
-                            </div>
+
+                            {% if loop.first %}
+                                <div class="single-episode__audio">
+                                    <audio src="{{ path('download', {slug: episode.slug}) }}" preload controls />
+                                    <small class="single-episode__audio-download"><a href="{{ path('download', {slug: episode.slug}) }}">Download</a></small>
+                                </div>
+                            {% endif %}
+
                         </div>
 
                     </div>
@@ -39,6 +44,10 @@
             <div class="view-more">
                 <a href="{{ path('site_all') }}">View All Episodes</a>
             </div>
+            {% elseif app.request.get('_route') == 'site_episode' %}
+                <div class="view-more">
+                    <a href="{{ path('site') }}">View More Episodes</a>
+                </div>
         {% endif %}
 
     </section>

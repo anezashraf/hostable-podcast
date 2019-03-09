@@ -44,10 +44,10 @@ class SiteController extends AbstractController
      */
     public function episode(string $slug)
     {
-        $episode = $this->episodeRepository->getBySlug($slug);
+        $podcast = $this->repository->getWithEpisode($slug);
 
-        return $this->render('site/episode.html.twig', [
-            'episode' => $episode,
+        return $this->render('site/index.html.twig', [
+            'podcast' => $podcast,
         ]);
     }
 }

@@ -65,6 +65,20 @@ class PodcastRepository extends ServiceEntityRepository
             ->getSingleResult();
     }
 
+    public function getWithEpisode(string $slug)
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p', 'e')
+            ->join('p.episodes', 'e')
+            ->andWhere('p.id = :id')
+            ->andWhere('e.slug = :slug')
+            ->orderBy('e.publishedAt', 'DESC')
+            ->setParameter('id', 1)
+            ->setParameter('slug', $slug)
+            ->getQuery()
+            ->getSingleResult();
+    }
+
 
     // /**
     //  * @return Podcast[] Returns an array of Podcast objects
