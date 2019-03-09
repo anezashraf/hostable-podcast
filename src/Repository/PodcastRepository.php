@@ -40,16 +40,20 @@ class PodcastRepository extends ServiceEntityRepository
         $this->_em->flush($podcast);
     }
 
-    public function getWithEpisodes()
+    public function getWithEpisodes(?int $limit = null)
     {
-        return $this->createQueryBuilder('p')
+        $query = $this->createQueryBuilder('p')
             ->select('p', 'e')
             ->join('p.episodes', 'e')
             ->andWhere('p.id = :id')
             ->orderBy('e.publishedAt', 'DESC')
-            ->setParameter('id', 1)
-            ->getQuery()
-            ->getSingleResult();
+            ->setParameter('id', 1);
+
+        if (! is_null($limit)) {
+            $query->setMaxResults($limit);
+        }
+
+        return $query->getQuery()->getSingleResult();
     }
 
     public function get() : Podcast

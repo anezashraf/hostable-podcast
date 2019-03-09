@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Repository\EpisodeRepository;
 use App\Repository\PodcastRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class SiteController extends AbstractController
@@ -20,10 +22,17 @@ class SiteController extends AbstractController
 
     /**
      * @Route("/", name="site")
+     * @Route("/all", name="site_all")
+     *
+     * @return Response
      */
-    public function index()
+    public function index(Request $request, ?int $limit = null)
     {
-        $podcast = $this->repository->getWithEpisodes();
+        if ($request->get('_route') === 'site') {
+            $limit = 5;
+        }
+
+        $podcast = $this->repository->getWithEpisodes($limit);
 
         return $this->render('site/index.html.twig', [
             'podcast' => $podcast,

@@ -34,6 +34,12 @@
                 </div>
             </article>
     {% endfor %}
-        </div>
+
+        {% if app.request.get('_route') == 'site' %}
+            <div class="view-more">
+                <a href="{{ path('site_all') }}">View All Episodes</a>
+            </div>
+        {% endif %}
+
     </section>
 {% endblock %}
