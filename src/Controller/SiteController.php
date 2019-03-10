@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\EpisodeRepository;
 use App\Repository\PodcastRepository;
+use App\Repository\SettingRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,12 +13,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class SiteController extends AbstractController
 {
     private $repository;
-    private $episodeRepository;
+    private $settingsRepository;
 
-    public function __construct(PodcastRepository $repository, EpisodeRepository $episodeRepository)
+    public function __construct(PodcastRepository $repository, SettingRepository $settingRepository)
     {
         $this->repository = $repository;
-        $this->episodeRepository = $episodeRepository;
+        $this->settingsRepository = $settingRepository;
     }
 
     /**
@@ -33,9 +34,11 @@ class SiteController extends AbstractController
         }
 
         $podcast = $this->repository->getWithEpisodes($limit);
+        $settings = $this->settingsRepository->findAll();
 
         return $this->render('site/index.html.twig', [
             'podcast' => $podcast,
+            'settings' => $settings
         ]);
     }
 
@@ -45,9 +48,13 @@ class SiteController extends AbstractController
     public function episode(string $slug)
     {
         $podcast = $this->repository->getWithEpisode($slug);
+        $settings = $this->settingsRepository->findAll();
+
 
         return $this->render('site/index.html.twig', [
             'podcast' => $podcast,
+            'settings' => $settings
+
         ]);
     }
 }
