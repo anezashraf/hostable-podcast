@@ -14,9 +14,11 @@
     <section class="episodes-list">
         <aside class="controls">
             <a class="controls--rss" href="{{ path('subscribe') }}"></a>
-            <a class="controls--itunes" href=""></a>
-            <a class="controls--facebook" href=""></a>
-            <a class="controls--twitter" href=""></a>
+            {% for setting in settings %}
+                {% if (setting.name == 'facebook' or setting.name == 'twitter') and setting.value != '' %}
+                    <a class="controls--{{ setting.name }}" href={{ setting.value }}></a>
+                {% endif %}
+            {% endfor %}
         </aside>
         {% for episode in podcast.episodes %}
             <article class="single-episode">

@@ -15,6 +15,9 @@ class Setting implements EntityInterface
     const PODCAST_INSERTED = 'podcast_inserted';
     const SETTINGS_CREATED = 'settings_created';
     const IS_ONLINE = 'is_online';
+    const FACEBOOK = 'facebook';
+    const TWITTER = 'twitter';
+    const ITUNES = 'itunes';
 
     const DEFAULTS = [
         self::USER_INSERTED => [
@@ -39,6 +42,24 @@ class Setting implements EntityInterface
             'default_value' => 'false',
             'type' => 'boolean',
             'editable_from_dashboard' => false
+        ],
+
+        self::FACEBOOK => [
+            'default_value' => '',
+            'type' => 'text',
+            'editable_from_dashboard' => true
+        ],
+
+        self::TWITTER => [
+            'default_value' => '',
+            'type' => 'text',
+            'editable_from_dashboard' => true
+        ],
+
+        self::ITUNES => [
+            'default_value' => '',
+            'type' => 'text',
+            'editable_from_dashboard' => true
         ]
     ];
 
