@@ -2,18 +2,24 @@
 language: php
 
 before_script:
-  - composer install -vvv
+  - composer install
   - nvm install 10.15
 
 install:
   - npm install
 
-after_script:
-  - vendor/bin/phpstan analyse -l 7 -c extension.neon src tests
-  - ./vendor/bin/phpmd src text cleancode,unusedcode,naming,codesize,design,controversial
-  - ./vendor/bin/phpcs
-  - ./node_modules/.bin/eslint assets
-  - ./node_modules/.bin/stylelint assets/
+jobs:
+  include:
+    - name: "phpstan"
+      script: ./vendor/bin/phpstan analyse -l 7 -c extension.neon src tests
+    - script: ./vendor/bin/phpmd src text cleancode,unusedcode,naming,codesize,design,controversial
+      name: "php mess detector"
+    - script: ./vendor/bin/phpcs
+      name: "php code sniffer"
+    - script: ./node_modules/.bin/eslint assets
+      name: "eslint"
+    - script: ./node_modules/.bin/stylelint assets/
+    - name: "sasslint"
 
 php:
   - '7.2'
