@@ -39,7 +39,7 @@ class SettingsController extends AbstractController
     }
 
     /**
-     * @Route("/api/settings/{id}", name="episodes_save", methods={"PATCH"})
+     * @Route("/api/settings/{id}", name="settings_save", methods={"PATCH"})
      */
     public function save(Request $request, string $id)
     {
