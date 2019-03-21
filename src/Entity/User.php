@@ -5,14 +5,18 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User implements UserInterface
+class User implements UserInterface, EntityInterface
 {
     /**
+     * @Groups("dashboard")
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -20,28 +24,52 @@ class User implements UserInterface
     private $id;
 
     /**
+     * @Assert\NotBlank
+     * @Groups("dashboard")
      * @ORM\Column(type="string", length=255)
      */
     private $username;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     checkMX = true
+     * )
      * @ORM\Column(type="string", length=255)
+     * @Groups("dashboard")
      */
     private $email;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="string", length=255)
      */
     private $password;
+
+
+    /**
+     * @ORM\Column(type="simple_array", length=255)
+     * @Groups("dashboard")
+     */
+    private $roles;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Podcast", mappedBy="user")
      */
     private $podcasts;
 
+
+    /**
+     * @Groups("dashboard")
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    private $enabled;
+
     public function __construct()
     {
         $this->podcasts = new ArrayCollection();
+        $this->roles = ['ROLE_ADMIN'];
     }
 
     public function getId(): ?int
@@ -110,7 +138,7 @@ class User implements UserInterface
      */
     public function getRoles()
     {
-        return ['ROLE_ADMIN'];
+        return $this->roles;
     }
 
     /**
@@ -163,6 +191,31 @@ class User implements UserInterface
                 $podcast->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function setRoles(array $array) : self
+    {
+        $this->roles = $array;
+
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * @param boolean $enabled
+     */
+    public function setEnabled(bool $enabled): self
+    {
+        $this->enabled = $enabled;
 
         return $this;
     }

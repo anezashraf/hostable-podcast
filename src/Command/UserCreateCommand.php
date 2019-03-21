@@ -60,6 +60,8 @@ class UserCreateCommand extends Command
 
         $user = (new User)->setUsername($username)
             ->setEmail($email)
+            ->setRoles(['ROLE_ADMIN'])
+            ->setEnabled(true)
             ->setPassword($password);
 
         $this->userRepository->insert($user);
