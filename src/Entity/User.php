@@ -202,6 +202,8 @@ class User implements UserInterface, EntityInterface
     }
 
     /**
+     * @SuppressWarnings(PHPMD.BooleanGetMethodName)
+     *
      * @return boolean
      */
     public function getEnabled()

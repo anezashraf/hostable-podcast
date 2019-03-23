@@ -16,19 +16,19 @@ use Symfony\Component\Routing\RouterInterface;
 
 class UserCreator
 {
-    private $invitationLinkRepository;
+    private $invitationLinkRepo;
     private $userRepository;
     private $router;
     private $host;
 
     public function __construct(
         UserRepository $userRepository,
-        InvitationLinkRepository $invitationLinkRepository,
+        InvitationLinkRepository $invitationLinkRepos,
         RouterInterface $router,
         string $host
     ) {
         $this->userRepository = $userRepository;
-        $this->invitationLinkRepository = $invitationLinkRepository;
+        $this->invitationLinkRepo = $invitationLinkRepos;
         $this->router = $router;
         $this->host = $host;
     }
@@ -37,7 +37,7 @@ class UserCreator
     {
         $link = bin2hex(openssl_random_pseudo_bytes(48));
 
-        $this->invitationLinkRepository->addInvitationLink($link);
+        $this->invitationLinkRepo->addInvitationLink($link);
 
 
         return $this->host . $this->router->generate('users_register', ['invitationLink' => $link]);
@@ -45,7 +45,7 @@ class UserCreator
 
     public function resolveInvitationLink(string $invitationLink)
     {
-        return $this->invitationLinkRepository->get($invitationLink);
+        return $this->invitationLinkRepo->get($invitationLink);
     }
 
     public function createUser(User $user, InvitationLink $invitationLink)
@@ -55,7 +55,7 @@ class UserCreator
         $invitationLink->setUser($user);
         $invitationLink->setUsed(true);
 
-        $this->invitationLinkRepository->insert($invitationLink);
+        $this->invitationLinkRepo->insert($invitationLink);
         $this->userRepository->insert($user);
 
         return $user;

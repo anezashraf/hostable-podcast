@@ -44,15 +44,15 @@ class PodcastCreateCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $io = new SymfonyStyle($input, $output);
+        $symfonyOutput = new SymfonyStyle($input, $output);
 
         if ($this->settingsRepository->findByName(Setting::PODCAST_INSERTED)) {
-            $io->error("Podcast has already been created");
+            $symfonyOutput->error("Podcast has already been created");
             return;
         }
 
-        $name = $io->ask("What title would you like to give to your podcast?");
-        $description = $io->ask("Please provide a small description for your podcast");
+        $name = $symfonyOutput->ask("What title would you like to give to your podcast?");
+        $description = $symfonyOutput->ask("Please provide a small description for your podcast");
 
         $podcast = (new Podcast)
             ->setTitle($name)

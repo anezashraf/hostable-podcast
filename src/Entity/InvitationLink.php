@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use DateInterval;
 use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -39,13 +40,10 @@ class InvitationLink
     private $used;
 
 
-    private $invitationLink;
-
     public function __construct(string $invitationLink)
     {
         $this->link = $invitationLink;
-        $this->expiryDate =  new DateTime('now +1 day'); //Tomorrow
-        //$new_time = $now->format('Y-m-d H:i:s');
+        $this->expiryDate =  new DateTime('now +1 day');
     }
 
     public function getId(): ?int
@@ -67,36 +65,36 @@ class InvitationLink
 
     public function getLink(): ?string
     {
-        return $this->Link;
+        return $this->link;
     }
 
-    public function setLink(string $Link): self
+    public function setLink(string $link): self
     {
-        $this->Link = $Link;
+        $this->link = $link;
 
         return $this;
     }
 
-    public function getExpiryDate(): ?\DateTimeInterface
+    public function getExpiryDate(): ?DateTimeInterface
     {
-        return $this->ExpiryDate;
+        return $this->expiryDate;
     }
 
-    public function setExpiryDate(\DateTimeInterface $ExpiryDate): self
+    public function setExpiryDate(DateTimeInterface $expiryDate): self
     {
-        $this->ExpiryDate = $ExpiryDate;
+        $this->expiryDate = $expiryDate;
 
         return $this;
     }
 
     public function getUsed(): ?bool
     {
-        return $this->Used;
+        return $this->used;
     }
 
-    public function setUsed(bool $Used): self
+    public function setUsed(bool $used): self
     {
-        $this->used = $Used;
+        $this->used = $used;
 
         return $this;
     }
