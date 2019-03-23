@@ -8,7 +8,6 @@
 
 namespace App\UserManagement;
 
-
 use App\Entity\InvitationLink;
 use App\Entity\User;
 use App\Repository\InvitationLinkRepository;
@@ -46,7 +45,7 @@ class UserCreator
 
     public function resolveInvitationLink(string $invitationLink)
     {
-       return $this->invitationLinkRepository->get($invitationLink);
+        return $this->invitationLinkRepository->get($invitationLink);
     }
 
     public function createUser(User $user, InvitationLink $invitationLink)
@@ -61,5 +60,4 @@ class UserCreator
 
         return $user;
     }
-
 }
