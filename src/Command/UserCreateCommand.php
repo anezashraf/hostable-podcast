@@ -44,7 +44,7 @@ class UserCreateCommand extends Command
         if ($this->settingRepository->findByName(Setting::USER_INSERTED)) {
             $user = $this->userRepository->get();
             $io->error("a user has already been created with the username " . $user->getUsername());
-            return;
+            return 0;
         }
 
         $username = $io->ask("Please enter a username (this will appear on your rss feed as the podcast author)");

@@ -15,6 +15,7 @@ class SettingsController extends AbstractController
 {
     private $repository;
     private $serializer;
+    private $patcher;
 
     public function __construct(
         SettingRepository $repository,

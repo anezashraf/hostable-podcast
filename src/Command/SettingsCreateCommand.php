@@ -43,7 +43,7 @@ class SettingsCreateCommand extends Command
         try {
             if ($this->repository->findByName(Setting::SETTINGS_CREATED)) {
                 $symfonyOutput->error("Settings have already been initialised");
-                return;
+                return 0;
             }
         } catch (NoResultException $exception) {
             foreach ($defaultSettings as $name => $value) {

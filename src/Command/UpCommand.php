@@ -41,7 +41,7 @@ class UpCommand extends Command
             $symfonyOutput->warning('Your website is already up and available to the public');
 
 
-            return;
+            return 0;
         }
     }
 }

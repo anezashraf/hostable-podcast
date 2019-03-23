@@ -12,6 +12,7 @@ use App\Entity\InvitationLink;
 use App\Entity\User;
 use App\Repository\InvitationLinkRepository;
 use App\Repository\UserRepository;
+use Exception;
 use Symfony\Component\Routing\RouterInterface;
 
 class UserCreator
@@ -35,7 +36,13 @@ class UserCreator
 
     public function initNewInvitationLink()
     {
-        $link = bin2hex(openssl_random_pseudo_bytes(48));
+        $bytes = openssl_random_pseudo_bytes(48);
+
+        if (! $bytes) {
+            throw new Exception("Failed to create invitation link");
+        }
+
+        $link = bin2hex($bytes);
 
         $this->invitationLinkRepo->addInvitationLink($link);
 

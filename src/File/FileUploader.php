@@ -2,6 +2,7 @@
 
 namespace App\File;
 
+use Exception;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -20,8 +21,16 @@ class FileUploader
     public function upload(UploadedFile $file)
     {
         $clientOriginalFilename = $file->getClientOriginalName();
+        $originalFilename = '';
         $extension = $file->getClientOriginalExtension();
-        $originalFilename = substr($clientOriginalFilename, 0, strpos($clientOriginalFilename, "."));
+        if ($clientOriginalFilename !== null) {
+            $strPosition = strpos($clientOriginalFilename, ".");
+            if (! $strPosition) {
+                throw new Exception("Bad file extension");
+            }
+            $originalFilename = substr($clientOriginalFilename, 0, $strPosition);
+        }
+
 
         $fileName = rawurlencode("$originalFilename.$extension");
 

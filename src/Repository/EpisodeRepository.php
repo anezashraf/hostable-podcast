@@ -16,15 +16,19 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class EpisodeRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    private $podcastRepository;
+
+    public function __construct(RegistryInterface $registry, PodcastRepository $podcastRepository)
     {
         parent::__construct($registry, Episode::class);
+
+        $this->podcastRepository = $podcastRepository;
     }
 
     public function saveOrUpdate(Episode $episode)
     {
         if (is_null($episode->getPodcast())) {
-            $podcast = $this->_em->getRepository(Podcast::class)->find(1);
+            $podcast = $this->podcastRepository->get();
             $episode->setPodcast($podcast);
             $episode->setPublishedAt(new DateTime());
         }

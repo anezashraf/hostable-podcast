@@ -48,7 +48,7 @@ class PodcastCreateCommand extends Command
 
         if ($this->settingsRepository->findByName(Setting::PODCAST_INSERTED)) {
             $symfonyOutput->error("Podcast has already been created");
-            return;
+            return 0;
         }
 
         $name = $symfonyOutput->ask("What title would you like to give to your podcast?");
