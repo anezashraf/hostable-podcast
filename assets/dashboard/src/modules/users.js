@@ -37,22 +37,19 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLoading: true
-      };
+      }
 
-
-    case UPDATE_USER_RESPONSE:
-      let id = action.payload.data.id;
-      let newUsers = [...state.users];
-      console.log(id);
-      console.log(action.payload.data);
-      newUsers[id - 1] = action.payload.data;
+    case UPDATE_USER_RESPONSE: {
+      let id = action.payload.data.id
+      let newUsers = [...state.users]
+      newUsers[id - 1] = action.payload.data
 
       return {
         ...state,
         users: newUsers,
         isLoading: false
-      };
-
+      }
+    }
     case FETCH_USERS_RESPONSE:
       return {
         ...state,
@@ -118,8 +115,7 @@ export const updateUser = (id, value) => {
           payload: response.data
         })
       })
-      .catch(function (error) {
-        console.log(error)
+      .catch(function () {
       })
   }
 }
