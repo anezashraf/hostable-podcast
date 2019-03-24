@@ -1,9 +1,9 @@
 import React from 'react'
 import { Route, Link } from 'react-router-dom'
-import Settings from '../Pages/settings'
-import Details from '../Pages/details'
-import User from '../Pages/user'
-import Index from '../Pages/create-new-episode'
+import Settings from './Pages/Settings'
+import Details from './Pages/Details'
+import User from './Pages/User'
+import CreateNewEpisode from './Pages/CreateNewEpisode'
 
 const App = () => (
   <div>
@@ -18,9 +18,9 @@ const App = () => (
       <Route exact path="/dashboard/settings" component={Settings} />
       <Route exact path="/dashboard/user" component={User} />
       <Route exact path="/dashboard/details" component={Details} />
-      <Route exact path="/dashboard/create-episode" component={Index} />
+      <Route exact path="/dashboard/create-episode" component={CreateNewEpisode} />
     </main>
   </div>
-)
+);
 
 export default App

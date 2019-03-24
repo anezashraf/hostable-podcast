@@ -1,13 +1,10 @@
 import axios from 'axios'
-
-export const GET_DETAILS_REQUESTED = 'podcast/GET_DETAILS_REQUESTED'
-export const GET_DETAILS_RESPONSED = 'podcast/GET_DETAILS_RESPONSED'
-
-export const SAVE_DETAILS_REQUEST = 'podcast/SAVE_DETAILS_REQUEST'
-export const SAVE_DETAILS_RESPONSE = 'podcast/SAVE_DETAILS_RESPONSED'
-
-export const UPLOAD_IMAGE_REQUEST = 'podcast/UPLOAD_IMAGE_REQUEST'
-export const UPLOAD_IMAGE_RESPONSE = 'podcast/UPLOAD_IMAGE_RESPONSE'
+import {
+  GET_DETAILS_REQUESTED,
+  GET_DETAILS_RESPONSED, SAVE_DETAILS_REQUEST, SAVE_DETAILS_RESPONSE,
+  UPLOAD_IMAGE_REQUEST,
+  UPLOAD_IMAGE_RESPONSE
+} from "../Actions/podcastActions";
 
 const initialState = {
   title: '',

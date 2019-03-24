@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 class PodcastForm extends React.Component {
   constructor (props) {
-    super(props)
+    super(props);
 
     this.state = {
       title: '',
@@ -13,7 +13,7 @@ class PodcastForm extends React.Component {
   }
 
   componentDidMount () {
-    let { title, description, id } = this.props
+    let { title, description, id } = this.props;
 
     this.setState({
       title: title,
@@ -31,13 +31,13 @@ class PodcastForm extends React.Component {
     };
 
     handleSave = (e) => {
-      e.preventDefault()
+      e.preventDefault();
       this.props.handleSave(this.state.title, this.state.description, this.props.id)
-    }
+    };
 
     render () {
-      let { title, description } = this.state
-      let { image, uploadImage, isImageUploading } = this.props
+      let { title, description } = this.state;
+      let { image, uploadImage, isImageUploading } = this.props;
 
       return (
         <div>

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 class Preview extends React.Component {
   constructor (props) {
-    super(props)
+    super(props);
 
     this.state = {
       accepted: [],
@@ -12,7 +12,7 @@ class Preview extends React.Component {
   }
 
   render () {
-    let { type, fileLocation } = this.props
+    let { type, fileLocation } = this.props;
 
     if (type === 'audio') {
       return <audio src={fileLocation} controls />

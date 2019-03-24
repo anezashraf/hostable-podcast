@@ -1,14 +1,14 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { fetchUsers, fetchInvitationLink, updateUser } from '../../modules/users'
-import UserForm from '../../Components/Forms/UserForm'
+import { fetchUsers, fetchInvitationLink, updateUser } from '../Reducers/users'
+import UserForm from '../Components/Forms/UserForm'
 import PropTypes from 'prop-types';
 
 
 class User extends React.Component {
   constructor (props) {
-    super(props)
+    super(props);
 
     this.state = {
       invitationLink: ''
@@ -28,7 +28,7 @@ class User extends React.Component {
     };
 
     render () {
-      let { users } = this.props
+      let { users } = this.props;
 
       return (
         <section>
@@ -58,7 +58,7 @@ const mapStateToProps = ({ user }) => ({
   users: user.users,
   invitationLink: user.invitationLink
 
-})
+});
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -68,7 +68,7 @@ const mapDispatchToProps = dispatch =>
       fetchInvitationLink
     },
     dispatch
-  )
+  );
 
 export default connect(
   mapStateToProps,

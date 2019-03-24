@@ -1,6 +1,6 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
-import { fetchEpisodes, updateEpisode, uploadImage, uploadAudio } from '../modules/episode'
+import { fetchEpisodes, updateEpisode, uploadImage, uploadAudio } from '../Reducers/episode'
 import { Link } from 'react-router-dom'
 
 import { connect } from 'react-redux'
@@ -19,8 +19,8 @@ class Episodes extends React.Component {
       <section>
         <Link to={'/dashboard/create-episode'}>Create New Episode</Link>
         {episodes.map((value, index) => {
-          let imageFileLocation = value.image
-          let audioFileLocation = value.enclosureUrl
+          let imageFileLocation = value.image;
+          let audioFileLocation = value.enclosureUrl;
           return (
             <EpisodeForm
               uploadAudio={uploadAudio}
@@ -68,7 +68,7 @@ const mapDispatchToProps = dispatch =>
       uploadAudio
     },
     dispatch
-  )
+  );
 
 export default connect(
   mapStateToProps,

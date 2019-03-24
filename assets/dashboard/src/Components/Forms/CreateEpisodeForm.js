@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import PropTypes from "prop-types";
 class CreateEpisodeForm extends React.Component {
   constructor (props) {
-    super(props)
+    super(props);
 
     this.state = {
       imageFile: '',
@@ -21,7 +21,7 @@ class CreateEpisodeForm extends React.Component {
   }
 
   componentDidMount () {
-    let { episode } = this.props
+    let { episode } = this.props;
 
     this.setState({ episode: episode })
   }
@@ -35,12 +35,12 @@ class CreateEpisodeForm extends React.Component {
     };
 
     handleSave = (e) => {
-      e.preventDefault()
+      e.preventDefault();
 
-      let { title, description, audioFile, imageFile } = this.state
+      let { title, description, audioFile, imageFile } = this.state;
 
       this.props.handleSave(title, description, audioFile, imageFile)
-    }
+    };
 
     handleImageDrop = (imageFile) => {
       this.setState({ imageFile: imageFile })
@@ -51,7 +51,7 @@ class CreateEpisodeForm extends React.Component {
     };
 
     render () {
-      let { isNewEpisodeSaving } = this.props
+      let { isNewEpisodeSaving } = this.props;
 
       if (isNewEpisodeSaving) {
         return <p>Saving</p>
