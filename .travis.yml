@@ -12,7 +12,7 @@ jobs:
   include:
     - name: "phpstan"
       script: ./vendor/bin/phpstan analyse -l 7 -c extension.neon src tests
-    - script: ./vendor/bin/phpmd src text cleancode,unusedcode,naming,codesize,design,controversial
+    - script: ./vendor/bin/phpmd src text ruleset.xml
       name: "php mess detector"
     - script: ./vendor/bin/phpcs
       name: "php code sniffer"

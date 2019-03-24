@@ -8,37 +8,43 @@
 
 namespace App\UserManagement;
 
-
 use App\Entity\InvitationLink;
 use App\Entity\User;
 use App\Repository\InvitationLinkRepository;
 use App\Repository\UserRepository;
+use Exception;
 use Symfony\Component\Routing\RouterInterface;
 
 class UserCreator
 {
-    private $invitationLinkRepository;
+    private $invitationLinkRepo;
     private $userRepository;
     private $router;
     private $host;
 
     public function __construct(
         UserRepository $userRepository,
-        InvitationLinkRepository $invitationLinkRepository,
+        InvitationLinkRepository $invitationLinkRepos,
         RouterInterface $router,
         string $host
     ) {
         $this->userRepository = $userRepository;
-        $this->invitationLinkRepository = $invitationLinkRepository;
+        $this->invitationLinkRepo = $invitationLinkRepos;
         $this->router = $router;
         $this->host = $host;
     }
 
     public function initNewInvitationLink()
     {
-        $link = bin2hex(openssl_random_pseudo_bytes(48));
+        $bytes = openssl_random_pseudo_bytes(48);
 
-        $this->invitationLinkRepository->addInvitationLink($link);
+        if (! $bytes) {
+            throw new Exception("Failed to create invitation link");
+        }
+
+        $link = bin2hex($bytes);
+
+        $this->invitationLinkRepo->addInvitationLink($link);
 
 
         return $this->host . $this->router->generate('users_register', ['invitationLink' => $link]);
@@ -46,7 +52,7 @@ class UserCreator
 
     public function resolveInvitationLink(string $invitationLink)
     {
-       return $this->invitationLinkRepository->get($invitationLink);
+        return $this->invitationLinkRepo->get($invitationLink);
     }
 
     public function createUser(User $user, InvitationLink $invitationLink)
@@ -56,10 +62,9 @@ class UserCreator
         $invitationLink->setUser($user);
         $invitationLink->setUsed(true);
 
-        $this->invitationLinkRepository->insert($invitationLink);
+        $this->invitationLinkRepo->insert($invitationLink);
         $this->userRepository->insert($user);
 
         return $user;
     }
-
 }

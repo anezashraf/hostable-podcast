@@ -9,7 +9,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
@@ -123,18 +122,7 @@ class User implements UserInterface, EntityInterface
     }
 
     /**
-     * Returns the roles granted to the user.
-     *
-     *     public function getRoles()
-     *     {
-     *         return array('ROLE_USER');
-     *     }
-     *
-     * Alternatively, the roles might be stored on a ``roles`` property,
-     * and populated in any number of different ways when the user object
-     * is created.
-     *
-     * @return (Role|string)[] The user roles
+     * @return array
      */
     public function getRoles()
     {
@@ -203,6 +191,8 @@ class User implements UserInterface, EntityInterface
     }
 
     /**
+     * @SuppressWarnings(PHPMD.BooleanGetMethodName)
+     *
      * @return boolean
      */
     public function getEnabled()

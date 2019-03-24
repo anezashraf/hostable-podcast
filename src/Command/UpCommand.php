@@ -34,14 +34,14 @@ class UpCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $io = new SymfonyStyle($input, $output);
+        $symfonyOutput = new SymfonyStyle($input, $output);
 
         if (! $this->repository->findByName(Setting::IS_ONLINE)) {
             $this->repository->update(['name' => Setting::IS_ONLINE, 'value' => 'true']);
-            $io->warning('Your website is already up and available to the public');
+            $symfonyOutput->warning('Your website is already up and available to the public');
 
 
-            return;
+            return 0;
         }
     }
 }

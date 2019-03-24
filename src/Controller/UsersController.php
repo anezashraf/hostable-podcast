@@ -77,7 +77,8 @@ class UsersController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                 $user = $this->userCreator->createUser($form->getData(), $invitationLink);
 
-                return $this->render('login/success.twig',
+                return $this->render(
+                    'login/success.twig',
                     [
                         'username' => $user->getUsername(),
                         'email' => $user->getEmail()
@@ -88,7 +89,6 @@ class UsersController extends AbstractController
             return $this->render('login/register.twig', [
                 'form' => $form->createView()
             ]);
-
         }
 
         return $this->render('login/register_fail.twig');
@@ -103,7 +103,15 @@ class UsersController extends AbstractController
 
         $data = ['message' => $this->userCreator->initNewInvitationLink()];
 
-        $data = $this->serializer->serialize(ApiStructure::create($data, new ConstraintViolationList), 'json', ['groups' => ['dashboard']]);
+        $data = $this->serializer->serialize(
+            ApiStructure::create(
+                $data,
+                new ConstraintViolationList
+            ),
+            'json',
+            ['groups' => ['dashboard']
+            ]
+        );
 
         return new JsonResponse($data, 200, [], true);
     }

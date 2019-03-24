@@ -1,61 +1,63 @@
 import React from 'react'
-import Dropzone from "react-dropzone";
-import Preview from './Preview';
+import Dropzone from 'react-dropzone'
+import Preview from './Preview'
+import PropTypes from "prop-types";
 
 class UploadFile extends React.Component {
+  constructor (props) {
+    super(props)
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            accepted: [],
-            rejected: []
-        }
+    this.state = {
+      accepted: [],
+      rejected: []
     }
+  }
 
     handleDrop = (file) => {
-        this.props.uploadFile(file[0], this.state.id);
+      this.props.uploadFile(file[0], this.state.id)
     };
 
+    render () {
+      let { fileLocation, fileType, isLoading } = this.props
 
-    render() {
+      let preview = <p><b>Currently Loading Please Wait This Could Take Some Time..</b></p>
 
-        let {fileLocation, fileType, isLoading} = this.props;
+      if (!isLoading) {
+        preview = <Preview type={fileType} fileLocation={fileLocation} />
+      }
 
+      let acceptedFileTypes = 'image/jpeg, image/png'
 
+      if (fileType === 'audio') {
+        acceptedFileTypes = 'audio/mpeg, audio/mp3'
+      }
 
-        let preview = <p><b>Currently Loading Please Wait This Could Take Some Time..</b></p>
-
-        if (! isLoading) {
-            preview = <Preview type={fileType} fileLocation={fileLocation} />
-        }
-
-        let acceptedFileTypes = 'image/jpeg, image/png';
-
-
-        if (fileType === 'audio') {
-            acceptedFileTypes = 'audio/mpeg, audio/mp3';
-        }
-
-        return (
-            <div>
-                {preview}
-                <div className="dropzone">
-                    <Dropzone
-                        accept={acceptedFileTypes}
-                        onDrop={this.handleDrop}
-                    >
-                        {({ getRootProps, getInputProps }) => (
-                            <div {...getRootProps()}  className="dropzone">
-                                <input {...getInputProps()} />
-                                <p>Upload {fileType} here</p>
-                            </div>
-                        )}
-                    </Dropzone>
+      return (
+        <div>
+          {preview}
+          <div className="dropzone">
+            <Dropzone
+              accept={acceptedFileTypes}
+              onDrop={this.handleDrop}
+            >
+              {({ getRootProps, getInputProps }) => (
+                <div {...getRootProps()} className="dropzone">
+                  <input {...getInputProps()} />
+                  <p>Upload {fileType} here</p>
                 </div>
-            </div>
-        )
+              )}
+            </Dropzone>
+          </div>
+        </div>
+      )
     }
 }
+
+UploadFile.propTypes = {
+  uploadFile: PropTypes.func,
+  fileLocation: PropTypes.string,
+  fileType: PropTypes.string,
+  isLoading: PropTypes.bool,
+};
 
 export default UploadFile

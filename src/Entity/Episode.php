@@ -168,10 +168,10 @@ class Episode implements EntityInterface
     }
 
     /**
-     * @param $slug
+     * @param string $slug
      * @return Episode
      */
-    public function setSlug($slug): self
+    public function setSlug(string $slug): self
     {
         $this->slug = $slug;
 

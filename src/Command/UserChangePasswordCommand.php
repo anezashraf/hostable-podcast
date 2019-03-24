@@ -49,7 +49,7 @@ class UserChangePasswordCommand extends Command
             $user->setPassword($password);
             $this->userRepository->saveOrUpdate($user);
 
-            return;
+            return 0;
         }
 
         $io->error("Passwords do not match");

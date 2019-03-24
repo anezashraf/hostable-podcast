@@ -28,7 +28,8 @@
         "symfony/validator": "4.1.*",
         "symfony/web-link": "*",
         "symfony/webpack-encore-pack": "^1.0",
-        "symfony/yaml": "*"
+        "symfony/yaml": "*",
+      "ext-openssl": "*"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.0",
