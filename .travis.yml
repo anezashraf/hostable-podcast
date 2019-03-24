@@ -17,9 +17,10 @@ jobs:
     - script: ./vendor/bin/phpcs
       name: "php code sniffer"
     - script: ./node_modules/.bin/eslint assets
-      name: "eslint"
-    - script: ./node_modules/.bin/stylelint assets/
-    - name: "sasslint"
+      name: "javascript linting"
+#    Need to enabled once I am starting to create design
+#    - script: ./node_modules/.bin/stylelint assets/
+#    - name: "sass linting"
 
 php:
   - '7.2'

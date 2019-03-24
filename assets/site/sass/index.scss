@@ -1,17 +1,14 @@
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/mixins";
-@import "~bootstrap/scss/reboot";
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/reboot';
 
-@fa-font-path:   "../font";
+$fa-font-path: '../font';
 
-@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
-@import "~@fortawesome/fontawesome-free/scss/solid.scss";
-@import "~@fortawesome/fontawesome-free/scss/brands.scss";
-
-
+@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import '~@fortawesome/fontawesome-free/scss/solid.scss';
+@import '~@fortawesome/fontawesome-free/scss/brands.scss';
 @import '../../../config.scss';
-
 @import 'layout/layout.scss';
 @import 'header/header.scss';
 @import 'middle-part/middle-part.scss';
@@ -24,8 +21,9 @@ a:hover {
   color: $secondaryColor;
   text-decoration: underline;
 }
+
 body {
+  background-color: #f9f9f9;
   font-family: 'Roboto', sans-serif;
-  background-color: #F9F9F9;
 }
 

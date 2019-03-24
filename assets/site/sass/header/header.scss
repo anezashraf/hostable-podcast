@@ -1,12 +1,13 @@
 .header {
   @include make-row();
+
   background-color: $headerBackgroundColor;
-  color: white;
   border-bottom: 6px solid $secondaryColor;
 
   &__information {
     @include make-col-ready();
     @include make-col(6);
+
     & > * {
       display: inline;
     }
@@ -16,15 +17,13 @@
     }
 
     &-description {
-      font-size: 1rem;
       display: none;
+      font-size: 1rem;
 
       @include media-breakpoint-up(md) {
         display: inline;
       }
-
     }
-
   }
 }
 
