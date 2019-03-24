@@ -12,7 +12,17 @@ class Episodes extends React.Component {
     this.props.fetchEpisodes()
   }
 
-  render () {
+    static propTypes = {
+        fetchEpisodes: PropTypes.func,
+        episodes: PropTypes.array,
+        updateEpisode: PropTypes.func,
+        uploadImage: PropTypes.func,
+        uploadAudio: PropTypes.func,
+        isAudioUploading: PropTypes.bool,
+        isImageUploading: PropTypes.bool,
+    };
+
+    render () {
     let { episodes, updateEpisode, uploadImage, uploadAudio, isAudioUploading, isImageUploading } = this.props
 
     return (
@@ -40,18 +50,6 @@ class Episodes extends React.Component {
     )
   }
 }
-
-
-Episodes.propTypes = {
-    fetchEpisodes: PropTypes.func,
-    episodes: PropTypes.array``,
-    updateEpisode: PropTypes.func,
-    uploadImage: PropTypes.func,
-    uploadAudio: PropTypes.func``,
-    isAudioUploading: PropTypes.bool,
-    isImageUploading: PropTypes.bool,
-};
-
 
 const mapStateToProps = ({ episode }) => ({
   episodes: episode.episodes,
