@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 class EpisodeForm extends React.Component {
   constructor (props) {
-    super(props)
+    super(props);
 
     this.state = {
       episode: {
@@ -13,44 +13,44 @@ class EpisodeForm extends React.Component {
   }
 
   componentDidMount () {
-    let { episode } = this.props
+    let { episode } = this.props;
 
     this.setState({ episode: episode })
   }
 
     handleTitleChange = (e) => {
-      let newEpisode = this.state.episode
+      let newEpisode = this.state.episode;
 
-      newEpisode.title = e.target.value
+      newEpisode.title = e.target.value;
       this.setState({ episode: newEpisode })
     };
 
     handleDescriptionChange = (e) => {
-      let newEpisode = this.state.episode
+      let newEpisode = this.state.episode;
 
-      newEpisode.description = e.target.value
+      newEpisode.description = e.target.value;
       this.setState({ episode: newEpisode })
     };
 
     handleSave = (e) => {
-      e.preventDefault()
-      let { episode } = this.state
+      e.preventDefault();
+      let { episode } = this.state;
 
       let data = [
         { op: 'replace', path: '/title', value: episode.title },
         { op: 'replace', path: '/description', value: episode.description }
-      ]
+      ];
 
       this.props.handleSave(episode.id, data)
-    }
+    };
 
     uploadImage = (file) => {
       this.props.uploadImage(file, this.props.episode.id)
-    }
+    };
 
     uploadAudio = (file) => {
       this.props.uploadAudio(file, this.props.episode.id)
-    }
+    };
 
     render () {
 

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 class SettingsForm extends React.Component {
   constructor (props) {
-    super(props)
+    super(props);
 
     this.state = {
       isChecked: false,
@@ -14,19 +14,19 @@ class SettingsForm extends React.Component {
   }
 
     handleCheck = (e) => {
-      let isChecked = e.target.checked
-      this.setState({ isChecked: isChecked })
+      let isChecked = e.target.checked;
+      this.setState({ isChecked: isChecked });
       this.props.handleUpdate(this.state.id, isChecked)
     };
 
     handleChange = (e) => {
-      let isChecked = e.target.value
-      this.setState({ isChecked: isChecked })
+      let isChecked = e.target.value;
+      this.setState({ isChecked: isChecked });
       this.props.handleUpdate(this.state.id, isChecked)
     };
 
     componentDidMount () {
-      let { setting } = this.props
+      let { setting } = this.props;
 
       this.setState({
         isChecked: setting.value, name: setting.name, id: setting.id, type: setting.type

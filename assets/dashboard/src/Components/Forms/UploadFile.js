@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 class UploadFile extends React.Component {
   constructor (props) {
-    super(props)
+    super(props);
 
     this.state = {
       accepted: [],
@@ -18,7 +18,7 @@ class UploadFile extends React.Component {
     };
 
     render () {
-      let { fileLocation, fileType, isLoading } = this.props
+      let { fileLocation, fileType, isLoading } = this.props;
 
       let preview = <p><b>Currently Loading Please Wait This Could Take Some Time..</b></p>
 

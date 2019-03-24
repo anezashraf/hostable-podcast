@@ -1,10 +1,5 @@
 import axios from 'axios'
-
-export const FETCH_SETTINGS_REQUEST = 'settings/GET_SETTINGS_REQUEST'
-export const FETCH_SETTINGS_RESPONSE = 'settings/GET_SETTINGS_RESPONSE'
-
-export const UPDATE_SETTING_REQUEST = 'settings/UPDATE_SETTING_REQUEST'
-export const UPDATE_SETTING_RESPONSE = 'settings/UPDATE_SETTING_RESPONSE'
+import {FETCH_SETTINGS_REQUEST, FETCH_SETTINGS_RESPONSE, UPDATE_SETTING_REQUEST} from "../Actions/settingActions";
 
 const initialState = {
   settings: [],

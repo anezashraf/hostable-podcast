@@ -1,8 +1,8 @@
 import React from 'react'
-import CreateEpisodeForm from '../../Components/Forms/CreateEpisodeForm'
+import CreateEpisodeForm from '../Components/Forms/CreateEpisodeForm'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { saveNew } from '../../modules/episode'
+import { saveNew } from '../Reducers/episode'
 import PropTypes from "prop-types";
 
 class CreateNewEpisode extends React.Component {
@@ -11,7 +11,7 @@ class CreateNewEpisode extends React.Component {
     };
 
     render () {
-      let { isNewEpisodeSaving } = this.props
+      let { isNewEpisodeSaving } = this.props;
 
       return (
         <section>
@@ -34,7 +34,7 @@ const mapStateToProps = ({ episode }) => ({
   isAudioUploading: episode.isAudioUploading,
   isImageUploading: episode.isImageUploading,
   isNewEpisodeSaving: episode.isNewEpisodeSaving
-})
+});
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -42,7 +42,7 @@ const mapDispatchToProps = dispatch =>
       saveNew
     },
     dispatch
-  )
+  );
 
 export default connect(
   mapStateToProps,

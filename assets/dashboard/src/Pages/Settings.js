@@ -1,10 +1,10 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
-import { fetchSettings, updateSetting } from '../../modules/setting'
+import { fetchSettings, updateSetting } from '../Reducers/setting'
 import { Link } from 'react-router-dom'
 
 import { connect } from 'react-redux'
-import SettingsForm from '../../Components/Forms/SettingsForm'
+import SettingsForm from '../Components/Forms/SettingsForm'
 import PropTypes from "prop-types";
 
 class Settings extends React.Component {
@@ -17,7 +17,7 @@ class Settings extends React.Component {
     };
 
     render () {
-      let { settings } = this.props
+      let { settings } = this.props;
 
       return (
         <section>
@@ -39,7 +39,7 @@ Settings.propTypes = {
 
 const mapStateToProps = ({ setting }) => ({
   settings: setting.settings
-})
+});
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -48,7 +48,7 @@ const mapDispatchToProps = dispatch =>
       updateSetting
     },
     dispatch
-  )
+  );
 
 export default connect(
   mapStateToProps,

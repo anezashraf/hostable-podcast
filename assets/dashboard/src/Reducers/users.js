@@ -1,11 +1,10 @@
 import axios from 'axios'
-
-export const FETCH_USERS_REQUEST = 'users/GET_USERS_REQUEST'
-export const FETCH_USERS_RESPONSE = 'users/GET_USERS_RESPONSE'
-export const FETCH_USER_LINK_REQUEST = 'users/FETCH_USER_LINK_REQUEST'
-export const FETCH_USER_LINK_RESPONSE = 'users/FETCH_USER_LINK_RESPONSE'
-export const UPDATE_USER_REQUEST = 'users/UPDATE_USER_REQUEST'
-export const UPDATE_USER_RESPONSE = 'users/UPDATE_USER_RESPONSE'
+import {
+  FETCH_USER_LINK_REQUEST,
+  FETCH_USER_LINK_RESPONSE,
+  FETCH_USERS_REQUEST, FETCH_USERS_RESPONSE,
+  UPDATE_USER_REQUEST, UPDATE_USER_RESPONSE
+} from "../Actions/userActions";
 
 const initialState = {
   users: [],
