@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Setting;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NoResultException;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -19,6 +20,11 @@ class SettingRepository extends ServiceEntityRepository
         parent::__construct($registry, Setting::class);
     }
 
+    /**
+     * @param string $name
+     * @return mixed
+     * @throws NoResultException
+     */
     public function findByName(string $name)
     {
 
