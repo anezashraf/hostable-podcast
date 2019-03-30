@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\EntityInterface;
 use App\Entity\Episode;
 use App\Entity\Podcast;
 use DateTime;
@@ -14,7 +15,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method Episode[]    findAll()
  * @method Episode[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class EpisodeRepository extends ServiceEntityRepository
+class EpisodeRepository extends ServiceEntityRepository implements RepositoryInterface
 {
     private $podcastRepository;
 
@@ -25,7 +26,7 @@ class EpisodeRepository extends ServiceEntityRepository
         $this->podcastRepository = $podcastRepository;
     }
 
-    public function saveOrUpdate(Episode $episode)
+    public function saveOrUpdate(EntityInterface $episode)
     {
         if (is_null($episode->getPodcast())) {
             $podcast = $this->podcastRepository->get();
@@ -38,13 +39,10 @@ class EpisodeRepository extends ServiceEntityRepository
 
     public function findAllOrdered()
     {
-        return $this->createQueryBuilder('e')
-            ->orderBy('e.publishedAt', 'DESC')
-            ->getQuery()
-            ->getResult();
+
     }
 
-    public function get(string $id) : Episode
+    public function get($id = 1) : Episode
     {
         return $this->createQueryBuilder('e')
             ->where('e.id = :id')
@@ -90,4 +88,11 @@ class EpisodeRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function getAll()
+    {
+        return $this->createQueryBuilder('e')
+            ->orderBy('e.publishedAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 }

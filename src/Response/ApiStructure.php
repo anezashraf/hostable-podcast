@@ -6,7 +6,7 @@
  * Time: 06:27
  */
 
-namespace App\Entity;
+namespace App\Response;
 
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\ConstraintViolationList;

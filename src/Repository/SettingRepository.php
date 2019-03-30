@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\EntityInterface;
 use App\Entity\Setting;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NoResultException;
@@ -13,7 +14,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method Setting[]    findAll()
  * @method Setting[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class SettingRepository extends ServiceEntityRepository
+class SettingRepository extends ServiceEntityRepository implements RepositoryInterface
 {
     public function __construct(RegistryInterface $registry)
     {
@@ -70,7 +71,7 @@ class SettingRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function get(string $id) : Setting
+    public function get($id = 1) : Setting
     {
         return $this->createQueryBuilder('e')
             ->where('e.id = :id')
@@ -79,7 +80,7 @@ class SettingRepository extends ServiceEntityRepository
             ->getSingleResult();
     }
 
-    public function saveOrUpdate(Setting $setting)
+    public function saveOrUpdate(EntityInterface $setting)
     {
         $this->_em->merge($setting);
         $this->_em->flush($setting);

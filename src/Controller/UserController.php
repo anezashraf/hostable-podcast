@@ -2,13 +2,16 @@
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+
 use App\Entity\ApiStructure;
 use App\Entity\User;
 use App\Form\UserRegisterationType;
 use App\Patcher\Patcher;
 use App\Repository\UserRepository;
 use App\UserManagement\UserCreator;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -17,12 +20,12 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\ConstraintViolationList;
 
-class UsersController extends AbstractController
+/**
+ * Class LoginController
+ * @package App\Controller\Login
+ */
+class UserController extends AbstractController
 {
-    private $repository;
-    private $serializer;
-    private $userCreator;
-    private $patcher;
 
     public function __construct(
         UserRepository $repository,
@@ -37,14 +40,17 @@ class UsersController extends AbstractController
     }
 
     /**
-     * @Route("/api/users", name="users")
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
      */
-    public function index()
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        $users = $this->serializer->serialize($this->repository->findAll(), 'json', ['groups' => ['dashboard']]);
+        $error = $authenticationUtils->getLastAuthenticationError();
+        $lastUsername = $authenticationUtils->getLastUsername();
 
-        return new JsonResponse($users, 200, [], true);
+        return $this->render('login/index.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
+
 
     /**
      * @Route("/user/register/{invitationLink}", name="users_register", methods={"GET"})
@@ -92,62 +98,5 @@ class UsersController extends AbstractController
         }
 
         return $this->render('login/register_fail.twig');
-    }
-
-
-        /**
-     * @Route("/api/users/invitation-link", name="invitation_link")
-     */
-    public function invitationLink()
-    {
-
-        $data = ['message' => $this->userCreator->initNewInvitationLink()];
-
-        $data = $this->serializer->serialize(
-            ApiStructure::create(
-                $data,
-                new ConstraintViolationList
-            ),
-            'json',
-            ['groups' => ['dashboard']
-            ]
-        );
-
-        return new JsonResponse($data, 200, [], true);
-    }
-
-    /**
-     * @Route("/api/users/{id}", name="single_users")
-     */
-    public function single(int $id)
-    {
-        $user = $this->serializer->serialize($this->repository->get($id), 'json', ['groups' => ['dashboard']]);
-
-
-        return new JsonResponse($user, 200, [], true);
-    }
-
-    /**
-     * @Route("/api/user/{id}", name="episodes_save", methods={"PATCH"})
-     */
-    public function patch(Request $request, string $id)
-    {
-        $patchDocument = $request->getContent();
-        $user = $this->repository->get($id);
-
-        $errors = $this->patcher->makeChangesTo($user)
-            ->using($patchDocument)
-            ->run()
-            ->getErrors();
-
-        $this->repository->saveOrUpdate($user);
-
-        $json = $this->serializer->serialize(
-            ApiStructure::create($user, $errors),
-            'json',
-            ['groups' => ['dashboard']]
-        );
-
-        return new JsonResponse($json, 200, [], true);
     }
 }

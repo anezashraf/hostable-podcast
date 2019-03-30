@@ -73,7 +73,7 @@ export const fetchEpisodes = () => {
       type: GET_EPISODES_REQUESTED
     })
 
-    fetch('/api/episodes')
+    fetch('/api/episode')
       .then(function (response) {
         return response.json()
       }).then(function (jsonResponse) {
@@ -172,7 +172,7 @@ export const saveNew = (title, description, audio, image) => {
       let formData = new FormData()
       formData.append('file', audio)
 
-      axios.post(`/api/fileupload/episode/${response.data.id}/enclosureUrl`,
+      axios.post(`/api/fileupload/episode/${response.data.data.id}/enclosureUrl`,
         formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
@@ -189,7 +189,7 @@ export const saveNew = (title, description, audio, image) => {
       formData = new FormData()
       formData.append('file', image)
 
-      axios.post(`/api/fileupload/episode/${response.data.id}/image`,
+      axios.post(`/api/fileupload/episode/${response.data.data.id}/image`,
         formData, {
           headers: {
             'Content-Type': 'multipart/form-data'

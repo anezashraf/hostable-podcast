@@ -43,7 +43,7 @@ export const fetchSettings = () => {
       type: FETCH_SETTINGS_REQUEST
     })
 
-    fetch('/api/settings')
+    fetch('/api/setting')
       .then(function (response) {
         return response.json()
       }).then(function (jsonResponse) {
