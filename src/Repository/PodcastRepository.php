@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\EntityInterface;
 use App\Entity\Podcast;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -13,7 +14,7 @@ use UnexpectedValueException;
  * @method Podcast[]    findAll()
  * @method Podcast[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PodcastRepository extends ServiceEntityRepository
+class PodcastRepository extends ServiceEntityRepository implements RepositoryInterface
 {
     public function __construct(RegistryInterface $registry)
     {
@@ -34,7 +35,7 @@ class PodcastRepository extends ServiceEntityRepository
         $this->_em->flush($podcast);
     }
 
-    public function saveOrUpdate(Podcast $podcast)
+    public function saveOrUpdate(EntityInterface $podcast)
     {
         $this->_em->merge($podcast);
         $this->_em->flush($podcast);
@@ -56,11 +57,11 @@ class PodcastRepository extends ServiceEntityRepository
         return $query->getQuery()->getSingleResult();
     }
 
-    public function get() : Podcast
+    public function get($id = 1) : Podcast
     {
         return $this->createQueryBuilder('p')
             ->where('p.id = :id')
-            ->setParameter('id', 1)
+            ->setParameter('id', $id)
             ->getQuery()
             ->getSingleResult();
     }
@@ -108,4 +109,8 @@ class PodcastRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function getAll()
+    {
+        return $this->findAll();
+    }
 }

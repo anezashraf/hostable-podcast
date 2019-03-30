@@ -10,17 +10,36 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\Templating\EngineInterface;
 
-class HasBeenInstalledSubscriber implements EventSubscriberInterface
+/**
+ * Class InstalledSubscriber
+ * @package App\EventSubscriber
+ */
+class InstalledSubscriber implements EventSubscriberInterface
 {
+    /**
+     * @var SettingRepository
+     */
     private $repository;
+
+    /**
+     * @var EngineInterface
+     */
     private $engine;
 
+    /**
+     * InstalledSubscriber constructor.
+     * @param SettingRepository $repository
+     * @param EngineInterface $engine
+     */
     public function __construct(SettingRepository $repository, EngineInterface $engine)
     {
         $this->repository = $repository;
         $this->engine = $engine;
     }
 
+    /**
+     * @param GetResponseEvent $event
+     */
     public function onKernelRequest(GetResponseEvent $event)
     {
 
@@ -48,6 +67,9 @@ class HasBeenInstalledSubscriber implements EventSubscriberInterface
         }
     }
 
+    /**
+     * @return array
+     */
     public static function getSubscribedEvents()
     {
         return [

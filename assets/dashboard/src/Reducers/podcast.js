@@ -83,7 +83,7 @@ export const updateDetails = (title, description) => {
       { op: 'replace', path: '/description', value: description }
     ]
 
-    axios.patch('/api/podcast', data)
+    axios.patch('/api/podcast/1', data)
       .then(function () {
       })
       .catch(function () {
