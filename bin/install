@@ -6,7 +6,5 @@ npm run build
 composer install
 php bin/console doctrine:database:create
 php bin/console doctrine:schema:update --force
-php bin/console setting:create
-php bin/console up
-php bin/console user:create
-php bin/console podcast:create
+php bin/console install
+php bin/console mode online
