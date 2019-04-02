@@ -4,6 +4,7 @@ namespace App\Installation;
 
 use App\Entity\Setting;
 use App\Repository\SettingRepository;
+use App\Setting\SettingDefaults;
 use Doctrine\ORM\NoResultException;
 
 class SettingsInstaller extends AbstractInstaller implements InstallerInterface
@@ -17,10 +18,10 @@ class SettingsInstaller extends AbstractInstaller implements InstallerInterface
 
     public function install() : string
     {
-        $defaultSettings = Setting::DEFAULTS;
+        $defaultSettings = SettingDefaults::DEFAULTS;
 
         try {
-            if ($this->respository->findByName(Setting::SETTINGS_CREATED)) {
+            if ($this->respository->findByName(SettingDefaults::SETTINGS_CREATED)) {
                 throw new InstallerException("Settings have already been initialised");
             }
         } catch (NoResultException $exception) {
@@ -36,7 +37,7 @@ class SettingsInstaller extends AbstractInstaller implements InstallerInterface
 
             $this->respository->update(
                 [
-                    'name' => Setting::SETTINGS_CREATED,
+                    'name' => SettingDefaults::SETTINGS_CREATED,
                     'value' => 'true',
                 ]
             );

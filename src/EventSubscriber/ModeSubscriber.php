@@ -34,7 +34,7 @@ class ModeSubscriber implements EventSubscriberInterface
      */
     public function onKernelRequest(GetResponseEvent $event)
     {
-        if ($this->repository->findByName(Setting::IS_ONLINE)) {
+        if ($this->repository->findByName(SettingDefaults::IS_ONLINE)) {
             return;
         }
 

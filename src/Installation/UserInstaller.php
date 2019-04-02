@@ -21,7 +21,7 @@ class UserInstaller extends AbstractInstaller implements InstallerInterface
 
     public function install() : string
     {
-        if ($this->settingRepository->findByName(Setting::USER_INSERTED)) {
+        if ($this->settingRepository->findByName(SettingDefaults::USER_INSERTED)) {
             $user = $this->userRespository->get();
             throw new InstallerException(
                 "a user has already been created with the username "
@@ -48,7 +48,7 @@ class UserInstaller extends AbstractInstaller implements InstallerInterface
             ->setPassword($password);
 
         $this->userRespository->insert($user);
-        $this->settingRepository->update(["name" => Setting::USER_INSERTED, "value" => 'true']);
+        $this->settingRepository->update(["name" => SettingDefaults::USER_INSERTED, "value" => 'true']);
 
         return "User has been created";
     }

@@ -2,25 +2,23 @@
 
 namespace App\Entity;
 
+use App\Entity\Common\IdTrait;
+use App\Entity\Common\TimestampTrait;
+use App\Entity\Contracts\EntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
-
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PodcastRepository")
+ *
+ * @ORM\HasLifecycleCallbacks()
  */
 class Podcast implements EntityInterface
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     *
-     * @Groups("dashboard")
-     */
-    private $id;
+    use IdTrait;
+    use TimestampTrait;
 
     /**
      * @Assert\NotBlank
@@ -65,11 +63,6 @@ class Podcast implements EntityInterface
     public function __construct()
     {
         $this->episodes = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getTitle(): ?string

@@ -2,74 +2,22 @@
 
 namespace App\Entity;
 
+use App\Entity\Common\IdTrait;
+use App\Entity\Common\TimestampTrait;
+use App\Entity\Contracts\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SettingRepository")
+ *
+ * @ORM\HasLifecycleCallbacks()
  */
 class Setting implements EntityInterface
 {
-
-    const USER_INSERTED = 'user_inserted';
-    const PODCAST_INSERTED = 'podcast_inserted';
-    const SETTINGS_CREATED = 'settings_created';
-    const IS_ONLINE = 'is_online';
-    const FACEBOOK = 'facebook';
-    const TWITTER = 'twitter';
-    const ITUNES = 'itunes';
-
-    const DEFAULTS = [
-        self::USER_INSERTED => [
-            'default_value' => 'false',
-            'type' => 'boolean',
-            'editable_from_dashboard' => false
-        ],
-
-        self::SETTINGS_CREATED => [
-            'default_value' => 'false',
-            'type' => 'boolean',
-            'editable_from_dashboard' => false,
-        ],
-
-        self::IS_ONLINE => [
-            'default_value' => 'false',
-            'type' => 'boolean',
-            'editable_from_dashboard' => true
-        ],
-
-        self::PODCAST_INSERTED => [
-            'default_value' => 'false',
-            'type' => 'boolean',
-            'editable_from_dashboard' => false
-        ],
-
-        self::FACEBOOK => [
-            'default_value' => '',
-            'type' => 'text',
-            'editable_from_dashboard' => true
-        ],
-
-        self::TWITTER => [
-            'default_value' => '',
-            'type' => 'text',
-            'editable_from_dashboard' => true
-        ],
-
-        self::ITUNES => [
-            'default_value' => '',
-            'type' => 'text',
-            'editable_from_dashboard' => true
-        ]
-    ];
-
-    /**
-     * @Groups("dashboard")
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    use IdTrait;
+    use TimestampTrait;
 
     /**
      *
@@ -95,11 +43,6 @@ class Setting implements EntityInterface
      * @Groups("dashboard")
      */
     private $editableFromDashboard;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getName(): ?string
     {
