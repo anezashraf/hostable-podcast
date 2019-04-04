@@ -7,7 +7,7 @@ use App\Entity\EntityInterface;
 use App\Entity\Episode;
 use App\File\FileUploader;
 use App\Patcher\Patcher;
-use App\Repository\RepositoryInterface;
+use App\Repository\Contracts\RepositoryInterface;
 use App\UserManagement\UserCreator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
