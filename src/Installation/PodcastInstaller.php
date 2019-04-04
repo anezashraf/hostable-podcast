@@ -7,6 +7,7 @@ use App\Entity\Setting;
 use App\Repository\PodcastRepository;
 use App\Repository\SettingRepository;
 use App\Repository\UserRepository;
+use App\Setting\SettingDefaults;
 use Doctrine\ORM\NoResultException;
 
 class PodcastInstaller extends AbstractInstaller implements InstallerInterface

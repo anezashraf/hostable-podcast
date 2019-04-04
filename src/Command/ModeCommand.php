@@ -4,6 +4,7 @@ namespace App\Command;
 
 use App\Entity\Setting;
 use App\Repository\SettingRepository;
+use App\Setting\SettingDefaults;
 use Doctrine\ORM\NoResultException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;

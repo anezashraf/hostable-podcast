@@ -6,6 +6,7 @@ use App\Entity\Setting;
 use App\Entity\User;
 use App\Repository\SettingRepository;
 use App\Repository\UserRepository;
+use App\Setting\SettingDefaults;
 use Doctrine\ORM\NoResultException;
 
 class UserInstaller extends AbstractInstaller implements InstallerInterface

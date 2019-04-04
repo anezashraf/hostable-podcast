@@ -8,7 +8,6 @@
 
 namespace App\Setting;
 
-
 class SettingDefaults
 {
 
@@ -63,5 +62,4 @@ class SettingDefaults
             'editable_from_dashboard' => true
         ]
     ];
-
 }

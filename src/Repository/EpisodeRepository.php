@@ -20,6 +20,11 @@ class EpisodeRepository extends ServiceEntityRepository implements RepositoryInt
         $this->podcastRepository = $podcastRepository;
     }
 
+    /**
+     * @param Episode $episode
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function saveOrUpdate(EntityInterface $episode)
     {
         if (is_null($episode->getPodcast())) {

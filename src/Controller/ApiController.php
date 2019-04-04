@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Response\ApiStructure;
-use App\Entity\EntityInterface;
+use App\Entity\Contracts\EntityInterface;
 use App\Entity\Episode;
 use App\File\FileUploader;
 use App\Patcher\Patcher;
@@ -102,7 +102,7 @@ class ApiController extends AbstractController
 
         $fileName = $this->fileUploader->upload($file);
 
-        $entity = $repository->find($id);
+        $entity = $repository->get($id);
 
         $methodName = "set" . ucfirst($type);
         $entity->$methodName($fileName);

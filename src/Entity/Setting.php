@@ -8,7 +8,6 @@ use App\Entity\Contracts\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SettingRepository")
  *

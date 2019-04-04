@@ -27,6 +27,11 @@ use Symfony\Component\Validator\ConstraintViolationList;
 class UserController extends AbstractController
 {
 
+    private $repository;
+    private $serializer;
+    private $patcher;
+    private $userCreator;
+
     public function __construct(
         UserRepository $repository,
         SerializerInterface $serializer,
