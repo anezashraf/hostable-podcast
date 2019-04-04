@@ -9,7 +9,6 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 use UnexpectedValueException;
 use App\Repository\Contracts\RepositoryInterface;
 
-
 class PodcastRepository extends ServiceEntityRepository implements RepositoryInterface
 {
     public function __construct(RegistryInterface $registry)

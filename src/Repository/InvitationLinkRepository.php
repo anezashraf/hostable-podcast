@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\InvitationLink;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class InvitationLinkRepository extends ServiceEntityRepository
 {

@@ -8,7 +8,7 @@
 
 namespace App\Patcher;
 
-use App\Entity\EntityInterface;
+use App\Entity\Contracts\EntityInterface;
 use App\Entity\Podcast;
 use Rs\Json\Patch;
 use Symfony\Component\Serializer\SerializerInterface;
