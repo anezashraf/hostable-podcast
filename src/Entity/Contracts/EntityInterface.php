@@ -6,7 +6,7 @@
  * Time: 06:00
  */
 
-namespace App\Entity;
+namespace App\Entity\Contracts;
 
 interface EntityInterface
 {

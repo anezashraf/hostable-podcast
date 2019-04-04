@@ -2,22 +2,25 @@
 
 namespace App\Entity;
 
+use App\Entity\Common\IdTrait;
+use App\Entity\Common\TimestampTrait;
+use App\Entity\Contracts\EntityInterface;
 use DateInterval;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\InvitationLinkRepository")
+ *
+ * @ORM\HasLifecycleCallbacks()
  */
-class InvitationLink
+class InvitationLink implements EntityInterface
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+
+    use IdTrait;
+    use TimestampTrait;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
@@ -44,11 +47,6 @@ class InvitationLink
     {
         $this->link = $invitationLink;
         $this->expiryDate =  new DateTime('now +1 day');
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getUser(): ?User

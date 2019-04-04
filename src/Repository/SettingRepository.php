@@ -18,7 +18,7 @@ class SettingRepository extends ServiceEntityRepository implements RepositoryInt
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Setting::class);
+        parent::__construct($registry, SettingDefaults::class);
     }
 
     /**

@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+use App\Entity\Common\IdTrait;
+use App\Entity\Common\TimestampTrait;
+use App\Entity\Contracts\EntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,16 +14,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ *
+ * @ORM\HasLifecycleCallbacks()
  */
 class User implements UserInterface, EntityInterface
 {
-    /**
-     * @Groups("dashboard")
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    use IdTrait;
+    use TimestampTrait;
 
     /**
      * @Assert\NotBlank
@@ -69,11 +69,6 @@ class User implements UserInterface, EntityInterface
     {
         $this->podcasts = new ArrayCollection();
         $this->roles = ['ROLE_ADMIN'];
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getUsername(): ?string

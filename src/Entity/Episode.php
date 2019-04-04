@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+use App\Entity\Common\IdTrait;
+use App\Entity\Common\TimestampTrait;
+use App\Entity\Contracts\EntityInterface;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -9,17 +12,14 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EpisodeRepository")
+ *
+ * @ORM\HasLifecycleCallbacks()
  */
 class Episode implements EntityInterface
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     *
-     * @Groups("dashboard")
-     */
-    private $id;
+
+    use IdTrait;
+    use TimestampTrait;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -76,11 +76,6 @@ class Episode implements EntityInterface
     public function __construct()
     {
         $this->slug = uniqid();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getTitle(): ?string

@@ -46,7 +46,7 @@ class InstalledSubscriber implements EventSubscriberInterface
         $messages = [];
 
         try {
-            if (! $this->repository->findByName(Setting::USER_INSERTED)) {
+            if (! $this->repository->findByName(SettingDefaults::USER_INSERTED)) {
                 $messages[] = 'You need to create a user, please run php bin/console user:create';
             }
         } catch (NoResultException $exception) {

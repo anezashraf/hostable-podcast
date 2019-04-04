@@ -71,7 +71,7 @@ final class ModeCommand extends Command
 
         $value = $argument === 'online' ? 'true' : 'false';
 
-        $this->repository->update(['name' => Setting::IS_ONLINE, 'value' => $value]);
+        $this->repository->update(['name' => SettingDefaults::IS_ONLINE, 'value' => $value]);
 
         $symfonyOutput->text("Your hostable podcast is now ${argument}");
     }
