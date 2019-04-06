@@ -149,9 +149,11 @@ class Episode implements EntityInterface
     /**
      * @param mixed $image
      */
-    public function setImage($image): void
+    public function setImage($image): self
     {
         $this->image = $image;
+
+        return $this;
     }
 
     /**
