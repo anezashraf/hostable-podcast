@@ -32,10 +32,11 @@
       "ext-openssl": "*"
     },
     "require-dev": {
-        "doctrine/doctrine-fixtures-bundle": "^3.0",
+        "doctrine/doctrine-fixtures-bundle": "^3.1",
         "fzaninotto/faker": "^1.8",
         "phpstan/phpstan": "^0.11.2",
         "phpstan/phpstan-symfony": "^0.11.1",
+        "symfony/browser-kit": "^4.2",
         "symfony/debug-pack": "*",
         "symfony/dotenv": "*",
         "symfony/maker-bundle": "^1.0",
