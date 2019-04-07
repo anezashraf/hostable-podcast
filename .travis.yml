@@ -10,16 +10,10 @@ install:
 
 jobs:
   include:
-    - name: "phpstan"
-      script: ./vendor/bin/phpstan analyse -l 7 -c extension.neon src tests
-    - script: ./vendor/bin/phpmd src text ruleset.xml
-      name: "php mess detector"
-    - script: ./vendor/bin/phpcs
-      name: "php code sniffer"
+    - name: "Testing and unit"
+      script: ./vendor/bin/robo analyse
     - script: ./node_modules/.bin/eslint assets
       name: "javascript linting"
-    - script: ./bin/phpunit
-      name: "php unit"
 #    Need to enabled once I am starting to create design
 #    - script: ./node_modules/.bin/stylelint assets/
 #    - name: "sass linting"
