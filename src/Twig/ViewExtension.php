@@ -6,29 +6,21 @@ use Twig\TwigFunction;
 
 class ViewExtension extends AbstractExtension
 {
-    private $host;
-
-    public function __construct(string $host)
-    {
-        $this->host = $host;
-    }
-
     public function getFunctions()
     {
         return array(
-            new TwigFunction('imageUrl', array($this, 'imageUrl')),
-            new TwigFunction('firstSentence', array($this, 'firstSentence')),
+            new TwigFunction('cutParagraph', array($this, 'cutParagraph')),
         );
     }
 
-    public function imageUrl(string $image)
-    {
-        return $this->host . $image;
-    }
 
-    public function firstSentence(string $text)
+    public function cutParagraph(string $text, int $numOfSentence)
     {
-        //TODO:// implement first sentence
-        return $text;
+
+        $sentences = preg_split('/[.]/', $text);
+        $cutSentences = array_slice($sentences, 0, $numOfSentence);
+
+
+        return implode('.', $cutSentences);
     }
 }
