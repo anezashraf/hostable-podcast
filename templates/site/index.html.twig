@@ -26,7 +26,7 @@
                     <div class="single-episode-row">
                         <div class="single-episode__information">
                             <h4><a class="single-episode__information-link" href="{{ path('site_episode', {slug: episode.slug}) }}">#{{ episode.id }} {{ episode.title}}</a></h4>
-                            <p class="single-episode__information-description">{{ firstSentence(episode.description) }}</p>
+                            <p class="single-episode__information-description">{{ cutParagraph(episode.description, 3) }}</p>
 
                             {% if loop.first %}
                                 <div class="single-episode__audio">
