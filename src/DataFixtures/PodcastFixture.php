@@ -9,13 +9,15 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class PodcastFixture extends Fixture implements DependentFixtureInterface
 {
+    public const TITLE = 'Acme Podcast';
+    public const DESCRIPTION = 'We discuss everything from politics to football and even cars!';
     const PODCAST_OBJ = 'podcast_obj';
 
     public function load(ObjectManager $manager)
     {
          $podcast = (new Podcast)
-             ->setDescription("Some description")
-             ->setTitle("Some title")
+             ->setDescription(self::DESCRIPTION)
+             ->setTitle(self::TITLE)
              ->setImage('/some_image_url');
 
          $podcast->setUser($this->getReference(UserFixture::USER_OBJ));

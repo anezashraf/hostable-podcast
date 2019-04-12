@@ -39,7 +39,7 @@ class SiteController extends AbstractController
     public function index(Request $request, ?int $limit = null)
     {
         if ($request->get('_route') === 'site') {
-            $limit = 5;
+            $limit = 10;
         }
 
         $podcast = $this->repository->getWithEpisodes($limit);

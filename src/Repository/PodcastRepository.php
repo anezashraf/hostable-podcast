@@ -42,7 +42,7 @@ class PodcastRepository extends ServiceEntityRepository implements RepositoryInt
             ->select('p', 'e')
             ->join('p.episodes', 'e')
             ->andWhere('p.id = :id')
-            ->orderBy('e.publishedAt', 'DESC')
+            ->orderBy('e.id', 'DESC')
             ->setParameter('id', 1);
 
         if (! is_null($limit)) {
