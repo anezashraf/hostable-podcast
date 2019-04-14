@@ -13,14 +13,16 @@ use Faker\Factory;
 
 class EpisodeFixture extends Fixture implements DependentFixtureInterface
 {
+    public const NUMBER_OF_EPISODES = 20;
+
     public function load(ObjectManager $manager)
     {
         $faker = Factory::create();
         $faker->addProvider(new FileLinkProvider($faker));
 
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < self::NUMBER_OF_EPISODES; $i++) {
             $episode = (new Episode())
-                ->setTitle($faker->text)
+                ->setTitle($faker->text(30))
                 ->setDescription($faker->sentences(3, true))
                 ->setPublishedAt($faker->dateTime)
                 ->setEnclosureUrl($faker->audioLink)
