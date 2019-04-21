@@ -17,10 +17,6 @@ class PodcastInstaller extends AbstractInstaller implements InstallerInterface
      */
     private $settingRepository;
 
-    /**
-     * @var UserRepository
-     */
-    private $userRepository;
 
     /**
      * @var PodcastRepository
@@ -29,11 +25,9 @@ class PodcastInstaller extends AbstractInstaller implements InstallerInterface
 
     public function __construct(
         SettingRepository $repository,
-        PodcastRepository $podcastRepository,
-        UserRepository $userRepository
+        PodcastRepository $podcastRepository
     ) {
         $this->settingRepository = $repository;
-        $this->userRepository = $userRepository;
         $this->podcastRepository = $podcastRepository;
     }
 

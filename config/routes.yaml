@@ -1,6 +1,0 @@
-app_logout:
-    path: /logout
-
-app_login:
-    controller: App\Controller\UserController::login
-    path: /login

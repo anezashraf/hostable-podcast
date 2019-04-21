@@ -11,7 +11,6 @@ namespace App\Setting;
 class SettingDefaults
 {
 
-    const USER_INSERTED = 'user_inserted';
     const PODCAST_INSERTED = 'podcast_inserted';
     const SETTINGS_CREATED = 'settings_created';
     const IS_ONLINE = 'is_online';
@@ -20,13 +19,7 @@ class SettingDefaults
     const ITUNES = 'itunes';
 
     const DEFAULTS = [
-        self::USER_INSERTED => [
-            'default_value' => 'false',
-            'type' => 'boolean',
-            'editable_from_dashboard' => false
-        ],
-
-        self::SETTINGS_CREATED => [
+          self::SETTINGS_CREATED => [
             'default_value' => 'false',
             'type' => 'boolean',
             'editable_from_dashboard' => false,

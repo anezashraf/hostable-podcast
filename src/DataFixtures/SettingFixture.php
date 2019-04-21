@@ -13,7 +13,6 @@ class SettingFixture extends Fixture
     {
         $settingDefaults = SettingDefaults::DEFAULTS;
 
-        $settingDefaults[SettingDefaults::USER_INSERTED]['default_value'] = 'true';
         $settingDefaults[SettingDefaults::PODCAST_INSERTED]['default_value'] = 'true';
         $settingDefaults[SettingDefaults::SETTINGS_CREATED]['default_value'] = 'true';
         $settingDefaults[SettingDefaults::IS_ONLINE]['default_value'] = 'true';
