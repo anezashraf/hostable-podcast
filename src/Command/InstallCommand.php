@@ -22,12 +22,11 @@ class InstallCommand extends Command
 
     public function __construct(
         SettingsInstaller $settingsInstaller,
-        UserInstaller $userInstaller,
         PodcastInstaller $podcastInstaller
     ) {
         parent::__construct(self::$defaultName);
 
-        $this->installers = [$settingsInstaller, $userInstaller, $podcastInstaller];
+        $this->installers = [$settingsInstaller, $podcastInstaller];
     }
 
     protected function configure()
