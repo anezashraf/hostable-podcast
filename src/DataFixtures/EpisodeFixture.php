@@ -23,7 +23,7 @@ class EpisodeFixture extends Fixture implements DependentFixtureInterface
         for ($i = 0; $i < self::NUMBER_OF_EPISODES; $i++) {
             $episode = (new Episode())
                 ->setTitle($faker->text(30))
-                ->setDescription($faker->sentences(3, true))
+                ->setDescription($faker->sentences(10, true))
                 ->setPublishedAt($faker->dateTime)
                 ->setEnclosureUrl($faker->audioLink)
                 ->setImage($faker->imageLink);

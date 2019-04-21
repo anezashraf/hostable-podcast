@@ -26,7 +26,15 @@
                     <div class="single-episode-row">
                         <div class="single-episode__information">
                             <h4><a class="single-episode__information-link" href="{{ path('site_episode', {slug: episode.slug}) }}">#{{ episode.id }} {{ episode.title}}</a></h4>
-                            <p class="single-episode__information-description">{{ cutParagraph(episode.description, 3) }}</p>
+                            <p class="single-episode__information-description">
+
+                                {% if app.request.get('_route')  != 'site_episode' %}
+                                    {{ cutParagraph(episode.description, 3) }}
+                                {% else %}
+                                    <h1>ross</h1>
+                                    {{ episode.description }}
+                                {% endif %}
+                            </p>
 
                                 <div class="single-episode__audio">
                                     <small class="single-episode__audio-download"><a class="single-episode__audio-link" href="{{ path('download', {slug: episode.slug}) }}">Download</a></small>
