@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Entity\Common\IdTrait;
 use App\Entity\Common\TimestampTrait;
 use App\Entity\Contracts\EntityInterface;
+use App\Entity\Contracts\Updatable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -16,7 +17,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *
  * @ORM\HasLifecycleCallbacks()
  */
-class Podcast implements EntityInterface
+class Podcast implements EntityInterface, Updatable
 {
     use IdTrait;
     use TimestampTrait;
@@ -127,5 +128,13 @@ class Podcast implements EntityInterface
         }
 
         return $this;
+    }
+
+    public function updatableProperties() : array
+    {
+        return [
+            'title',
+            'description',
+        ];
     }
 }
