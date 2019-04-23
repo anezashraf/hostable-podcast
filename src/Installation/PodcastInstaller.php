@@ -44,7 +44,6 @@ class PodcastInstaller extends AbstractInstaller implements InstallerInterface
             ->setTitle($name)
             ->setDescription($description);
 
-        $podcast->setUser($this->userRepository->get());
 
         $this->podcastRepository->update($podcast);
         $this->settingRepository->update(['name' => SettingDefaults::PODCAST_INSERTED, 'value' => 'true']);
