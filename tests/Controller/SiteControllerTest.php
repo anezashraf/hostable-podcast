@@ -65,7 +65,7 @@ class SiteControllerTest extends WebTestCase
 
     public function testShouldBeDecendingOrder()
     {
-        $ids = $this->homepageCrawler->filter('.single-episode__information-link')->each(function($anchor) {
+        $ids = $this->homepageCrawler->filter('.single-episode__information-link')->each(function ($anchor) {
             return ltrim(substr($anchor->text(), 0, strpos($anchor->text(), " ")), '#');
         });
 

@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Entity\Common\IdTrait;
 use App\Entity\Common\TimestampTrait;
 use App\Entity\Contracts\EntityInterface;
+use App\Entity\Contracts\Updatable;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -13,7 +14,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *
  * @ORM\HasLifecycleCallbacks()
  */
-class Setting implements EntityInterface
+class Setting implements EntityInterface, Updatable
 {
     use IdTrait;
     use TimestampTrait;
@@ -101,5 +102,10 @@ class Setting implements EntityInterface
         $this->editableFromDashboard = $editableFromDashboard;
 
         return $this;
+    }
+
+    public function updatableProperties(): array
+    {
+        return ['value'];
     }
 }

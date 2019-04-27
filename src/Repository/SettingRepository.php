@@ -69,8 +69,8 @@ class SettingRepository extends ServiceEntityRepository implements RepositoryInt
     public function get($id = 1) : Setting
     {
         return $this->createQueryBuilder('e')
-            ->where('e.id = :id')
-            ->setParameter('id', $id)
+            ->where('e.name = :name')
+            ->setParameter('name', $id)
             ->getQuery()
             ->getSingleResult();
     }
