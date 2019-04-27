@@ -8,19 +8,16 @@
 
 namespace App\Command\Common;
 
-
 use App\Entity\Contracts\Updatable;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputOption;
 
 trait OptionTrait
 {
-    public function getDefinitionFromEntity(Updatable $updatable)
+    public function getOptionsFromEntity(Updatable $updatable)
     {
-        return new InputDefinition(array_map(function(string $property) {
-            return new InputOption($property, null, InputOption::VALUE_OPTIONAL);
-        }, $updatable->updatableProperties()));
-
+        return array_map(function (string $property) {
+            return new InputOption($property, null, InputOption::VALUE_REQUIRED);
+        }, $updatable->updatableProperties());
     }
-
 }

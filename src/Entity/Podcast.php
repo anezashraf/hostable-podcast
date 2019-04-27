@@ -137,4 +137,9 @@ class Podcast implements EntityInterface, Updatable
             'description',
         ];
     }
+
+    public function __toString() : string
+    {
+        return $this->title;
+    }
 }

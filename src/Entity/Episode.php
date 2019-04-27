@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Entity\Common\IdTrait;
 use App\Entity\Common\TimestampTrait;
 use App\Entity\Contracts\EntityInterface;
+use App\Entity\Contracts\Updatable;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -15,7 +16,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *
  * @ORM\HasLifecycleCallbacks()
  */
-class Episode implements EntityInterface
+class Episode implements EntityInterface, Updatable
 {
 
     use IdTrait;
@@ -71,12 +72,8 @@ class Episode implements EntityInterface
      * )
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $enclosureUrl;
+    private $enclosure;
 
-    public function __construct()
-    {
-        $this->slug = uniqid();
-    }
 
     public function getTitle(): ?string
     {
@@ -126,14 +123,14 @@ class Episode implements EntityInterface
         return $this;
     }
 
-    public function getEnclosureUrl()
+    public function getEnclosure()
     {
-        return $this->enclosureUrl;
+        return $this->enclosure;
     }
 
-    public function setEnclosureUrl($enclosureUrl): self
+    public function setEnclosure(string $enclosure): self
     {
-        $this->enclosureUrl = $enclosureUrl;
+        $this->enclosure = $enclosure;
 
         return $this;
     }
@@ -173,5 +170,16 @@ class Episode implements EntityInterface
         $this->slug = $slug;
 
         return $this;
+    }
+
+    public function updatableProperties(): array
+    {
+        return [
+            'title',
+            'description',
+            'enclosure',
+            'image',
+            'slug',
+        ];
     }
 }

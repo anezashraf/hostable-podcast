@@ -23,36 +23,36 @@ class SettingDefaults
             'default_value' => 'false',
             'type' => 'boolean',
             'editable_from_dashboard' => false,
-        ],
+          ],
 
-        self::IS_ONLINE => [
+          self::IS_ONLINE => [
             'default_value' => 'false',
             'type' => 'boolean',
             'editable_from_dashboard' => true
-        ],
+          ],
 
-        self::PODCAST_INSERTED => [
+          self::PODCAST_INSERTED => [
             'default_value' => 'false',
             'type' => 'boolean',
             'editable_from_dashboard' => false
-        ],
+          ],
 
-        self::FACEBOOK => [
+          self::FACEBOOK => [
             'default_value' => '',
             'type' => 'text',
             'editable_from_dashboard' => true
-        ],
+          ],
 
-        self::TWITTER => [
+          self::TWITTER => [
             'default_value' => '',
             'type' => 'text',
             'editable_from_dashboard' => true
-        ],
+          ],
 
-        self::ITUNES => [
+          self::ITUNES => [
             'default_value' => '',
             'type' => 'text',
             'editable_from_dashboard' => true
-        ]
+          ]
     ];
 }

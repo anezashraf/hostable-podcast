@@ -20,7 +20,13 @@ class EpisodeFixture extends Fixture implements DependentFixtureInterface
         $faker = Factory::create();
         $faker->addProvider(new FileLinkProvider($faker));
 
-        for ($i = 0; $i < self::NUMBER_OF_EPISODES; $i++) {
+        $numberOfEpisodes = self::NUMBER_OF_EPISODES;
+
+        if (getenv("mode") === 'installation') {
+            $numberOfEpisodes = 0;
+        }
+
+        for ($i = 0; $i < $numberOfEpisodes; $i++) {
             $episode = (new Episode())
                 ->setTitle($faker->text(30))
                 ->setDescription($faker->sentences(10, true))
