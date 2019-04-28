@@ -19,9 +19,9 @@ class Feed
         $episodes = $podcast->getEpisodes()->getValues();
 
         foreach ($episodes as $episode) {
-            if ($episode->getEnclosureUrl()) {
+            if ($episode->getEnclosure()) {
                 $enclosure = new Media();
-                $enclosure->setUrl($host  . $episode->getEnclosureUrl())
+                $enclosure->setUrl($host  . $episode->getEnclosure())
                     ->setType('audio/mpeg');
 
                 $item = $feed->newItem();
