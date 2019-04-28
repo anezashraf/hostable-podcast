@@ -31,7 +31,8 @@ class EpisodeFixture extends Fixture implements DependentFixtureInterface
                 ->setTitle($faker->text(30))
                 ->setDescription($faker->sentences(10, true))
                 ->setPublishedAt($faker->dateTime)
-                ->setEnclosureUrl($faker->audioLink)
+                ->setEnclosure($faker->audioLink)
+                ->setSlug($faker->slug)
                 ->setImage($faker->imageLink);
 
             $episode->setPodcast($this->getReference(PodcastFixture::PODCAST_OBJ));

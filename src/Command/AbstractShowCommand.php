@@ -40,7 +40,6 @@ abstract class AbstractShowCommand extends Command
 
         if ($this->canAcceptArgument() && $input->getArgument("name")) {
             $entities = [$repository->get($input->getArgument("name"))];
-
         } else {
             $entities = $repository->getAll();
         }
@@ -63,7 +62,7 @@ abstract class AbstractShowCommand extends Command
 
     private function getRows(array $entities)
     {
-        return array_map(function($entity){
+        return array_map(function ($entity) {
             return $this->getTableRows($entity);
         }, $entities);
     }

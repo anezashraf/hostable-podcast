@@ -11,12 +11,23 @@ class ViewExtensionTest extends TestCase
     {
         $extension = new ViewExtension();
 
-        $sentence = "This is a very cool sentence. Today is a nice day. I hope this test passes otherwise I am fired.
-         Does it make sense to skip?";
+        $sentence = sprintf(
+            "%s%s%s%s",
+            "This is a very cool sentence.",
+            " Today is a nice day.",
+            " I hope this test passes otherwise I am fired.",
+            " Does it make sense to skip?"
+        );
+
+        $expected = sprintf(
+            "%s%s%s",
+            "This is a very cool sentence.",
+            " Today is a nice day.",
+            " I hope this test passes otherwise I am fired"
+        );
 
         $result = $extension->cutParagraph($sentence, 3);
-        $this->assertEquals("This is a very cool sentence. Today is a nice day. I hope this test passes
-         otherwise I am fired", $result);
+        $this->assertEquals($expected, $result);
         $this->assertNotContains("Does it make sense to skip?", $extension->cutParagraph(
             $sentence,
             3
