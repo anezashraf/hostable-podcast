@@ -27,6 +27,8 @@ class EpisodeShowCommand extends AbstractShowCommand
             'title',
             'description',
             'slug',
+            'enclosure',
+            'image'
         ];
     }
 
@@ -37,6 +39,8 @@ class EpisodeShowCommand extends AbstractShowCommand
             $entities->getTitle(),
             $entities->getDescription(),
             $entities->getSlug(),
+            $entities->getEnclosure(),
+            $entities->getImage(),
         ];
     }
 }

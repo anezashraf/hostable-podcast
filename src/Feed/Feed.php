@@ -21,14 +21,21 @@ class Feed
         foreach ($episodes as $episode) {
             if ($episode->getEnclosure()) {
                 $enclosure = new Media();
-                $enclosure->setUrl($host  . $episode->getEnclosure())
+
+                $enclosureMedia = $episode->getEnclosure();
+
+                if (is_dir($enclosureMedia)) {
+                    $enclosureMedia = $host  . '/' . $episode->getEnclosure();
+                }
+
+                $enclosure->setUrl($enclosureMedia)
                     ->setType('audio/mpeg');
 
                 $item = $feed->newItem();
                 $item->setDescription($episode->getDescription());
                 $item->setLastModified($episode->getPublishedAt());
                 $item->setTitle($episode->getTitle());
-                $item->setLink($host  . 'episode' . $episode->getId());
+                $item->setLink($host  . '/episode/' . $episode->getSlug());
 
                 $item->addMedia($enclosure);
 

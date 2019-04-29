@@ -31,7 +31,6 @@
                                 {% if app.request.get('_route')  != 'site_episode' %}
                                     {{ cutParagraph(episode.description, 3) }}
                                 {% else %}
-                                    <h1>ross</h1>
                                     {{ episode.description }}
                                 {% endif %}
                             </p>
@@ -45,6 +44,10 @@
                     </div>
                 </div>
             </article>
+
+            {% else %}
+            <p>No episodes found :(, run the below comand to create your first episode</p>
+            <pre>$ php bin/console episode:create --title=helloworld --description="welcome to my first episode" --slug=/some_uri --image=some_time --enclosure=some_mp3</pre>
     {% endfor %}
 
         {% if app.request.get('_route') == 'site' %}

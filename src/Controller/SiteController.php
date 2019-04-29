@@ -9,6 +9,7 @@ use App\Repository\SettingRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 class SiteController extends AbstractController
@@ -51,6 +52,25 @@ class SiteController extends AbstractController
         ]);
     }
 
+
+    /**
+     * @Route("/episode/{slug}.mp3", name="download")
+     */
+    public function download(string $slug)
+    {
+        /**@var \App\Entity\Episode **/
+        $episode = $this->episodeRepository->getBySlug($slug);
+
+        $enclosure = $episode->getEnclosure();
+
+        if (is_file($enclosure)) {
+            return $this->file($this->targetDirectory . $episode->getEnclosureUrl(), $episode->getTitle() . '.mp3');
+        }
+
+        return $this->redirect($enclosure);
+    }
+
+
     /**
      * @Route("/episode/{slug}", name="site_episode")
      */
@@ -70,23 +90,12 @@ class SiteController extends AbstractController
     /**
      * @Route("/subscribe.rss", name="subscribe")
      */
-    public function subscribe()
+    public function subscribe(Request $request)
     {
         $podcast = $this->repository->get();
 
-        $content = (new Feed())->feed($podcast, 'localhost:8000');
+        $content = (new Feed())->feed($podcast, $request->getHttpHost());
 
         return new Response($content, 200, ['Content-Type' => 'application/rss+xml']);
-    }
-
-    /**
-     * @Route("/episode/{slug}.mp3", name="download")
-     */
-    public function download(string $slug)
-    {
-        /**@var \App\Entity\Episode **/
-        $episode = $this->repository->getBySlug($slug);
-
-        return $this->file($this->targetDirectory . $episode->getEnclosureUrl(), $episode->getTitle() . '.mp3');
     }
 }

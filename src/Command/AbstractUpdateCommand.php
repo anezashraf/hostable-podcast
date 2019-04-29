@@ -45,6 +45,8 @@ abstract class AbstractUpdateCommand extends Command
 
     abstract public function getEntity();
 
+    abstract public function getFileProperties();
+
     abstract public function getArgument() : ?InputArgument;
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -65,14 +67,18 @@ abstract class AbstractUpdateCommand extends Command
         /** @var Updatable $entity */
         $entity = $repository->get($value);
 
-        $repository->saveOrUpdate($this->updateEntity($entity, $input));
+        $entity = $this->updateEntity($entity, $input, $this->getFileProperties());
+
+        $repository->saveOrUpdate($entity);
 
         $table = new Table($output);
+        $table->setStyle("compact");
 
         foreach ($entity->updatableProperties() as $property) {
             $method = "get" . $property;
             $row[] = $entity->$method() ?? '';
         }
+
 
         $table
             ->setHeaders($headers)

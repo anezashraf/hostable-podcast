@@ -45,6 +45,7 @@ abstract class AbstractShowCommand extends Command
         }
 
         $table = new Table($output);
+        $table->setStyle("compact");
 
         $table->setHeaders($this->getTableHeaders());
         $table->setRows($this->getRows($entities));

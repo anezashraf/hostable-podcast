@@ -30,4 +30,9 @@ class SettingUpdateCommand extends AbstractUpdateCommand
     {
         return new InputArgument("name", InputArgument::REQUIRED);
     }
+
+    public function getFileProperties()
+    {
+        return [];
+    }
 }

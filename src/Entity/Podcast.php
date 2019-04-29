@@ -135,6 +135,7 @@ class Podcast implements EntityInterface, Updatable
         return [
             'title',
             'description',
+            'image',
         ];
     }
 

@@ -21,4 +21,9 @@ class EpisodeUpdateCommand extends AbstractUpdateCommand
     {
         return new InputArgument("id", InputArgument::REQUIRED);
     }
+
+    public function getFileProperties()
+    {
+        return ['enclosure', 'image'];
+    }
 }
