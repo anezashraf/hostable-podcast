@@ -18,6 +18,7 @@
 #### Installation
 
 1. ```$ git clone https://github.com/rossboswell/hostable-podcast.git```
+1. ```$ git checkout tags/v1.0.0```
 2. ```$ composer install```
 
 #### Usage
@@ -32,7 +33,7 @@ This command takes the below possible options
 4. `--image=${someValue}` The image of the specific episode (overwrites the podcast image in the rss feed)
 5. `--enclosure=${someValue}` The downloadable media (for now, this can only be mp3/mp4)
 
-**Example**:
+Examples:
 * `$ php bin/console episode:create --title=FirstEpisode --description="the first ever episode" --enclosure=http://some_s3_link` 
 * `$ php bin/console episode:create --slug=coolbeans --description="the second ever episode" --enclosure=http://some_s3_link` 
 
@@ -49,7 +50,7 @@ This command takes the below possible options
 
 The `id` or episode number must be the first argument before the options.
 
-**Example**:
+Examples:
 * `$ php bin/console episode:update 3 --title=FirstEpisode --description="the first ever episode" --enclosure=http://some_s3_link` 
 * `$ php bin/console episode:update 4 --slug=coolbeans --description="the second ever episode" --enclosure=http://some_s3_link` 
 
@@ -67,10 +68,10 @@ The first argument will need to be the setting `key`. The possible keys are show
 This command takes the below possible options 
 1. `--value=${someValue}` the value of the setting key
 
-**Example**:
+Examples:
 * `$ php bin/console setting:update facebook --value=http://facebook.com/some_facebook_page_blah_blah`
 
-##### 3.  Bring the site online or offline
+##### 4.  Bring the site online or offline
 
 `$ php bin/console mode`
 
@@ -78,14 +79,20 @@ The first argument could either be `online` or `offline`
 
 This command takes no options 
 
-**Example**:
+Examples:
 * `$ php bin/console mode online`
 * `$ php bin/console mode offline # send a http code of 503 when request is sent`
 
 
-##### Linting 
-* ```./vendor/bin/phpcs```
+#### Adding CSS
+You can custom css to the `public/css/main.css` file
 
-##### Tests 
-* ```./bin/phpunit```
+#### Amending the html markup
+All html/twig templates are stored in the `templates` directory.
+
+#### Linting 
+* ```composer codesniffer```
+
+#### Tests 
+* ```composer test```
 
