@@ -5,6 +5,14 @@ use Symfony\Component\Debug\Debug;
 use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\HttpFoundation\Request;
 
+$autoloadFile = __DIR__.'/../vendor/autoload.php';
+
+if (! is_file($autoloadFile)) {
+    echo "<p>Please run the below command from the project's root:</p><pre> $ composer install</pre>";
+
+    exit;
+}
+
 require __DIR__.'/../vendor/autoload.php';
 
 // The check is to ensure we don't use .env in production
