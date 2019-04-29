@@ -25,6 +25,7 @@ class PodcastShowCommand extends AbstractShowCommand
             'id',
             'title',
             'description',
+            'image',
         ];
     }
 
@@ -33,7 +34,7 @@ class PodcastShowCommand extends AbstractShowCommand
         return [
             $entities->getId(),
             $entities->getTitle(),
-            $entities->getDescription(),
+            $entities->getImage(),
         ];
     }
 }

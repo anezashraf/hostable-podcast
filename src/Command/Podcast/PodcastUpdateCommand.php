@@ -29,4 +29,9 @@ class PodcastUpdateCommand extends AbstractUpdateCommand
     {
         return null;
     }
+
+    public function getFileProperties()
+    {
+        return ['image'];
+    }
 }

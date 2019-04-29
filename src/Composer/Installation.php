@@ -10,6 +10,7 @@ class Installation
     {
         $filesystem = new Filesystem();
 
+        putenv("mode=installation");
         $commands = [
             '%s/../../bin/console doctrine:database:create --env=prod',
             '%s/../../bin/console doctrine:schema:update --env=prod --force',

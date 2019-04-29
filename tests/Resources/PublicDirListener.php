@@ -27,7 +27,7 @@ class PublicDirListener implements TestListener
         if (in_array('public_resources', $suite->getGroups())) {
             $filesystem = new Filesystem();
 
-            $filesystem->mirror(__DIR__ . '/audio', __DIR__. '/../../public/audio');
+            $filesystem->mirror(__DIR__ . '/audio', __DIR__ . '/../../public/enclosure');
             $filesystem->mirror(__DIR__ . '/images', __DIR__. '/../../public/images');
         }
     }
@@ -42,7 +42,7 @@ class PublicDirListener implements TestListener
         if (in_array('public_resources', $suite->getGroups())) {
             $filesystem = new Filesystem();
 
-            $filesystem->remove(__DIR__. '/../../public/audio');
+            $filesystem->remove(__DIR__ . '/../../public/enclosure');
             $filesystem->remove(__DIR__. '/../../public/images');
         }
     }

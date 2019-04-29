@@ -40,7 +40,7 @@ class PodcastRepository extends ServiceEntityRepository implements RepositoryInt
     {
         $query = $this->createQueryBuilder('p')
             ->select('p', 'e')
-            ->join('p.episodes', 'e')
+            ->leftJoin('p.episodes', 'e')
             ->andWhere('p.id = :id')
             ->orderBy('e.id', 'DESC')
             ->setParameter('id', 1);

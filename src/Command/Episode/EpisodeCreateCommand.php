@@ -4,6 +4,7 @@ namespace App\Command\Episode;
 
 use App\Command\Common\EntityUpdaterTrait;
 use App\Command\Common\OptionTrait;
+use App\File\FileParserFactory;
 use App\Entity\Episode;
 use App\Repository\EpisodeRepository;
 use Symfony\Component\Console\Command\Command;
@@ -39,7 +40,7 @@ class EpisodeCreateCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $episode = $this->updateEntity(new Episode, $input);
+        $episode = $this->updateEntity(new Episode, $input, ['image', 'enclosure']);
 
         $this->episodeRepository->saveOrUpdate($episode);
     }
